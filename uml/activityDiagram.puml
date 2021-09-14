@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+start
+    :Open WebApp;
+    :Maak wedstrijd aan;
+    :Wedstrijd instellingen aanpassen;
+repeat
+if (Bestaat speler?) then (nee)
+    :Maak spelers aan;
+else (ja)
+    :Kies speler;
+endif
+repeat while (Zijn er 2 spelers gekozen?) is (nee)
+    ->ja;
+repeat
+    :Start set;
+repeat
+    :Start leg;
+    :Beurt speler 1;
+    :Beurt speler 2;
+repeat while (Leg uitgespeeld?) is (nee)
+    ->ja;
+:Set gespeeld;
+repeat while (Nog meer sets?) is (ja)
+    ->nee;
+:Wedstrijd beeindigd;
+:Navigeren naar wedstrijd overzicht;
+
+
+/'repeat
+    :LegUitspelen;
+    :SetUitgespeeld;
+repeat while (Meer wedstrijden?) is (ja)
+->nee;
+:WedstrijdBeeindigen;'/
+stop
+
+@enduml
