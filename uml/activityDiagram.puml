@@ -6,7 +6,7 @@ start
     :Wedstrijd instellingen aanpassen;
 repeat
 if (Bestaat speler?) then (nee)
-    :Maak spelers aan;
+    :Maak speler aan;
 else (ja)
     :Kies speler;
 endif
