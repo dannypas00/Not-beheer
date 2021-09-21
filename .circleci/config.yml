@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: circleci/php-alpine
+      - image: circleci/php:8.0-fpm-alpine
 
     steps:
       - checkout
