@@ -12,6 +12,7 @@ workflows:
     jobs:
       - welcome/run
       - test
+      - test_two
 
 jobs:
   test:
