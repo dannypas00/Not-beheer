@@ -19,9 +19,10 @@ jobs:
     docker:
       - image: ubuntu:latest
     steps:
-      - run: echo "hello, world!"
+      - run: ./tests/TestCase.php
   test_two:
     docker:
       - image: cimg/python:3.9.7
     steps:
       - run: python -c 'print("hi")'
+
