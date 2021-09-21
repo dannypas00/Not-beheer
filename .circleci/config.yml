@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: php:8.1.0RC2-fpm-alpine3.14
+      - image: circleci/php:8.0-node-browsers
 
     steps:
       - checkout
