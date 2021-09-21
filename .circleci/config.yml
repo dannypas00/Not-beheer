@@ -17,7 +17,7 @@ jobs:
       - run:
           name: "Create Environment file"
           command: |
-            cp .env.testing > .env && cat .env
+            cat .env.testing > .env && cat .env
 
       # Download and cache dependencies
       - restore_cache:
