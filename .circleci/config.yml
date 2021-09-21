@@ -18,7 +18,6 @@ jobs:
           name: "Create Environment file"
           command: |
             ls
-            mv /.env.testing .env
 
       # Download and cache dependencies
       - restore_cache:
