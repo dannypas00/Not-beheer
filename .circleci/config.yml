@@ -19,3 +19,8 @@ jobs:
       - image: ubuntu:latest
     steps:
       - run: echo "hello, world!"
+  test_two:
+    docker:
+      - image: cimg/python:3.9.7
+    steps:
+      - run: print("hi")
