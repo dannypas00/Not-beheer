@@ -17,7 +17,7 @@ jobs:
       - run:
           name: "Create Environment file"
           command: |
-            ls -la && cat .env.testing > .env && cat .env
+            cp .env.example .env
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: "Generate App key"
-          command: php artisan --env=testing key:generate
+          command: php artisan key:generate
 
       # run tests with phpunit
       - run:
