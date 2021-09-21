@@ -24,4 +24,4 @@ jobs:
     docker:
       - image: cimg/python:3.9.7
     steps:
-      - run: print("hi")
+      - run: python -c 'print("hi")'
