@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: arvindr226/alpine-ssh
+      - image: php:8.1.0RC2-fpm-alpine3.14
 
     steps:
       - checkout
