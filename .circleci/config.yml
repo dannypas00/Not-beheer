@@ -14,10 +14,10 @@ jobs:
             sudo apt update
             sudo docker-php-ext-install zip
 
-#      - run:
-#          name: "Create Environment file"
-#          command: |
-#            mv .env.testing .env
+      - run:
+          name: "Create Environment file"
+          command: |
+            cp .env.testing | tee .env
 
       # Download and cache dependencies
       - restore_cache:
