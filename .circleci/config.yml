@@ -11,3 +11,15 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+  deploy:
+    jobs:
+      - pull-and-build:
+          filters:
+            branches:
+              only:
+                - master
+          docker:
+            - image: arvindr226/alpine-ssh
+          steps:
+            - checkout
+            - run: ssh -oStrictHostKeyChecking=no -v 178.62.225.52 "./deploy.sh"
