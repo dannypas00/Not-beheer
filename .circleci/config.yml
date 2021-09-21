@@ -19,6 +19,7 @@ workflows:
             branches:
               only:
                 - master
+                - NB-41-feature/cd-instellen
 jobs:
   pull-and-build:
     docker:
