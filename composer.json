@@ -53,6 +53,11 @@
         ],
         "feature": [
             "@php vendor/bin/phpunit --testsuite Feature"
+        ],
+        "fix": [
+            "@php vendor/bin/php-cs-fixer fix app",
+            "@php vendor/bin/php-cs-fixer fix tests",
+            "@php vendor/bin/phpstan analyse"
         ]
     },
     "extra": {
