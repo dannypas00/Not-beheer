@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('players.index');
+});
+
+Route::get('/export', function () {
+    return view('export.index');
+});
+
+Route::get('/matches', function () {
+    return view('matches.index');
+});
+
+Route::get('/statistics', function () {
+    return view('statistics.index');
+});
+
+Route::get('/players', function () {
+    return view('players.index');
 });
