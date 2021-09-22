@@ -17,6 +17,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Prepare dependencies"
+          command: |
+            apk add libzip-dev
+      - run:
           name: "Prepare Environment"
           command: |
             docker-php-ext-install zip
