@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Install dependencies"
           command: |
-            apk add libzip
+            apk add libzip-dev
       - run:
           name: "Prepare Environment"
           command: |
