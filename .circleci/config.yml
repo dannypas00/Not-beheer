@@ -12,10 +12,14 @@ jobs:
   test-unit:
     docker:
       # Specify the version you desire here
-      - image: circleci:php8.0
+      - image: php:8.0.10-alpine
 
     steps:
       - checkout
+      - run:
+          name: "Install dependencies"
+          command: |
+            apk add libzip
       - run:
           name: "Prepare Environment"
           command: |
