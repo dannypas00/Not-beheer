@@ -40,11 +40,11 @@ jobs:
           command: |
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
             php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php --install-dir=/bin --filename=composer
+            php composer-setup.php --install-dir=. --filename=composer
             php -r "unlink('composer-setup.php');"
       - run:
           name: "Install Dependencies"
-          command: composer install -n --prefer-dist
+          command: ./composer install -n --prefer-dist
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
@@ -64,7 +64,7 @@ jobs:
           at: /root/project
       - run:
           name: "Run Unit Tests"
-          command: composer run unit
+          command: ./composer run unit
   test-feature:
     docker:
       - image: php:8.0-alpine
@@ -73,7 +73,7 @@ jobs:
           at: /root/project
       - run:
           name: "Run Feature Tests"
-          command: composer run feature
+          command: ./composer run feature
   test-static:
     docker:
       - image: php:8.0-alpine
