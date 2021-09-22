@@ -80,6 +80,7 @@ jobs:
 workflows:
   test-push:
     jobs:
+      - build
       - test-unit:
           requires:
             - build
