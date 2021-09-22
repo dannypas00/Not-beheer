@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   pull-and-build:
     docker:
@@ -16,18 +16,15 @@ jobs:
 
     steps:
       - checkout
-
       - run:
           name: "Prepare Environment"
           command: |
             sudo apt update
             sudo docker-php-ext-install zip
-
       - run:
           name: "Create Environment file"
           command: |
             cp .env.example .env
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -35,20 +32,16 @@ jobs:
             - v1-dependencies-{{ checksum "composer.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
       - run:
           name: "Install Dependencies"
           command: composer install -n --prefer-dist
-
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-
       - run:
           name: "Generate App key"
           command: php artisan key:generate
-
       # run tests with phpunit
       - run:
           name: "Run Unit Tests"
