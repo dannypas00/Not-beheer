@@ -52,10 +52,16 @@ jobs:
       - run:
           name: "Generate App key"
           command: php artisan key:generate
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - *
   test-unit:
     docker:
       - image: php:8.0-alpine
     steps:
+      - attach_workspace:
+          at: /root/project
       - run:
           name: "Run Unit Tests"
           command: composer run unit
@@ -63,13 +69,17 @@ jobs:
     docker:
       - image: php8.0-alpine
     steps:
+      - attach_workspace:
+          at: /root/project
       - run:
           name: "Run Feature Tests"
           command: composer run feature
   test-static:
     docker:
-      - image: php8.0-alpine
+      - image: php:8.0-alpine
     steps:
+      - attach_workspace:
+          at: /root/project
       - run:
           name: "Run Static Tests"
           command: |
