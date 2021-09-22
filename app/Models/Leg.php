@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Leg extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +21,8 @@ class Leg extends Model
     /**
      * The attributes that should be guarded.
      *
-     * @var array
+     * @var string[]
+     *
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 }
