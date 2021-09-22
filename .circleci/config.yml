@@ -12,7 +12,7 @@ jobs:
   test-unit:
     docker:
       # Specify the version you desire here
-      - image: php:8.0.10-alpine
+      - image: circleci/php8.0
 
     steps:
       - checkout
