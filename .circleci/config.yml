@@ -83,9 +83,9 @@ jobs:
       - run:
           name: "Run Static Tests"
           command: |
-            php vendor/bin/php-cs-fixer fix --dry-run app
-            php vendor/bin/php-cs-fixer fix --dry-run tests
-            php vendor/bin/phpstan analyse
+            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix --dry-run app
+            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix --dry-run tests
+            php -d memory_limit=-1 vendor/bin/phpstan analyse
 
 workflows:
   test-push:
