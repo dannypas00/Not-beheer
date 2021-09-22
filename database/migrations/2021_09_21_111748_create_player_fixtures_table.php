@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlayerMatchesTable extends Migration
+class CreatePlayerFixturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePlayerMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('player_matches', function (Blueprint $table) {
+        Schema::create('player_fixtures', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('match_id')
+            $table->foreignId('fixture_id')
                 ->nullable()
                 ->references('id')
-                ->on('matches');
+                ->on('fixtures');
 
             $table->foreignId('player_id')
                 ->nullable()
