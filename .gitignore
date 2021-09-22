@@ -20,3 +20,4 @@ yarn-error.log
 /public/css/
 /public/mix-manifest.json
 /packages/
+yarn.lock
