@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Prepare Environment"
           command: |
-            docker-php-ext-install zip
+            sudo docker-php-ext-install zip
       - run:
           name: "Create Environment file"
           command: |
