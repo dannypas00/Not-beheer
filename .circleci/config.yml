@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test-unit:
     docker:
       # Specify the version you desire here
       - image: circleci/php:8.0-node-browsers
@@ -44,3 +44,4 @@ jobs:
       - run:
           name: "Run Unit Tests"
           command: ./vendor/bin/phpunit
+#  test-feature:
