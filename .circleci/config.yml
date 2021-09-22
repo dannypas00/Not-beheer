@@ -67,7 +67,7 @@ jobs:
           command: composer run unit
   test-feature:
     docker:
-      - image: php8.0-alpine
+      - image: php:8.0-alpine
     steps:
       - attach_workspace:
           at: /root/project
