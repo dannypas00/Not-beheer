@@ -53,9 +53,9 @@ jobs:
           name: "Generate App key"
           command: php artisan key:generate
       - persist_to_workspace:
-          root: /root/project
+          root: .
           paths:
-            - *
+            - .
   test-unit:
     docker:
       - image: php:8.0-alpine
