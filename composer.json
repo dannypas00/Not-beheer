@@ -54,8 +54,9 @@
         "feature": [
             "@php vendor/bin/phpunit --testsuite Feature"
         ],
-        "static": [
-            "@php vendor/bin/php-cs-fixer fix --dry-run",
+        "fix": [
+            "@php vendor/bin/php-cs-fixer fix app",
+            "@php vendor/bin/php-cs-fixer fix tests",
             "@php vendor/bin/phpstan analyse"
         ]
     },
