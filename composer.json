@@ -53,6 +53,10 @@
         ],
         "feature": [
             "@php vendor/bin/phpunit --testsuite Feature"
+        ],
+        "static": [
+            "@php vendor/bin/php-cs-fixer fix --dry-run",
+            "@php vendor/bin/phpstan analyse"
         ]
     },
     "extra": {
