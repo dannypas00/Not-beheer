@@ -24,3 +24,5 @@ yarn-error.log
 /public/mix-manifest.json
 /packages/
 yarn.lock
+/Vagrantfile
+!/.php-cs-fixer.cache
