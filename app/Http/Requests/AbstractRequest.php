@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Nette\NotImplementedException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AbstractRequest extends FormRequest
 {
     /**
-     * @return array
+     * @return array<string>
      */
     public function validationData(): array
     {
@@ -30,7 +31,7 @@ class AbstractRequest extends FormRequest
     }
 
     /**
-     * Check for unknown keys and let requesting application know these are not allowed.
+     * @return void
      */
     private function validateAllowedInputParameters(): void
     {
@@ -38,9 +39,9 @@ class AbstractRequest extends FormRequest
         $this->validateParameters($disallowedParameters, array_keys($this->rules()), $this->input());
 
         // Get the difference between request keys and the rule keys
-        if (!empty($disallowedParameters)) {
+        if (filled($disallowedParameters)) {
             throw new HttpResponseException(
-                response()->json(['errors' => $disallowedParameters], Response::HTTP_NOT_ACCEPTABLE)
+                new JsonResponse(['errors' => $disallowedParameters], Response::HTTP_NOT_ACCEPTABLE)
             );
         }
     }
@@ -48,9 +49,9 @@ class AbstractRequest extends FormRequest
 
     /**
      * @param string[] $ruleKeys
-     * @param array $input
+     * @param array<string|int|bool|null|array> $input
      * @param string $previous
-     * @param array $errors
+     * @param array<string> $errors
      */
     private function validateParameters(array &$errors, array $ruleKeys, array $input, string $previous = ''): void
     {
@@ -59,7 +60,7 @@ class AbstractRequest extends FormRequest
             $key = $field;
 
             // Prepend the key with the previous run for multi dimensional array checks
-            if (!empty($previous)) {
+            if (filled($previous)) {
                 // Check if the field is part of a non associative array and set the key according
                 $key = $previous . '.' . $field;
             }
@@ -97,7 +98,7 @@ class AbstractRequest extends FormRequest
 
         // Loop through (key) parts and modify the numeric values to '*'
         $parts = array_map(
-            static function ($part) {
+            static function ($part): string {
                 // Check if this part should be a star
                 if (is_numeric($part)) {
                     // Make this part a star!
@@ -114,7 +115,10 @@ class AbstractRequest extends FormRequest
         return implode('.', $parts);
     }
 
-    public function rules() : array
+    /**
+     * @return array<string>
+     */
+    public function rules(): array
     {
         throw new NotImplementedException('Request does not implement rules function');
     }
