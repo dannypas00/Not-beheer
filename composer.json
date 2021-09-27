@@ -13,10 +13,14 @@
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/homestead": "^12.5",
         "friendsofphp/php-cs-fixer": "^3.1",
+        "laravel/homestead": "^12.5",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^0.12.99",
+        "phpstan/phpstan-strict-rules": "^0.12.11",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",

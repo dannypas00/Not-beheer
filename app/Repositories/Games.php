@@ -2,20 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Leg;
+use App\Models\Game;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * Class Legs
+ * Class Games
  * @package App\Repositories
  */
-class Legs extends Repository
+class Games extends Repository
 {
     /**
      * Attractions constructor.
-     * @param Leg $model
+     * @param Game $model
      */
-    #[Pure] public function __construct(Leg $model)
+    #[Pure] public function __construct(Game $model)
     {
         parent::__construct($model);
     }
