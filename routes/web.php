@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +18,7 @@ Route::get('/', function () {
     return redirect('/players');
 });
 
-Route::resource('players', PlayersController::class)
+Route::resource('players', PlayerController::class)
     ->only(['index', 'create', 'delete']);
 
 Route::get('/export', function () {
@@ -32,3 +32,7 @@ Route::get('/matches', function () {
 Route::get('/statistics', function () {
     return view('statistics.index');
 });
+
+Route::get('/get', PlayerController::class);
+
+

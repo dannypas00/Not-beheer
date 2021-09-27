@@ -8,22 +8,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class PlayersController extends Controller
+class PlayerController extends AbstractController
 {
-
-    /**
-     * @var Players
-     */
-    private Players $players;
-
-    /**
-     * @param Players $players
-     */
-    public function __construct(Players $players)
-    {
-        $this->players = $players;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -31,8 +17,6 @@ class PlayersController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('players.index')
-            ->with('players', $this->players->all());
     }
 
     /**
@@ -42,7 +26,6 @@ class PlayersController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -53,7 +36,6 @@ class PlayersController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -64,7 +46,6 @@ class PlayersController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -75,7 +56,6 @@ class PlayersController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -87,7 +67,6 @@ class PlayersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -98,6 +77,5 @@ class PlayersController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
