@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractController {
+    __invoke(AbstractRequest $request)
+}
+
+abstract class AbstractHandler {
+}
+
+abstract class AbstractRepository {
+    - $model : ModelInterface
+    + ModelInterface create()
+    + ModelInterface read()
+    + ModelInterface update()
+    + bool delete()
+}
+
+abstract class AbstractRequest {
+    + get(string $key) : string|int|null|array
+}
+
+AbstractController --> AbstractHandler
+AbstractRequest .> AbstractController
+AbstractRepository -> AbstractHandler
+
+note top of AbstractRequest: AbstractRequest is implemented by \na unique request for each request that can be made
+note top of AbstractController: AbstractController is called from the routes.php file by defining \n`Route::get(<ControllerClassName>::class)`
+note left of AbstractRepository: A repository is made for every model, \nthe repository handles all database interactions
+note right of AbstractHandler: A handler handles all logic for a request. \nIf logic is needed beyond what a request should do, turn it into a service.
+
+@enduml
