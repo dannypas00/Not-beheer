@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePlayer;
+use App\Models\Player;
 use App\Repositories\Players;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class PlayersController extends AbstractController
 {
@@ -51,57 +53,25 @@ class PlayersController extends AbstractController
      * Store a newly created resource in storage.
      *
      * @param StorePlayer $request
-     * @return Response
+     * @return Application|Redirector|RedirectResponse
+     * @throws Exception
      */
-    public function store(StorePlayer $request): Response
+    public function store(StorePlayer $request): Application|RedirectResponse|Redirector
     {
-        dd('test');
-        dd($request);
-//        dd($request, $request->validated());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $this->players->create($request);
+        return redirect()->route('players.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Response
+     * @param Player $player
+     * @return Application|RedirectResponse|Redirector
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Player $player): Redirector|RedirectResponse|Application
     {
-        //
+        $this->players->delete($player);
+        return redirect()->route('players.index');
     }
 }

@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::resource('players', PlayersController::class)
-    ->only(['index', 'create', 'store', 'delete']);
+    ->only(['index', 'create', 'store', 'destroy']);
 
 Route::get('/export', function () {
     return view('export.index');

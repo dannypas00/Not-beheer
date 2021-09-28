@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12">
         <label for="name">Name</label>
-        <input id="name" type="text" class="@error('name') is-invalid @enderror">
+        <input name="name" id="name" type="text" class="@error('name') is-invalid @enderror">
 
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
