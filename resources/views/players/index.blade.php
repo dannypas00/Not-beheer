@@ -7,7 +7,8 @@
     <div class="mt-3 mb-3">
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-success btn-sm float-end">Voeg nieuwe speler toe</button>
+                <a href="{{route('players.create')}}" type="button" class="btn btn-success btn-sm float-end">Voeg nieuwe
+                    speler toe</a>
                 <h5>Overzicht van spelers</h5>
             </div>
 
