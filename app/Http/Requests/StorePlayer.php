@@ -9,7 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StorePlayer extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *

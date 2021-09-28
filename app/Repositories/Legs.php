@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Leg;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Legs
@@ -15,9 +14,8 @@ class Legs extends Repository
      * Attractions constructor.
      * @param Leg $model
      */
-    #[Pure] public function __construct(Leg $model)
+    public function __construct(Leg $model)
     {
         parent::__construct($model);
     }
-
 }

@@ -14,7 +14,6 @@ use Illuminate\Routing\Redirector;
 
 class PlayersController extends AbstractController
 {
-
     /**
      * @var Players
      */
