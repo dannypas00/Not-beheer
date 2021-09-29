@@ -21,12 +21,15 @@ Route::get('/', function () {
 Route::resource('players', PlayersController::class)
     ->only(['index', 'create', 'store', 'destroy']);
 
+Route::resource('fixtures', \App\Http\Controllers\FixturesController::class)
+    ->only(['index', 'create', 'store','destroy']);
+
 Route::get('/export', function () {
     return view('export.index');
 });
 
-Route::get('/matches', function () {
-    return view('matches.index');
+Route::get('/fixtures', function () {
+    return view('fixtures.index');
 });
 
 Route::get('/statistics', function () {
