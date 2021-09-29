@@ -2,21 +2,21 @@
 
 namespace App\Repositories;
 
-use App\Models\Leg;
+use App\Models\Set;
 
 /**
- * Class Legs
+ * Class Sets
  *
  * @package App\Repositories
  */
-class Legs extends Repository
+class Sets extends Repository
 {
     /**
      * Attractions constructor.
      *
-     * @param Leg $model
+     * @param Set $model
      */
-    public function __construct(Leg $model)
+    public function __construct(Set $model)
     {
         parent::__construct($model);
     }

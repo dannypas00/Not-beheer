@@ -9,17 +9,19 @@ class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that are not reported.
-     *
-     * @var string[]
      */
-    protected $dontReport;
+    protected $dontReport = [
+        //
+    ];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
-     *
-     * @var string[]
      */
-    protected $dontFlash = [];
+    protected $dontFlash = [
+        'current_password',
+        'password',
+        'password_confirmation',
+    ];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -28,7 +30,10 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(static function (Throwable $e): void {
-        });
+        $this->reportable(
+            function (Throwable $e): void {
+                //
+            }
+        );
     }
 }

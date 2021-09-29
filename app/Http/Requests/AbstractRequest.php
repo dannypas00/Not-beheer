@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AbstractRequest
+ *
  * @package App\Http\Requests
  */
 class AbstractRequest extends FormRequest
@@ -80,7 +81,10 @@ class AbstractRequest extends FormRequest
 
             // Check if the key exists in the rules
             if (!in_array($starKey, $ruleKeys, true)) {
-                $errors[$key] = sprintf('Parameter %s is not allowed.', str_replace('.', ' ', Str::snake(Str::studly($key), ' ')));
+                $errors[$key] = sprintf(
+                    'Parameter %s is not allowed.',
+                    str_replace('.', ' ', Str::snake(Str::studly($key), ' '))
+                );
             }
         }
     }

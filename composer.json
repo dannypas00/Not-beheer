@@ -13,14 +13,16 @@
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/homestead": "^12.5",
         "friendsofphp/php-cs-fixer": "^3.1",
+        "laravel/homestead": "^12.5",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -57,7 +59,8 @@
         "fix": [
             "@php vendor/bin/php-cs-fixer fix app",
             "@php vendor/bin/php-cs-fixer fix tests",
-            "@php vendor/bin/phpstan analyse"
+            "@php vendor/bin/phpcbf --standard=PSR12 --extensions=php app tests",
+            "@php vendor/bin/phpcs --standard=PSR12 --extensions=php app tests"
         ]
     },
     "extra": {

@@ -51,7 +51,9 @@ jobs:
             - ./vendor
       - run:
           name: "Generate App key"
-          command: php artisan key:generate
+          command: |
+            php artisan key:generate
+            php artisan migrate:fresh --seed
       - persist_to_workspace:
           root: .
           paths:
@@ -83,9 +85,10 @@ jobs:
       - run:
           name: "Run Static Tests"
           command: |
-            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix --dry-run app
-            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix --dry-run tests
-            php -d memory_limit=-1 vendor/bin/phpstan analyse
+            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix app
+            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix tests
+            php -d memory_limit=-1 vendor/bin/phpcbf --standard=PSR12 --extensions=php app tests
+            php -d memory_limit=-1 vendor/bin/phpcs --standard=PSR12 --extensions=php app tests
 
 workflows:
   test-push:
