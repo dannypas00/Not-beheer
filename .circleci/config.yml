@@ -51,7 +51,9 @@ jobs:
             - ./vendor
       - run:
           name: "Generate App key"
-          command: php artisan key:generate
+          command: |
+            php artisan key:generate"
+            php artisan migrate:fresh --seed"
       - persist_to_workspace:
           root: .
           paths:
