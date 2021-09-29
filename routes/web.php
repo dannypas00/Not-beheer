@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\FixturesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +26,7 @@ Route::get('/export', function () {
     return view('export.index');
 });
 
-Route::get('/matches', function () {
-    return view('matches.index');
-});
+Route::resource('fixtures', FixturesController::class);
 
 Route::get('/statistics', function () {
     return view('statistics.index');

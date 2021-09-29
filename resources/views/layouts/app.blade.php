@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li>
-                <a href="/matches" class="nav-link text-white {{ (request()->is('matches')) ? 'active' : '' }}">
+                <a href="/fixtures" class="nav-link text-white {{ (request()->is('fixtures')) ? 'active' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-calendar-week" viewBox="0 0 16 16">
                         <path
