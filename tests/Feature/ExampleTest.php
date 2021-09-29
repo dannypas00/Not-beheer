@@ -2,22 +2,25 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    use DatabaseMigrations;
 
     /**
-     * A basic test example.
-     *
-     * @return void
+     * A basic test example to see if this runs at all
      */
-    public function testExample()
+    public function testBasicAssertion()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A basic test to see if the routing for unauthenticated users works correctly
+     */
+    public function testUnauthenticatedBasicRouting()
     {
         $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $response->assertRedirect(route('players.index'));
     }
 }
