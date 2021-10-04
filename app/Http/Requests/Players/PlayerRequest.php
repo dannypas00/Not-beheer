@@ -9,9 +9,12 @@ class PlayerRequest extends AbstractRequest
     /**
      * @return array<string>
      */
-    public function rules(): array {
+    public function rules(): array
+    {
         return [
-
+            'id' => 'sometimes|int',
+            'name' => 'required|string',
+            'file' => 'sometimes|nullable|mimes:jpeg,png'
         ];
     }
 }
