@@ -3,7 +3,7 @@
 namespace App\Handlers;
 
 use App\Http\Requests\Players\PlayerIndexRequest;
-use App\Http\Requests\Players\PlayerRequest;
+use App\Http\Requests\Players\PlayerStoreRequest;
 use App\Models\Player;
 use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\View\Factory;
@@ -32,10 +32,10 @@ class PlayerHandler
     }
 
     /**
-     * @param PlayerRequest $request
+     * @param PlayerStoreRequest $request
      * @return Response
      */
-    public function store(PlayerRequest $request): Response
+    public function store(PlayerStoreRequest $request): Response
     {
         try {
             app(PlayerRepository::class)->create($request);

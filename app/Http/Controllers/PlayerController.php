@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Handlers\PlayerHandler;
 use App\Http\Requests\Players\PlayerIndexRequest;
-use App\Http\Requests\Players\PlayerRequest;
+use App\Http\Requests\Players\PlayerStoreRequest;
 use App\Models\Player;
 use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -33,10 +33,10 @@ class PlayerController extends AbstractController
     }
 
     /**
-     * @param PlayerRequest $request
+     * @param PlayerStoreRequest $request
      * @return Response
      */
-    public function store(PlayerRequest $request): Response
+    public function store(PlayerStoreRequest $request): Response
     {
         return app(PlayerHandler::class)->store($request);
     }

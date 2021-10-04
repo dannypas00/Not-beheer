@@ -4,7 +4,7 @@ namespace App\Http\Requests\Players;
 
 use App\Http\Requests\AbstractRequest;
 
-class PlayerRequest extends AbstractRequest
+class PlayerStoreRequest extends AbstractRequest
 {
     /**
      * @return array<string>
