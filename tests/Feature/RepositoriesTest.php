@@ -46,13 +46,14 @@ class RepositoriesTest extends TestCase
 
     public function testGet()
     {
+        Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
             //
-            $expected = $model::factory()->create(['id' => '1337']);
-            $actual = $repository->get('1337');
+            $expected = $model::factory()->create();
+            $actual = $repository->get($expected->id);
             $actual = collect($actual->getAttributes())->filter(function ($value, $key) {
                 return $value !== null;
             });
@@ -79,13 +80,13 @@ class RepositoriesTest extends TestCase
 
     public function testCreate()
     {
+        Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
             $model = $model::factory()->make();
             $repository->create($model->getAttributes());
-            Log::error('Table', ['table' => $model->getTable()]);
             foreach ($model->getAttributes() as $key => $value) {
                 $this->assertDatabaseHas($model->getTable(), [$key => $value]);
             }
@@ -94,6 +95,7 @@ class RepositoriesTest extends TestCase
 
     public function testUpdate()
     {
+        Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
@@ -109,13 +111,14 @@ class RepositoriesTest extends TestCase
 
     public function testDelete()
     {
+        Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
             $model = $model::factory()->create();
             $repository->delete($model);
-            $this->assertDatabaseMissing($model->toTable(), ['id' => $model->id, 'deleted_at' => null]);
+            $this->assertDatabaseMissing($model->getTable(), ['id' => $model->id, 'deleted_at' => null]);
         }
     }
 }

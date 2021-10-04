@@ -21,16 +21,12 @@ class GameFactory extends Factory
      */
     public function definition()
     {
-        $fixture_id = $this->faker->unixTime;
-        $fixture = FixtureFactory::new()->create(['id' => $fixture_id]);
-        $fixture->save();
-        $gameable_id = $this->faker->unixTime;
-        $gameable = $this->faker->boolean ? SetFactory::new()->create(['id' => $gameable_id]) : LegFactory::new()->create(['id' => $gameable_id]);
-        $gameable->save();
+        $fixture = FixtureFactory::new()->create();
+        $gameable = $this->faker->boolean ? SetFactory::new()->create() : LegFactory::new()->create();
         return [
-            'fixture_id' => $fixture_id,
+            'fixture_id' => $fixture->id,
             'gameable_type' => $gameable::class,
-            'gameable_id' => $gameable_id
+            'gameable_id' => $gameable->id
         ];
     }
 }
