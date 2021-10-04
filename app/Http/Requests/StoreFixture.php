@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @package App\Http\Requests
  */
-class StorePlayer extends FormRequest
+class StoreFixture extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

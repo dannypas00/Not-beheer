@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class Repository
+ *
  * @package App\Repositories
  */
 abstract class Repository
@@ -30,7 +31,7 @@ abstract class Repository
     }
 
     /**
-     * @param $id
+     * @param  $id
      * @return Model|null
      */
     public function get($id): ?Model
@@ -94,7 +95,6 @@ abstract class Repository
 
     /**
      * @param Model $model
-     *
      */
     public function delete(Model $model): void
     {
