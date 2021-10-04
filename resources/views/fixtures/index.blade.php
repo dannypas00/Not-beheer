@@ -33,8 +33,8 @@
                             <td>{{$fixture->style}}</td>
                             <td>{{$fixture->length}}</td>
                             <td>{{$fixture->winner}}</td>
-                            <td>{{App\Http\Controllers\FixturesController::getPlayer($fixture->id, '1')}}</td>
-                            <td>{{App\Http\Controllers\FixturesController::getPlayer($fixture->id, '2')}}</td>
+                            <td>{{App\Http\Controllers\FixtureController::getPlayer($fixture->id, '1')}}</td>
+                            <td>{{App\Http\Controllers\FixtureController::getPlayer($fixture->id, '2')}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date}}</td>
 

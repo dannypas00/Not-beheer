@@ -9,20 +9,12 @@ use Illuminate\Contracts\View\View;
 use App\Repositories\Fixtures;
 use App\Repositories\PlayerFixtures;
 
-class FixturesController extends AbstractController
+class FixtureController extends AbstractController
 {
-    private Fixtures $fixtures;
-
-    public function __construct(Fixtures $fixtures)
-    {
-        $this->fixtures = $fixtures;
-    }
-
     public function index():View|Factory|Application
     {
         return view('fixtures.index')
             ->with('fixtures',$this->fixtures->all());
-
     }
 
     public static function getPlayer($fixtureID, $playerOrder)
@@ -34,6 +26,7 @@ class FixturesController extends AbstractController
             ->where('fixture_id', $fixtureID)
             ->where('order', $playerOrder)
             ->value('name');
+
         return $player;
     }
 }

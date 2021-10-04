@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\FixturesController;
+use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/players');
+    return redirect(route('players.index'));
 });
 
 Route::get('/export', function () {
     return view('export.index');
 });
 
-Route::resource('fixtures', FixturesController::class);
+Route::get('/fixtures', function () {
+    return redirect(route('fixtures.index'));
+});
+
+Route::group(['prefix' => 'fixtures'], function () {
+    Route::get('index', [FixtureController::class, 'index'])->name('fixtures.index');
+});
 
 Route::get('/statistics', function () {
     return view('statistics.index');
