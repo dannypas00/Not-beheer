@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property string $type
+ * @property string $style
+ * @property int $length
+ * @property int $start_score
+ * @property int $average_score
+ * @property \DateTime $date
+ * @property Player $player1
+ * @property Player $player2
+ */
 class Fixture extends Model
 {
     use HasFactory;
@@ -18,7 +28,7 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['type', 'style', 'length', 'start_score', 'average_score', 'date'];
+    protected $fillable = ['average_score', 'type', 'style', 'length', 'start_score', 'date', 'player_1', 'player_2'];
 
     /**
      * The attributes that should be guarded.
@@ -26,11 +36,6 @@ class Fixture extends Model
      * @var string[]
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
-
-    public function players(): HasManyThrough
-    {
-        return $this->hasManyThrough(Player::class, PlayerFixture::class);
-    }
 
     /**
      * @return MorphMany

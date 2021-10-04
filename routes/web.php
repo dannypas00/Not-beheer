@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/players');
+    return redirect(route('players.index'));
 });
 
 Route::get('/export', function () {
