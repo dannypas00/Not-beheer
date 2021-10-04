@@ -26,3 +26,4 @@ yarn-error.log
 yarn.lock
 /Vagrantfile
 !/.php-cs-fixer.cache
+/.php-cs-fixer.cache

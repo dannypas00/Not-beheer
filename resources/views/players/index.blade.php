@@ -7,7 +7,8 @@
     <div class="mt-3 mb-3">
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-success btn-sm float-end">Voeg nieuwe speler toe</button>
+                <a href="{{route('players.create')}}" type="button" class="btn btn-success btn-sm float-end">Voeg nieuwe
+                    speler toe</a>
                 <h5>Overzicht van spelers</h5>
             </div>
 
@@ -23,8 +24,16 @@
                                         voluptatem? Culpa, illum?</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            <button type="button" class="me-2 rounded btn btn-sm btn-outline-secondary">
+                                                Edit
+                                            </button>
+
+                                            <form method="post" action="{{route('players.destroy', $player)}}">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete
+                                                </button>
+                                            </form>
                                         </div>
                                         <small class="text-muted">9 mins</small>
                                     </div>
