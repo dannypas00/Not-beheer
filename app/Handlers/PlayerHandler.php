@@ -15,12 +15,11 @@ class PlayerHandler
 {
     /**
      * @param PlayerIndexRequest $request
-     * @param PlayerRepository $playerRepository
      * @return View|Factory
      */
-    public function index(PlayerIndexRequest $request, PlayerRepository $playerRepository): View|Factory
+    public function index(PlayerIndexRequest $request): View|Factory
     {
-        $players = $playerRepository->all();
+        $players = app(PlayerRepository::class)->all();
         return view('players.index', ['players' => $players]);
     }
 
@@ -34,13 +33,12 @@ class PlayerHandler
 
     /**
      * @param PlayerRequest $request
-     * @param PlayerRepository $playerRepository
      * @return Response
      */
-    public function store(PlayerRequest $request, PlayerRepository $playerRepository): Response
+    public function store(PlayerRequest $request): Response
     {
         try {
-            $playerRepository->create($request);
+            app(PlayerRepository::class)->create($request);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
@@ -49,13 +47,12 @@ class PlayerHandler
 
     /**
      * @param Player $player
-     * @param PlayerRepository $playerRepository
      * @return Response
      */
-    public function destroy(Player $player, PlayerRepository $playerRepository): Response
+    public function destroy(Player $player): Response
     {
         try {
-            $playerRepository->delete($player);
+            app(PlayerRepository::class)->delete($player);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);

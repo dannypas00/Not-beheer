@@ -15,3 +15,5 @@ if [ $# -gt 0 ];then
 else
     /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 fi
+
+npm run watch
