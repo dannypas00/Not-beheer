@@ -19,5 +19,4 @@ class GameRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
-
 }
