@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\FixtureHandler;
+use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\StoreFixture;
-use App\Http\Requests\StorePlayer;
 use App\Models\Fixture;
 use App\Models\Player;
-use App\Repositories\Players;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,10 +14,11 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
-class FixturesController extends AbstractController
+class FixtureController extends AbstractController
 {
     /**
-     * @var Fixture
+     * @param FixtureIndexRequest $request
+     * @return View|Factory
      */
     private Fixture $fixtures;
 
@@ -34,10 +35,9 @@ class FixturesController extends AbstractController
      *
      * @return Application|Factory|View
      */
-    public function index(): View|Factory|Application
+    public function index(FixtureIndexRequest $request): View|Factory|Application
     {
-        return view('fixtures.index')
-            ->with('players', Player::all());
+        return app(FixtureHandler::class)->index($request);
     }
 
     /**
@@ -60,7 +60,7 @@ class FixturesController extends AbstractController
      */
     public function store(StoreFixture $request): Application|RedirectResponse|Redirector
     {
-        $this->fixtures->create($request);
+        $this->fixtures->store($request);
         return redirect()->route('fixtures.index');
     }
 

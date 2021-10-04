@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Players;
+namespace App\Http\Requests\Fixtures;
 
 use App\Http\Requests\AbstractRequest;
 
-class PlayerIndexRequest extends AbstractRequest
+class FixtureIndexRequest extends AbstractRequest
 {
     /**
      * @return array<string>

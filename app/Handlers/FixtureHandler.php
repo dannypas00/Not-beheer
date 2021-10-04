@@ -2,25 +2,25 @@
 
 namespace App\Handlers;
 
-use App\Http\Requests\Players\PlayerIndexRequest;
+use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
-use App\Models\Player;
-use App\Repositories\PlayerRepository;
+use App\Models\Fixture;
+use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class PlayerHandler
+class FixtureHandler
 {
     /**
-     * @param PlayerIndexRequest $request
+     * @param FixtureIndexRequest $request
      * @return View|Factory
      */
-    public function index(PlayerIndexRequest $request): View|Factory
+    public function index(FixtureIndexRequest $request): Factory|View
     {
-        $players = app(PlayerRepository::class)->all();
-        return view('players.index', ['players' => $players]);
+        $players = app(FixtureRepository::class)->all();
+        return view('fixture.index', ['players' => $players]);
     }
 
     /**
@@ -28,7 +28,7 @@ class PlayerHandler
      */
     public function createView(): View|Factory
     {
-        return view('players.create');
+        return view('fixture.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PlayerHandler
     public function store(FixtureStoreRequest $request): Response
     {
         try {
-            app(PlayerRepository::class)->create($request);
+            app(FixtureRepository::class)->create($request);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
@@ -46,13 +46,13 @@ class PlayerHandler
     }
 
     /**
-     * @param Player $player
+     * @param Fixture $fixture
      * @return Response
      */
-    public function destroy(Player $player): Response
+    public function destroy(Fixture $fixture): Response
     {
         try {
-            app(PlayerRepository::class)->delete($player);
+            app(FixtureRepository::class)->delete($fixture);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
