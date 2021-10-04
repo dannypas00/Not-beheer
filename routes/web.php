@@ -24,7 +24,7 @@ Route::get('/export', function () {
 });
 
 Route::get('/fixtures', function () {
-    return redirect(route('fixtures.index'));
+    return view('fixtures.index');
 });
 
 Route::group(['prefix' => 'fixtures'], function () {
@@ -33,6 +33,12 @@ Route::group(['prefix' => 'fixtures'], function () {
 
 Route::get('/statistics', function () {
     return view('statistics.index');
+});
+
+Route::group(['prefix' => 'fixtures'], function () {
+    Route::get('index', [FixtureController::class, 'index'])->name('fixtures.index');
+    Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
+    Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
 });
 
 Route::group(['prefix' => 'players'], function () {
