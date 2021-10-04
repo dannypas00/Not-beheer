@@ -19,6 +19,8 @@
                         <th scope="col">Style</th>
                         <th scope="col">Length</th>
                         <th scope="col">Winner</th>
+                        <th scope="col">Player 1</th>
+                        <th scope="col">Player 2</th>
                         <th scope="col">Start Score</th>
                         <th scope="col">Date</th>
                     </tr>
@@ -31,6 +33,8 @@
                             <td>{{$fixture->style}}</td>
                             <td>{{$fixture->length}}</td>
                             <td>{{$fixture->winner}}</td>
+                            <td>{{App\Http\Controllers\FixturesController::getPlayer($fixture->id, '1')}}</td>
+                            <td>{{App\Http\Controllers\FixturesController::getPlayer($fixture->id, '2')}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date}}</td>
 
