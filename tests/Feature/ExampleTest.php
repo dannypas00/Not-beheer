@@ -13,13 +13,4 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
-
-    /**
-     * A basic test to see if the routing for unauthenticated users works correctly
-     */
-    public function testUnauthenticatedBasicRouting()
-    {
-        $response = $this->get('/');
-        $response->assertRedirect(route('players.index'));
-    }
 }

@@ -5,11 +5,10 @@ namespace App\Repositories;
 use App\Models\Player;
 
 /**
- * Class Players
- *
+ * Class PlayerRepository
  * @package App\Repositories
  */
-class Players extends Repository
+class PlayerRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.

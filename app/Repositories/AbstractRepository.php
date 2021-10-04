@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class Repository
- *
+ * Class AbstractRepository
  * @package App\Repositories
  */
-abstract class Repository
+abstract class AbstractRepository
 {
     /**
      * @var Model
@@ -21,7 +20,7 @@ abstract class Repository
     protected Model $model;
 
     /**
-     * Repository constructor.
+     * AbstractRepository constructor.
      *
      * @param Model $model
      */
@@ -31,7 +30,7 @@ abstract class Repository
     }
 
     /**
-     * @param  $id
+     * @param $id
      * @return Model|null
      */
     public function get($id): ?Model
@@ -95,6 +94,7 @@ abstract class Repository
 
     /**
      * @param Model $model
+     *
      */
     public function delete(Model $model): void
     {
@@ -108,4 +108,5 @@ abstract class Repository
             throw $e;
         }
     }
+
 }
