@@ -16,6 +16,7 @@ RUN apt-get update \
        php8.0-mysql php8.0-mbstring \
        php8.0-xml php8.0-zip \
        nodejs yarn \
+       npm \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \

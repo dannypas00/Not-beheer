@@ -18,12 +18,6 @@ Route::get('/', function () {
     return redirect('/players');
 });
 
-Route::resource('players', PlayersController::class)
-    ->only(['index', 'create', 'store', 'destroy']);
-
-Route::resource('fixtures', \App\Http\Controllers\FixturesController::class)
-    ->only(['index', 'create', 'store','destroy']);
-
 Route::get('/export', function () {
     return view('export.index');
 });
@@ -34,4 +28,11 @@ Route::get('/fixtures', function () {
 
 Route::get('/statistics', function () {
     return view('statistics.index');
+});
+
+Route::group(['prefix' => 'players'], function () {
+    Route::get('index', [PlayerController::class, 'index'])->name('players.index');
+    Route::get('create', [PlayerController::class, 'create'])->name('players.create');
+    Route::post('store', [PlayerController::class, 'store'])->name('players.store');
+    Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
 });
