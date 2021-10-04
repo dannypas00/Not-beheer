@@ -2,20 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Set;
+use App\Models\Game;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * Class Sets
+ * Class GameRepository
  * @package App\Repositories
  */
-class Sets extends Repository
+class GameRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
-     * @param Set $model
+     * @param Game $model
      */
-    #[Pure] public function __construct(Set $model)
+    #[Pure] public function __construct(Game $model)
     {
         parent::__construct($model);
     }

@@ -2,80 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Players;
+use App\Handlers\PlayerHandler;
+use App\Http\Requests\Players\PlayerIndexRequest;
+use App\Http\Requests\Players\PlayerRequest;
+use App\Models\Player;
+use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PlayerController extends AbstractController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
+     * @param PlayerIndexRequest $request
+     * @return View|Factory
      */
-    public function index(): View|Factory|Application
+    public function index(PlayerIndexRequest $request): View|Factory
     {
+        return app(PlayerHandler::class)->index($request);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return View|Factory
      */
-    public function create()
+    public function create(): View|Factory
     {
+        return app(PlayerHandler::class)->createView();
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param PlayerRequest $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(PlayerRequest $request): Response
     {
+        return app(PlayerHandler::class)->store($request);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Player $player
+     * @return Response
      */
-    public function show($id)
+    public function destroy(Player $player): Response
     {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+        return app(PlayerHandler::class)->destroy($player);
     }
 }

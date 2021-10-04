@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class Repository
+ * Class AbstractRepository
  * @package App\Repositories
  */
-abstract class Repository
+abstract class AbstractRepository
 {
     /**
      * @var Model
@@ -20,7 +20,7 @@ abstract class Repository
     protected Model $model;
 
     /**
-     * Repository constructor.
+     * AbstractRepository constructor.
      *
      * @param Model $model
      */

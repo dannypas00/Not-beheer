@@ -2,20 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Leg;
+use App\Models\Set;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * Class Legs
+ * Class SetRepository
  * @package App\Repositories
  */
-class Legs extends Repository
+class SetRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
-     * @param Leg $model
+     * @param Set $model
      */
-    #[Pure] public function __construct(Leg $model)
+    #[Pure] public function __construct(Set $model)
     {
         parent::__construct($model);
     }

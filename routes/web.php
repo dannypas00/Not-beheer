@@ -18,9 +18,6 @@ Route::get('/', function () {
     return redirect('/players');
 });
 
-Route::resource('players', PlayerController::class)
-    ->only(['index', 'create', 'delete']);
-
 Route::get('/export', function () {
     return view('export.index');
 });
@@ -36,3 +33,10 @@ Route::get('/statistics', function () {
 Route::get('/get', PlayerController::class);
 
 
+
+Route::group('player', function () {
+    Route::get('index', 'PlayerController@index');
+    Route::get('create', 'PlayerController@create');
+    Route::post('store', 'PlayerController@store');
+    Route::delete('{player}/destroy', 'PlayerController@destroy');
+});
