@@ -5,11 +5,10 @@ namespace App\Repositories;
 use App\Models\Set;
 
 /**
- * Class Sets
- *
+ * Class SetRepository
  * @package App\Repositories
  */
-class Sets extends Repository
+class SetRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
@@ -20,4 +19,5 @@ class Sets extends Repository
     {
         parent::__construct($model);
     }
+
 }

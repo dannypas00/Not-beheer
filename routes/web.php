@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\FixturesController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +19,6 @@ Route::get('/', function () {
     return redirect('/players');
 });
 
-Route::resource('players', PlayersController::class)
-    ->only(['index', 'create', 'store', 'destroy']);
-
 Route::get('/export', function () {
     return view('export.index');
 });
@@ -30,4 +27,11 @@ Route::resource('fixtures', FixturesController::class);
 
 Route::get('/statistics', function () {
     return view('statistics.index');
+});
+
+Route::group(['prefix' => 'players'], function () {
+    Route::get('index', [PlayerController::class, 'index'])->name('players.index');
+    Route::get('create', [PlayerController::class, 'create'])->name('players.create');
+    Route::post('store', [PlayerController::class, 'store'])->name('players.store');
+    Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
 });
