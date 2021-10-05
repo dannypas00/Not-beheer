@@ -10,5 +10,4 @@ class FixturesRoutesTest extends TestCase
     {
         $this->get(route('fixtures.index'))->assertViewHas('fixtures')->assertSuccessful()->assertViewIs('fixtures.index');
     }
-
 }
