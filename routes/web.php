@@ -32,6 +32,10 @@ Route::get('/fixtures', function () {
     return view('fixtures.index');
 });
 
+Route::get('/fixtures/fixture', function () {
+    return view('fixtures.fixture');
+});
+
 Route::get('/statistics', function () {
     return view('statistics.index');
 });
