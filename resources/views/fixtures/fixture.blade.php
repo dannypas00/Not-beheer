@@ -44,7 +44,7 @@
                         <div class="card-header">
                             <div class="container">
                                 <h5>Speler 1</h5>
-                                    <div id="player_1">
+                                    <div id="player1">
 
                                     </div>
                             </div>
@@ -58,7 +58,7 @@
                         <div class="card-header">
                             <div class="container">
                                 <h5>Speler 2</h5>
-                                <div id="player_2">
+                                <div id="player2">
 
                                 </div>
                             </div>
@@ -70,13 +70,11 @@
     </div>
 
     <div id="duplicate" class="mt-3 mb-3" style="visibility: hidden">
-        <div class="card-header" >
-            <h10 >Beurt #1</h10>
-        </div>
+        <div tag="text" class="card-header"></div>
         <div class="input-group mb-3">
-            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="2" maxlength="4">
-            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="2" maxlength="4">
-            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="2" maxlength="4">
+            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="1" maxlength="3">
+            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="1" maxlength="3">
+            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="1" maxlength="3">
         </div>
         </hr>
     </div>

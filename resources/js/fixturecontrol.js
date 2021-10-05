@@ -1,48 +1,69 @@
 document.addEventListener('DOMContentLoaded', (load) => {
 
-
-    for (let i = 1; i < 3; i++) {
-        // Create a clone of element with id duplicate:
-        let clone = document.querySelector('#duplicate').cloneNode( true );
-
-        // Change the id attribute of the newly created element:
-        clone.setAttribute( 'id', i );
-        clone.style.visibility = 'visible';
-
-        // Append the newly created element on parent from the event
-        document.getElementById('player_' + i).append(clone);
-    }
+    let turn = 0;
+    duplicateThrowElement(turn);
+    turn++;
 
     document.addEventListener("keydown", function(event) {
 
-        if(event.which == 9)
-        {
+        if(event.which == 9) {
             let parent = event.composedPath();
             const activeTextarea = document.activeElement;
 
-            if(activeTextarea.value != '')
-                activeTextarea.setAttribute("disabled", "true");
+            if(activeTextarea.tagName == 'INPUT'){
 
-            console.log(activeTextarea.parent);
+                if(activeTextarea.value != '')
+                    activeTextarea.setAttribute("disabled", "true");
 
-            if(parent[2].firstChild.value != '')
-            {
-                // Create a clone of element with id duplicate:
-                let clone = document.querySelector('#duplicate').cloneNode( true );
+                let inputs = parent[2].getElementsByTagName('input');
+                let checkIfInputContainsValue = true;
 
-                // Change the id attribute of the newly created element:
-                clone.setAttribute( 'id', "testid" );
-                clone.style.visibility = 'visible';
+                for (let index = 0; index < inputs.length; ++index) {
 
-                // Append the newly created element on parent from the event
-                parent[3].insertBefore( clone , parent[3].firstChild);
+                    if (inputs[index].value == '') {
+                        checkIfInputContainsValue = false;
+                    }
+                }
+
+                if(checkIfInputContainsValue) {
+                    duplicateThrowElement(turn, parent[3]);
+                    turn++;
+                }
             }
         }
     })
 })
 
 
+function duplicateThrowElement(turn){
+    // Create a clone of element with id duplicate:
+    let clone = document.querySelector('#duplicate').cloneNode( true );
+    clone.style.visibility = 'visible';
 
+    let div = document.createElement('h10');
+    div.appendChild(document.createTextNode('Beurt #' + turn));
+
+    console.log(clone.getElementsByTagName('text'));
+
+    if(turn % 2  == 0) {
+        // Change the id attribute of the newly created element:
+        clone.setAttribute( 'id', "player1_turn" + turn);
+
+        let player1Container = document.getElementById('player' + 1);
+
+        // Append the cloned element to the container
+        player1Container.insertBefore(clone, player1Container.firstChild);
+    }
+    else {
+        // Change the id attribute of the newly created element:
+        clone.setAttribute( 'id', "player2_turn" + turn);
+
+        let player2Container = document.getElementById('player' + 2);
+
+        // Append the cloned element to the container
+        player2Container.insertBefore(clone, player2Container.firstChild);
+    }
+}
 
 
 
