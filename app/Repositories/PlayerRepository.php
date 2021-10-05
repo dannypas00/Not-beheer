@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Player;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class PlayerRepository
@@ -15,7 +16,7 @@ class PlayerRepository extends AbstractRepository
      *
      * @param Player $model
      */
-    public function __construct(Player $model)
+    #[Pure] public function __construct(Player $model)
     {
         parent::__construct($model);
     }
