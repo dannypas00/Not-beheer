@@ -31,6 +31,7 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::get('index', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
+    Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
 });
 
 Route::group(['prefix' => 'players'], function () {

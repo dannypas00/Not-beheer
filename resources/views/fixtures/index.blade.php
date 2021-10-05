@@ -42,9 +42,13 @@
                                 <button type="button" class="btn btn-secondary btn-sm float-end">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-sm float-end me-2">
+                                <form method="post" action="{{route('fixtures.destroy', $fixture)}}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="button" class="btn btn-danger btn-sm float-end me-2">
                                     <i class="bi bi-trash-fill"></i>
-                                </button>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
