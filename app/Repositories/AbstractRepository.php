@@ -35,7 +35,7 @@ abstract class AbstractRepository
      */
     public function get($id): ?Model
     {
-        return $this->model->get($id);
+        return $this->model::find($id);
     }
 
     /**
@@ -47,13 +47,16 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param Request $request
+     * @param Request|array $request
      * @return Model|null
      * @throws Exception
      */
-    public function create(Request $request): ?Model
+    public function create($data): ?Model
     {
-        return $this->save($request->validated());
+        if ($data instanceof Request) {
+            $data = $data->validated();
+        }
+        return $this->save($data);
     }
 
     /**
@@ -82,14 +85,17 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param Request $request
+     * @param Request|array $data
      * @param Model|null $model
      * @return Model|null
      * @throws Exception
      */
-    public function update(Request $request, ?Model $model): ?Model
+    public function update($data, ?Model $model = null): ?Model
     {
-        return $this->save($request->validated(), $model);
+        if ($data instanceof Request) {
+            $data = $data->validated();
+        }
+        return $this->save($data, $model);
     }
 
     /**

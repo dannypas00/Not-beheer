@@ -18,7 +18,7 @@ class Game extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['gameable_type', 'gameable_id'];
+    protected $fillable = ['fixture_id', 'gameable_type', 'gameable_id'];
 
     /**
      * The attributes that should be guarded.

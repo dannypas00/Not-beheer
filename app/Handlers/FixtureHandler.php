@@ -20,14 +20,14 @@ class FixtureHandler
     public function index(FixtureIndexRequest $request): Factory|View
     {
         $fixtures = app(FixtureRepository::class)->all();
-        return view('fixtures.index', ['fixtures' => $fixtures]);
+        return view('fixture.index', ['fixtures' => $fixtures]);
     }
     /**
      * @return View|Factory
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create');
+        return view('fixture.create');
     }
     /**
      * @param FixtureStoreRequest $request

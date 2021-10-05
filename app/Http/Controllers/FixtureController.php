@@ -14,6 +14,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
+use Illuminate\Support\Facades\DB;
+
+
 class FixtureController extends AbstractController
 {
     /**
@@ -76,4 +79,21 @@ class FixtureController extends AbstractController
         $this->fixtures->delete($fixture);
         return redirect()->route('fixtures.index');
     }
+
+    public static function getPlayer($fixtureID, $playerOrder)
+    {
+        $player = DB::table('player_fixtures')
+            ->select('name')
+        ->where('order', $playerOrder)
+        ->where('fixture_id', $fixtureID)
+        ->join('fixtures', 'player_fixtures.fixture_id', '=', 'fixtures.id')
+        ->join('players', 'player_fixtures.player_id', '=', 'players.id')
+            ->value('name');
+
+
+        return $player;
+
+
 }
+}
+
