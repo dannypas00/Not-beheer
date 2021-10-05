@@ -3,7 +3,8 @@
 namespace App\Handlers;
 
 use App\Http\Requests\Players\PlayerIndexRequest;
-use App\Http\Requests\Fixtures\FixtureStoreRequest;
+use App\Http\Requests\Players\PlayerStoreRequest;
+use App\Http\Requests\Players\PlayerUpdateRequest;
 use App\Models\Player;
 use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\View\Factory;
@@ -32,10 +33,10 @@ class PlayerHandler
     }
 
     /**
-     * @param FixtureStoreRequest $request
+     * @param PlayerStoreRequest $request
      * @return Response
      */
-    public function store(FixtureStoreRequest $request): Response
+    public function store(PlayerStoreRequest $request): Response
     {
         try {
             app(PlayerRepository::class)->create($request);
@@ -56,6 +57,20 @@ class PlayerHandler
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @param PlayerUpdateRequest $request
+     * @return Response
+     */
+    public function update(PlayerUpdateRequest $request): Response
+    {
+        try {
+            app(PlayerRepository::class)->update($request);
+            return new Response();
+        } catch (\Exception $e) {
+            return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
         }
     }
 }
