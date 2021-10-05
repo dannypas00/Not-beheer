@@ -4,7 +4,7 @@ namespace App\Http\Requests\Players;
 
 use App\Http\Requests\AbstractRequest;
 
-class PlayerStoreRequest extends AbstractRequest
+class PlayerUpdateRequest extends AbstractRequest
 {
     /**
      * @return array<string>
@@ -12,6 +12,7 @@ class PlayerStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
+            'id' => 'required|int|exists:players,id',
             'name' => 'required|string',
             'file' => 'sometimes|nullable|mimes:jpeg,png'
         ];

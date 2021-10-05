@@ -35,4 +35,5 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('create', [PlayerController::class, 'create'])->name('players.create');
     Route::post('store', [PlayerController::class, 'store'])->name('players.store');
     Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
+    Route::put('update', [PlayerController::class, 'update'])->name('players.update');
 });
