@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Player;
+use App\Providers\FakerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 
 class PlayerFactory extends Factory
 {
@@ -21,8 +23,11 @@ class PlayerFactory extends Factory
      */
     public function definition()
     {
+        $imageFaker = \Faker\Factory::create('nl_NL');
+        $imageFaker->addProvider(new FakerPicsumImagesProvider($imageFaker));
         return [
-            'name' => $this->faker->name
+            'image' => $imageFaker->imageUrl,
+            'name'  => $this->faker->name
         ];
     }
 }
