@@ -16,7 +16,6 @@ use Illuminate\Routing\Redirector;
 
 use Illuminate\Support\Facades\DB;
 
-
 class FixtureController extends AbstractController
 {
     /**
@@ -66,6 +65,4 @@ class FixtureController extends AbstractController
         $this->fixtures->delete($fixture);
         return redirect()->route('fixtures.index');
     }
-
 }
-
