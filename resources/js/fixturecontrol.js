@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', (load) => {
         document.getElementById('player_' + i).append(clone);
     }
 
-
-
     document.addEventListener("keydown", function(event) {
 
         if(event.which == 9)
@@ -25,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (load) => {
             if(activeTextarea.value != '')
                 activeTextarea.setAttribute("disabled", "true");
 
-            console.log(parent);
+            console.log(activeTextarea.parent);
 
             if(parent[2].firstChild.value != '')
             {
