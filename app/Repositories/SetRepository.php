@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Set;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class SetRepository
@@ -15,7 +16,7 @@ class SetRepository extends AbstractRepository
      *
      * @param Set $model
      */
-    public function __construct(Set $model)
+    #[Pure] public function __construct(Set $model)
     {
         parent::__construct($model);
     }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * @property Player $player
  * @property Leg $leg
@@ -9,7 +11,7 @@ namespace App\Models;
  * @property string $throw2
  * @property string $throw3
  */
-class Turn extends \Illuminate\Database\Eloquent\Model
+class Turn extends Model
 {
     /**
      * The attributes that are mass assignable.
