@@ -19,5 +19,4 @@ class SetRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
-
 }
