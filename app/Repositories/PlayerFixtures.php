@@ -2,21 +2,21 @@
 
 namespace App\Repositories;
 
-use App\Models\Set;
+use App\Models\PlayerFixture;
 
 /**
- * Class Sets
+ * Class PlayerFixtures
  *
  * @package App\Repositories
  */
-class Sets extends Repository
+class PlayerFixtures extends Repository
 {
     /**
      * Attractions constructor.
      *
-     * @param Set $model
+     * @param PlayerFixture $model
      */
-    public function __construct(Set $model)
+    public function __construct(PlayerFixture $model)
     {
         parent::__construct($model);
     }

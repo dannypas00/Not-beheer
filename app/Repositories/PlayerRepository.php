@@ -2,21 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Leg;
+use App\Models\Player;
 
 /**
- * Class Legs
- *
+ * Class PlayerRepository
  * @package App\Repositories
  */
-class Legs extends Repository
+class PlayerRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
      *
-     * @param Leg $model
+     * @param Player $model
      */
-    public function __construct(Leg $model)
+    public function __construct(Player $model)
     {
         parent::__construct($model);
     }

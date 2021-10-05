@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\FixtureHandler;
+use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\StoreFixture;
-use App\Http\Requests\StorePlayer;
 use App\Models\Fixture;
 use App\Models\Player;
-use App\Repositories\Players;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,10 +14,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
-class FixturesController extends AbstractController
+use Illuminate\Support\Facades\DB;
+
+
+class FixtureController extends AbstractController
 {
     /**
-     * @var Fixture
+     * @param FixtureIndexRequest $request
+     * @return View|Factory
      */
     private Fixture $fixtures;
 
@@ -34,10 +38,9 @@ class FixturesController extends AbstractController
      *
      * @return Application|Factory|View
      */
-    public function index(): View|Factory|Application
+    public function index(FixtureIndexRequest $request): View|Factory|Application
     {
-        return view('fixtures.index')
-            ->with('players', Player::all());
+        return app(FixtureHandler::class)->index($request);
     }
 
     /**
@@ -60,7 +63,7 @@ class FixturesController extends AbstractController
      */
     public function store(StoreFixture $request): Application|RedirectResponse|Redirector
     {
-        $this->fixtures->create($request);
+        $this->fixtures->store($request);
         return redirect()->route('fixtures.index');
     }
 
@@ -76,4 +79,21 @@ class FixturesController extends AbstractController
         $this->fixtures->delete($fixture);
         return redirect()->route('fixtures.index');
     }
+
+    public static function getPlayer($fixtureID, $playerOrder)
+    {
+        $player = DB::table('player_fixtures')
+            ->select('name')
+        ->where('order', $playerOrder)
+        ->where('fixture_id', $fixtureID)
+        ->join('fixtures', 'player_fixtures.fixture_id', '=', 'fixtures.id')
+        ->join('players', 'player_fixtures.player_id', '=', 'players.id')
+            ->value('name');
+
+
+        return $player;
+
+
 }
+}
+

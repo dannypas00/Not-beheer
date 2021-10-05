@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class Repository
- *
+ * Class AbstractRepository
  * @package App\Repositories
  */
-abstract class Repository
+abstract class AbstractRepository
 {
     /**
      * @var Model
@@ -21,7 +20,7 @@ abstract class Repository
     protected Model $model;
 
     /**
-     * Repository constructor.
+     * AbstractRepository constructor.
      *
      * @param Model $model
      */
@@ -31,12 +30,12 @@ abstract class Repository
     }
 
     /**
-     * @param  $id
+     * @param $id
      * @return Model|null
      */
     public function get($id): ?Model
     {
-        return $this->model->get($id);
+        return $this->model::find($id);
     }
 
     /**
@@ -48,13 +47,16 @@ abstract class Repository
     }
 
     /**
-     * @param Request $request
+     * @param Request|array $request
      * @return Model|null
      * @throws Exception
      */
-    public function create(Request $request): ?Model
+    public function create($data): ?Model
     {
-        return $this->save($request->validated());
+        if ($data instanceof Request) {
+            $data = $data->validated();
+        }
+        return $this->save($data);
     }
 
     /**
@@ -83,18 +85,22 @@ abstract class Repository
     }
 
     /**
-     * @param Request $request
+     * @param Request|array $data
      * @param Model|null $model
      * @return Model|null
      * @throws Exception
      */
-    public function update(Request $request, ?Model $model): ?Model
+    public function update($data, ?Model $model): ?Model
     {
-        return $this->save($request->validated(), $model);
+        if ($data instanceof Request) {
+            $data = $data->validated();
+        }
+        return $this->save($data, $model);
     }
 
     /**
      * @param Model $model
+     *
      */
     public function delete(Model $model): void
     {

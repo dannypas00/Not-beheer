@@ -2,21 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Player;
+use App\Models\Set;
 
 /**
- * Class Players
- *
+ * Class SetRepository
  * @package App\Repositories
  */
-class Players extends Repository
+class SetRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
      *
-     * @param Player $model
+     * @param Set $model
      */
-    public function __construct(Player $model)
+    public function __construct(Set $model)
     {
         parent::__construct($model);
     }

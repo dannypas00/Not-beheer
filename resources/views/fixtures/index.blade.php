@@ -7,7 +7,7 @@
     <div class="mt-3 mb-3">
         <div class="card">
             <div class="card-header">
-                <a href="{{route('fixtures.create')}}" type="button" class="btn btn-success btn-sm float-end">Maak wedstrijd aan</a>
+                <button type="button" class="btn btn-success btn-sm float-end">Start een nieuwe wedstrijd</button>
                 <h5>Overzicht van wedstrijden</h5>
             </div>
             <div class="card-body p-0">
@@ -15,55 +15,39 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        <th scope="col"></th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Style</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Winner</th>
+                        <th scope="col">Player 1</th>
+                        <th scope="col">Player 2</th>
+                        <th scope="col">Start Score</th>
+                        <th scope="col">Date</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <button type="button" class="btn btn-secondary btn-sm float-end">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm float-end me-2">
-                                <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>
-                            <button type="button" class="btn btn-secondary btn-sm float-end">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm float-end me-2">
-                                <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        <td>
-                            <button type="button" class="btn btn-secondary btn-sm float-end">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm float-end me-2">
-                                <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    @foreach($fixtures as $fixture)
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{$fixture->type}}</td>
+                            <td>{{$fixture->style}}</td>
+                            <td>{{$fixture->length}}</td>
+                            <td>{{$fixture->winner}}</td>
+                            <td>{{App\Http\Controllers\FixtureController::getPlayer($fixture->id, '1')}}</td>
+                            <td>{{App\Http\Controllers\FixtureController::getPlayer($fixture->id, '2')}}</td>
+                            <td>{{$fixture->start_score}}</td>
+                            <td>{{$fixture->date}}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm float-end">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm float-end me-2">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

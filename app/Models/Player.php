@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property $id
+ * @property $name
+ */
 class Player extends Model
 {
     use HasFactory;
@@ -24,7 +29,11 @@ class Player extends Model
      *
      * @var string[]
      */
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * @return HasManyThrough
@@ -32,5 +41,10 @@ class Player extends Model
     public function fixture(): HasManyThrough
     {
         return $this->hasManyThrough(Fixture::class, PlayerFixture::class);
+    }
+
+    public function turns(): HasMany
+    {
+        return $this->hasMany(Turn::class);
     }
 }
