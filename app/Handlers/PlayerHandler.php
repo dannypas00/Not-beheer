@@ -38,7 +38,7 @@ class PlayerHandler
     public function store(PlayerStoreRequest $request): Response
     {
         try {
-            app(PlayerRepository::class)->create($request);
+            app(PlayerRepository::class)->createWithAvatar($request);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
@@ -52,7 +52,7 @@ class PlayerHandler
     public function destroy(Player $player): Response
     {
         try {
-            app(PlayerRepository::class)->delete($player);
+            app(PlayerRepository::class)->deleteWithAvatar($player);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);

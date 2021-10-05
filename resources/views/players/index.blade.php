@@ -17,6 +17,14 @@
                     @foreach($players as $player)
                         <div class="col">
                             <div class="card shadow-sm">
+                                @if(!is_null($player->image))
+                                    <img class="card-img-top" style="max-height: 200px;" alt="Card image cap"
+                                         src="{{url($player->image)}}">
+                                @else
+                                    <img class="card-img-top" style="max-height: 200px;" alt="Card image cap"
+                                         src="https://picsum.photos/id/237/500/300.jpg">
+                                @endif
+
                                 <div class="card-body">
                                     <p class="card-title">{{$player->name}}</p>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -24,14 +32,15 @@
                                         voluptatem? Culpa, illum?</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="me-2 rounded btn btn-sm btn-outline-secondary">
-                                                Edit
-                                            </button>
+                                            <a type="button" href="#"
+                                               class="me-2 rounded btn btn-sm btn-outline-secondary">
+                                                Bewerk Speler
+                                            </a>
 
                                             <form method="post" action="{{route('players.destroy', $player)}}">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Verwijder
                                                 </button>
                                             </form>
                                         </div>
