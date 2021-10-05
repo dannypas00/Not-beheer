@@ -6,7 +6,6 @@ use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
 use App\Repositories\FixtureRepository;
-use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
