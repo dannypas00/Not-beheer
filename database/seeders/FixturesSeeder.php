@@ -20,8 +20,8 @@ class FixturesSeeder extends Seeder
         ], [
             'type' => 'best_of',
             'style' => 'sets',
-            'length' => '3',
-            'start_score' => '501',
+            'length' => 3,
+            'start_score' => 501,
             'date' => Carbon::today(),
             'winner' => null,
         ]);
@@ -31,8 +31,8 @@ class FixturesSeeder extends Seeder
         ], [
             'type' => 'first_to',
             'style' => 'legs',
-            'length' => '3',
-            'start_score' => '501',
+            'length' => 3,
+            'start_score' => 501,
             'date' => Carbon::today(),
             'winner' => null,
         ]);
