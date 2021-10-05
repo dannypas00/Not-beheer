@@ -19,18 +19,16 @@ class FixtureHandler
      */
     public function index(FixtureIndexRequest $request): Factory|View
     {
-        $players = app(FixtureRepository::class)->all();
-        return view('fixture.index', ['players' => $players]);
+        $fixtures = app(FixtureRepository::class)->all();
+        return view('fixtures.index', ['fixtures' => $fixtures]);
     }
-
     /**
      * @return View|Factory
      */
     public function createView(): View|Factory
     {
-        return view('fixture.create');
+        return view('fixtures.create');
     }
-
     /**
      * @param FixtureStoreRequest $request
      * @return Response
@@ -44,7 +42,6 @@ class FixtureHandler
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
         }
     }
-
     /**
      * @param Fixture $fixture
      * @return Response
