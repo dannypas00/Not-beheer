@@ -12,9 +12,7 @@ class FixtureStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'id' => 'sometimes|int',
-            'name' => 'required|string',
-            'file' => 'sometimes|nullable|mimes:jpeg,png'
+            //TODO
         ];
     }
 }
