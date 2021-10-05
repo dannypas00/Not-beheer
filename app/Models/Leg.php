@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property $average_score
  * @property $winner
+ * @property $set
  * @property $turns
  */
 class Leg extends Model
@@ -39,6 +41,11 @@ class Leg extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function winner(): HasOne
+    {
+        return $this->hasOne('player', 'id', 'winner');
+    }
 
     public function turns(): HasMany
     {

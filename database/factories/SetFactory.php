@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Set;
+use App\Models\Turn;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SetFactory extends Factory

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Game;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class GameRepository
@@ -15,7 +16,7 @@ class GameRepository extends AbstractRepository
      *
      * @param Game $model
      */
-    public function __construct(Game $model)
+    #[Pure] public function __construct(Game $model)
     {
         parent::__construct($model);
     }
