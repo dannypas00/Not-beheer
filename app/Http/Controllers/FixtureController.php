@@ -79,21 +79,6 @@ class FixtureController extends AbstractController
         $this->fixtures->delete($fixture);
         return redirect()->route('fixtures.index');
     }
-
-    public static function getPlayer($fixtureID, $playerOrder)
-    {
-        $player = DB::table('player_fixtures')
-            ->select('name')
-        ->where('order', $playerOrder)
-        ->where('fixture_id', $fixtureID)
-        ->join('fixtures', 'player_fixtures.fixture_id', '=', 'fixtures.id')
-        ->join('players', 'player_fixtures.player_id', '=', 'players.id')
-            ->value('name');
-
-
-        return $player;
-
-
-}
+    
 }
 
