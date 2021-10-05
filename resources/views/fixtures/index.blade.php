@@ -33,8 +33,8 @@
                             <td>{{$fixture->style}}</td>
                             <td>{{$fixture->length}}</td>
                             <td>{{$fixture->winner}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{}}</td>
+                            <td>{{}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date}}</td>
 

@@ -20,22 +20,9 @@ use Illuminate\Support\Facades\DB;
 class FixtureController extends AbstractController
 {
     /**
-     * @param FixtureIndexRequest $request
-     * @return View|Factory
-     */
-    private Fixture $fixtures;
-
-    /**
-     * @param Fixture $fixture
-     */
-    public function __construct(Fixture $fixture)
-    {
-        $this->fixtures = $fixture;
-    }
-
-    /**
      * Display a listing of the resource.
      *
+     * @param FixtureIndexRequest $request
      * @return Application|Factory|View
      */
     public function index(FixtureIndexRequest $request): View|Factory|Application
@@ -79,6 +66,6 @@ class FixtureController extends AbstractController
         $this->fixtures->delete($fixture);
         return redirect()->route('fixtures.index');
     }
-    
+
 }
 
