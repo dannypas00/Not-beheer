@@ -23,10 +23,6 @@ Route::get('/export', function () {
     return view('export.index');
 });
 
-Route::get('/fixtures', function () {
-    return view('fixtures.index');
-});
-
 Route::get('/statistics', function () {
     return view('statistics.index');
 });
