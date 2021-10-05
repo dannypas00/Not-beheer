@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Leg;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class LegRepository
