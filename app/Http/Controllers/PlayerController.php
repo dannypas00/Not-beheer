@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Handlers\PlayerHandler;
 use App\Http\Requests\Players\PlayerIndexRequest;
 use App\Http\Requests\Players\PlayerStoreRequest;
+use App\Http\Requests\Players\PlayerUpdateRequest;
 use App\Models\Player;
 use App\Repositories\PlayerRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -52,5 +53,14 @@ class PlayerController extends AbstractController
     {
         app(PlayerHandler::class)->destroy($player);
         return redirect(route('players.index'));
+    }
+
+    /**
+     * @param PlayerUpdateRequest $request
+     * @return Response
+     */
+    public function update(PlayerUpdateRequest $request): Response
+    {
+        return app(PlayerHandler::class)->update($request);
     }
 }
