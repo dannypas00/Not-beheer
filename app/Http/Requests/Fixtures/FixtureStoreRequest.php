@@ -11,10 +11,13 @@ class FixtureStoreRequest extends AbstractRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'sometimes|int',
-            'name' => 'required|string',
-            'file' => 'sometimes|nullable|mimes:jpeg,png'
-        ];
+        return array_merge($this->defaultRules, [
+            'player_1' => 'required|int|exists:players,id',
+            'player_2' => 'required|int|exists:players,id',
+            'type' => 'required|string',
+            'style' => 'required|string',
+            'length' => 'required|int',
+            'start_score' => 'required|int'
+        ]);
     }
 }

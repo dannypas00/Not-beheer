@@ -1,3 +1,6 @@
+<?php
+
+?>
 @extends('layouts.app')
 
 @section('content')
@@ -13,18 +16,6 @@
                     <form method="POST" action="{{route('players.store')}}">
                         @include('players.forms.form')
                     </form>
-                    {{--                    {{ Form::model(null, ['route' => ['players.store'], 'method' => 'POST']) }}--}}
-                    {{--                    <div class="card card-default md-4 shadow">--}}
-                    {{--                        <div class="card-header">--}}
-                    {{--                            dwjidjwaodjiado--}}
-                    {{--                        </div>--}}
-
-                    {{--                        <div class="card-body">--}}
-                    {{--                            @include('players.forms.form')--}}
-                    {{--                        </div>--}}
-
-                    {{--                    </div>--}}
-                    {{--                    {{ Form::close() }}--}}
                 </div>
             </div>
         </div>

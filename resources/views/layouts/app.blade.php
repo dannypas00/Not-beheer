@@ -65,7 +65,8 @@
                 </a>
             </li>
             <li>
-                <a href="../statistics" class="nav-link text-white {{ (request()->is('statistics')) ? 'active' : '' }}">
+                <a href="../statistics" class="nav-link text-white
+                            {{ (request()->is('statistics')) ? 'active' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-bar-chart-line" viewBox="0 0 16 16">
                         <path
@@ -77,7 +78,8 @@
                 </a>
             </li>
             <li>
-                <a href="../export" class="nav-link text-white {{ (request()->is('export')) ? 'active' : '' }}">
+                <a href="../export" class="nav-link text-white
+                            {{ (request()->is('export')) ? 'active' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hdd"
                          viewBox="0 0 16 16">
                         <path d="M4.5 11a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 10.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>

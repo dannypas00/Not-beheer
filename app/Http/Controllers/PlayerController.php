@@ -34,10 +34,10 @@ class PlayerController extends AbstractController
     }
 
     /**
-     * @param FixtureStoreRequest $request
+     * @param PlayerStoreRequest $request
      * @return Response
      */
-    public function store(FixtureStoreRequest $request): Response
+    public function store(PlayerStoreRequest $request): Response
     {
         return app(PlayerHandler::class)->store($request);
     }

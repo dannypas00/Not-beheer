@@ -16,6 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AbstractRequest extends FormRequest
 {
+    protected array $defaultRules = [
+        '_token' => 'sometimes|string'
+    ];
+
     /**
      * @return array<string>
      */
