@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTurnTable extends Migration
+class CreateTurnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTurnTable extends Migration
      */
     public function up()
     {
-        Schema::create('turn', function (Blueprint $table) {
+        Schema::create('turns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('player')
                 ->references('id')
@@ -38,6 +38,6 @@ class CreateTurnTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turn');
+        Schema::dropIfExists('turns');
     }
 }
