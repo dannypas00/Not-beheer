@@ -30,4 +30,12 @@ class PlayersRoutesTest extends TestCase
         $player->save();
         $this->delete(route('players.destroy', ['player' => $player->id]))->assertSuccessful();
     }
+
+    public function testUpdatePlayer()
+    {
+        $player = Player::factory()->create();
+        $attrs = collect(Player::factory()->make()->getAttributes())->except('image')->toArray();
+        $attrs['id'] = $player->id;
+        $this->put(route('players.update'), $attrs)->assertSuccessful();
+    }
 }
