@@ -35,8 +35,7 @@ class FixtureController extends AbstractController
      */
     public function create(): View|Factory|Application
     {
-        return view('fixtures.create')
-            ->with('players', Player::all());
+        return app(FixtureHandler::class)->createView();
     }
 
     /**
@@ -48,8 +47,7 @@ class FixtureController extends AbstractController
      */
     public function store(StoreFixture $request): Application|RedirectResponse|Redirector
     {
-        $this->fixtures->store($request);
-        return redirect()->route('fixtures.index');
+        return app(FixtureHandler::class)->store($request);
     }
 
     /**
@@ -61,7 +59,6 @@ class FixtureController extends AbstractController
      */
     public function destroy(Fixture $fixture): Redirector|RedirectResponse|Application
     {
-        $this->fixtures->delete($fixture);
-        return redirect()->route('fixtures.index');
+        return app(FixtureHandler::class)->delete($fixture);
     }
 }
