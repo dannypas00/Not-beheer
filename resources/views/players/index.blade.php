@@ -32,7 +32,7 @@
                                         voluptatem? Culpa, illum?</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a type="button" href="#"
+                                            <a type="button" href="{{route('players.edit', $player)}}"
                                                class="me-2 rounded btn btn-sm btn-outline-secondary">
                                                 Bewerk Speler
                                             </a>

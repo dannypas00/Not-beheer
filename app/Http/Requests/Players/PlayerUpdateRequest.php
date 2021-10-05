@@ -12,9 +12,17 @@ class PlayerUpdateRequest extends AbstractRequest
     public function rules(): array
     {
         return [
+            '_method' => 'required',
+            '_token' => 'required',
             'id' => 'required|int|exists:players,id',
-            'name' => 'required|string',
-            'file' => 'sometimes|nullable|mimes:jpeg,png'
+            'name' => 'required|string|unique:players',
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'id' => $this->route()->parameter('player')
+        ]);
     }
 }

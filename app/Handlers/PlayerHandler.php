@@ -33,6 +33,16 @@ class PlayerHandler
     }
 
     /**
+     * @param Player $player
+     * @return View|Factory
+     */
+    public function editView(Player $player): View|Factory
+    {
+        return view('players.edit')
+            ->with('player', $player);
+    }
+
+    /**
      * @param PlayerStoreRequest $request
      * @return Response
      */

@@ -56,11 +56,21 @@ class PlayerController extends AbstractController
     }
 
     /**
-     * @param PlayerUpdateRequest $request
-     * @return Response
+     * @param Player $player
+     * @return View|Factory
      */
-    public function update(PlayerUpdateRequest $request): Response
+    public function edit(Player $player): View|Factory
     {
-        return app(PlayerHandler::class)->update($request);
+        return app(PlayerHandler::class)->editView($player);
+    }
+
+    /**
+     * @param PlayerUpdateRequest $request
+     * @return Application|Redirector|RedirectResponse
+     */
+    public function update(PlayerUpdateRequest $request): Application|RedirectResponse|Redirector
+    {
+        app(PlayerHandler::class)->update($request);
+        return redirect(route('players.index'));
     }
 }
