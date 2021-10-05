@@ -21,10 +21,6 @@ class FixtureHandler
     public function index(FixtureIndexRequest $request): Factory|View
     {
         $fixtures = collect(app(FixtureRepository::class)->all());
-        $fixtures->transform(function (Fixture $fixture) {
-            $data = $fixture->getAttributes();
-            $data->player_1 = app(PlayerRepository::class)->get($fixture)
-        });
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
 
