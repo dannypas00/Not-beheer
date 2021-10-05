@@ -90,7 +90,7 @@ abstract class AbstractRepository
      * @return Model|null
      * @throws Exception
      */
-    public function update($data, ?Model $model): ?Model
+    public function update($data, ?Model $model = null): ?Model
     {
         if ($data instanceof Request) {
             $data = $data->validated();
