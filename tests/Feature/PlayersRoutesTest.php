@@ -34,7 +34,7 @@ class PlayersRoutesTest extends TestCase
     public function testUpdatePlayer()
     {
         $player = Player::factory()->create();
-        $attrs = Player::factory()->make()->getAttributes();
+        $attrs = collect(Player::factory()->make()->getAttributes())->except('image')->toArray();
         $attrs['id'] = $player->id;
         $this->put(route('players.update'), $attrs)->assertSuccessful();
     }
