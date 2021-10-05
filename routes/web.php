@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +27,8 @@ Route::get('/matches', function () {
     return view('matches.index');
 });
 
-Route::get('/statistics', function () {
-    return view('statistics.index');
+Route::group(['prefix' => 'statistics'], function () {
+    Route::get('{gameid}', [StatisticsController::class, 'find'])->name('statistics.find');
 });
 
 Route::group(['prefix' => 'players'], function () {
