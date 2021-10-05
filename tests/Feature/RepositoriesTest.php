@@ -7,12 +7,14 @@ use App\Models\Game;
 use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Set;
+use App\Models\Turn;
 use App\Repositories\AbstractRepository;
 use App\Repositories\FixtureRepository;
 use App\Repositories\GameRepository;
 use App\Repositories\LegRepository;
 use App\Repositories\PlayerRepository;
 use App\Repositories\SetRepository;
+use App\Repositories\TurnRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +30,8 @@ class RepositoriesTest extends TestCase
         Game::class    => GameRepository::class,
         Leg::class     => LegRepository::class,
         Player::class  => PlayerRepository::class,
-        Set::class     => SetRepository::class
+        Set::class     => SetRepository::class,
+        Turn::class    => TurnRepository::class
     ];
 
     /**
@@ -118,7 +121,9 @@ class RepositoriesTest extends TestCase
             $repository = $pair[1];
             $model = $model::factory()->create();
             $repository->delete($model);
-            $this->assertDatabaseMissing($model->getTable(), ['id' => $model->id, 'deleted_at' => null]);
+            $this->assertDatabaseMissing($model->getTable(), ['id'         => $model->id,
+                                                              'deleted_at' => null
+            ]);
         }
     }
 }
