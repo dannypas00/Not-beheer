@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\Players\PlayerStoreRequest;
 use App\Models\Player;
+use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\Pure;
 use Exception;
 
@@ -33,8 +34,8 @@ class PlayerRepository extends AbstractRepository
 
         // Store image to drive and add file path to request object
         if ($request->file('file')) {
-            $player['image'] = 'storage/players/' . $request->file('file')->hashName();
-            $request->file('file')->storePublicly('public/players');
+            $player['image'] = 'avatars/' . $request->file('file')->hashName();
+            $request->file('file')->storePublicly('public/avatars');
             $player->save();
         }
 
@@ -47,7 +48,10 @@ class PlayerRepository extends AbstractRepository
     {
         // Check if we need to delete the player avatar
         if (!is_null($player->image)) {
-            dd('TODO: Delete image if exists');
+            // Check if file still exists
+            if (Storage::disk('public')->exists($player->image)) {
+                Storage::disk('public')->delete($player->image);
+            }
         }
 
         // Lastly remove the player from the database
