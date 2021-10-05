@@ -19,10 +19,10 @@ class CreateFixturesTable extends Migration
 
             $table->string('type')->default('first_to');
             $table->string('style')->default('sets');
-            $table->string('length')->default('sets');
+            $table->integer('length')->default(2);
             $table->string('winner')->nullable()->default(null);
 
-            $table->double('start_score')->default(501);
+            $table->integer('start_score')->default(501);
 
             $table->date('date')->default(Carbon::now());
 

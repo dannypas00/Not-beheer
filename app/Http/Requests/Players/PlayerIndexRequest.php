@@ -9,7 +9,8 @@ class PlayerIndexRequest extends AbstractRequest
     /**
      * @return array<string>
      */
-    public function rules(): array {
+    public function rules(): array
+    {
         return [
 
         ];
