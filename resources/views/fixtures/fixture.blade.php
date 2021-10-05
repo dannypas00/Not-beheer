@@ -44,16 +44,8 @@
                         <div class="card-header">
                             <div class="container">
                                 <h5>Speler 1</h5>
-                                    <div class="mt-3 mb-3">
-                                        <div class="card-header" >
-                                            <h10 >Beurt #1</h10>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="text" id="log" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="2" maxlength="4">
-                                            <input type="text" id="T2" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="2" maxlength="4">
-                                            <input type="text" id="T3" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="2" maxlength="4">
-                                        </div>
-                                        </hr>
+                                    <div id="player_1">
+
                                     </div>
                             </div>
                         </div>
@@ -66,24 +58,26 @@
                         <div class="card-header">
                             <div class="container">
                                 <h5>Speler 2</h5>
-                                @for ($i = 10; $i >= 0; $i--)
-                                    <div class="mt-3 mb-3">
-                                        <div class="card-header" >
-                                            <h10 >Beurt #{{$i}}</h10>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1">
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2">
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3">
-                                        </div>
-                                        </hr>
-                                    </div>
-                                @endfor
+                                <div id="player_2">
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="duplicate" class="mt-3 mb-3" style="visibility: hidden">
+        <div class="card-header" >
+            <h10 >Beurt #1</h10>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="2" maxlength="4">
+            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="2" maxlength="4">
+            <input type="text" id="" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="2" maxlength="4">
+        </div>
+        </hr>
     </div>
 @endsection
