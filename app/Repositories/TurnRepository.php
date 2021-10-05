@@ -2,21 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\PlayerFixture;
+use App\Models\Turn;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class PlayerFixtures
  *
  * @package App\Repositories
  */
-class PlayerFixtures extends Repository
+class TurnRepository extends AbstractRepository
 {
     /**
      * Attractions constructor.
      *
-     * @param PlayerFixture $model
+     * @param Turn $model
      */
-    public function __construct(PlayerFixture $model)
+    public function __construct(Turn $model)
     {
         parent::__construct($model);
     }
