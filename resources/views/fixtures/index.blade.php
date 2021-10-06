@@ -7,7 +7,7 @@
     <div class="mt-3 mb-3">
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-success btn-sm float-end">Start een nieuwe wedstrijd</button>
+                <a href="{{route('fixtures.create')}}" type="button" class="btn btn-success btn-sm float-end">Maak wedstrijd aan</a>
                 <h5>Overzicht van wedstrijden</h5>
             </div>
             <div class="card-body p-0">
@@ -15,14 +15,10 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Style</th>
-                        <th scope="col">Length</th>
-                        <th scope="col">Winner</th>
-                        <th scope="col">Player 1</th>
-                        <th scope="col">Player 2</th>
-                        <th scope="col">Start Score</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>

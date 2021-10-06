@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Handlers\FixtureHandler;
 use App\Http\Requests\Fixtures\FixtureIndexRequest;
+use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Http\Requests\StoreFixture;
 use App\Models\Fixture;
 use App\Models\Player;
@@ -40,11 +41,11 @@ class FixtureController extends AbstractController
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreFixture $request
+     * @param FixtureStoreRequest $request
      * @return Application|Redirector|RedirectResponse
      * @throws Exception
      */
-    public function store(StoreFixture $request): Application|RedirectResponse|Redirector
+    public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
         return app(FixtureHandler::class)->store($request);
     }
