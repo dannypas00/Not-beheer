@@ -5,6 +5,7 @@ namespace App\Handlers;
 use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
+use App\Models\Player;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -30,7 +31,8 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create');
+        return view('fixtures.create')
+            ->with('players', Player::all());
     }
     /**
      * @param FixtureStoreRequest $request
@@ -45,7 +47,7 @@ class FixtureHandler
      * @param Fixture $fixture
      * @return Response
      */
-    public function destroy(Fixture $fixture): Response
+    public function delete(Fixture $fixture): Response
     {
         try {
             app(FixtureRepository::class)->delete($fixture);

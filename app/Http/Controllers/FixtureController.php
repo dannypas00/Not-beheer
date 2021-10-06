@@ -13,6 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 
 class FixtureController extends AbstractController
@@ -54,10 +55,10 @@ class FixtureController extends AbstractController
      * Remove the specified resource from storage.
      *
      * @param Fixture $fixture
-     * @return Application|RedirectResponse|Redirector
+     * @return Application
      * @throws Exception
      */
-    public function destroy(Fixture $fixture): Redirector|RedirectResponse|Application
+    public function destroy(Fixture $fixture): Response
     {
         return app(FixtureHandler::class)->delete($fixture);
     }
