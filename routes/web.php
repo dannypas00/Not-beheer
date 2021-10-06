@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,12 +23,14 @@ Route::get('/export', function () {
     return view('export.index');
 });
 
-Route::get('/matches', function () {
-    return view('matches.index');
-});
-
 Route::get('/statistics', function () {
     return view('statistics.index');
+});
+
+Route::group(['prefix' => 'fixtures'], function () {
+    Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
+    Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
+    Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
 });
 
 Route::group(['prefix' => 'players'], function () {
@@ -38,3 +41,4 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
+?>
