@@ -26,6 +26,7 @@ class FixtureHandler
         $fixtures = collect(app(FixtureRepository::class)->all());
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
+
     /**
      * @return View|Factory
      */
@@ -34,26 +35,24 @@ class FixtureHandler
         return view('fixtures.create')
             ->with('players', Player::all());
     }
+
     /**
      * @param FixtureStoreRequest $request
      * @return Application|RedirectResponse|Redirector
      */
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
-            app(FixtureRepository::class)->create($request);
-            return redirect(route('fixtures.index'));
+        app(FixtureRepository::class)->create($request);
+        return redirect(route('fixtures.index'));
     }
+
     /**
      * @param Fixture $fixture
-     * @return Response
+     * @return RedirectResponse
      */
-    public function delete(Fixture $fixture): Response
+    public function destroy(Fixture $fixture): RedirectResponse
     {
-        try {
             app(FixtureRepository::class)->delete($fixture);
-            return new Response();
-        } catch (\Exception $e) {
-            return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
-        }
+            return redirect()->route('fixtures.index');
     }
 }
