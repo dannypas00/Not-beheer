@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property $id
  * @property $name
+ * @property $image
  */
 class Player extends Model
 {
@@ -22,7 +23,7 @@ class Player extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image'];
 
     /**
      * The attributes that should be guarded.
