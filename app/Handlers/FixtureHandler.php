@@ -52,7 +52,7 @@ class FixtureHandler
      */
     public function destroy(Fixture $fixture): RedirectResponse
     {
-            app(FixtureRepository::class)->delete($fixture);
-            return redirect()->route('fixtures.index');
+        app(FixtureRepository::class)->delete($fixture);
+        return redirect()->route('fixtures.index');
     }
 }
