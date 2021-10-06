@@ -12,8 +12,8 @@ class PlayerUpdateRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            '_method' => 'required',
-            '_token' => 'required',
+            '_method' => 'sometimes',
+            '_token' => 'sometimes',
             'id' => 'required|int|exists:players,id',
             'name' => 'required|string|unique:players',
         ];
