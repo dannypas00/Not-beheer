@@ -38,7 +38,6 @@ class PlayerRepository extends AbstractRepository
             $request->file('file')->storePublicly('public/avatars');
             $player->save();
         }
-
     }
 
     /**
@@ -57,5 +56,4 @@ class PlayerRepository extends AbstractRepository
         // Lastly remove the player from the database
         parent::delete($player);
     }
-
 }

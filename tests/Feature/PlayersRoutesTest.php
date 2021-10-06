@@ -45,5 +45,4 @@ class PlayersRoutesTest extends TestCase
         $this->put(route('players.update', ['player' => $player['id']]), $attrs)
             ->assertRedirect(route('players.index'));
     }
-
 }
