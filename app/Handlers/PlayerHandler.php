@@ -33,13 +33,23 @@ class PlayerHandler
     }
 
     /**
+     * @param Player $player
+     * @return View|Factory
+     */
+    public function editView(Player $player): View|Factory
+    {
+        return view('players.edit')
+            ->with('player', $player);
+    }
+
+    /**
      * @param PlayerStoreRequest $request
      * @return Response
      */
     public function store(PlayerStoreRequest $request): Response
     {
         try {
-            app(PlayerRepository::class)->create($request);
+            app(PlayerRepository::class)->createWithAvatar($request);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
@@ -53,7 +63,7 @@ class PlayerHandler
     public function destroy(Player $player): Response
     {
         try {
-            app(PlayerRepository::class)->delete($player);
+            app(PlayerRepository::class)->deleteWithAvatar($player);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
