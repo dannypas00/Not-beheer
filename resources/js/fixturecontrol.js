@@ -78,9 +78,3 @@ function duplicateThrowElement(turn){
         player2Turn++;
     }
 }
-
-
-
-
-
-
