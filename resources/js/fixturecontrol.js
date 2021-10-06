@@ -1,41 +1,37 @@
-document.addEventListener('DOMContentLoaded', (load) => {
-
-    let turn = 0;
-    duplicateThrowElement(turn);
-    turn++;
-
-    document.addEventListener("keydown", function(event) {
-
-        if(event.which == 9) {
-            let parent = event.composedPath();
-            const activeTextarea = document.activeElement;
-
-            if(activeTextarea.tagName == 'INPUT'){
-
-                if(activeTextarea.value != '')
-                    activeTextarea.setAttribute("disabled", "true");
-
-                let inputs = parent[2].getElementsByTagName('input');
-                let checkIfInputContainsValue = true;
-
-                for (let index = 0; index < inputs.length; ++index) {
-
-                    if (inputs[index].value == '') {
-                        checkIfInputContainsValue = false;
-                    }
-                }
-
-                if(checkIfInputContainsValue) {
-                    duplicateThrowElement(turn);
-                    turn++;
-                }
-            }
-        }
-    })
-})
-
 let player1Turn = 1;
 let player2Turn = 1;
+let turn = 0;
+duplicateThrowElement(turn);
+turn++;
+
+document.addEventListener("keydown", function(event) {
+
+    if(event.which == 9) {
+        let parent = event.composedPath();
+        const activeTextarea = document.activeElement;
+
+        if(activeTextarea.tagName == 'INPUT'){
+
+            if(activeTextarea.value != '')
+                activeTextarea.setAttribute("disabled", "true");
+
+            let inputs = parent[2].getElementsByTagName('input');
+            let checkIfInputContainsValue = true;
+
+            for (let index = 0; index < inputs.length; ++index) {
+
+                if (inputs[index].value == '') {
+                    checkIfInputContainsValue = false;
+                }
+            }
+
+            if(checkIfInputContainsValue) {
+                duplicateThrowElement(turn);
+                turn++;
+            }
+        }
+    }
+})
 
 function duplicateThrowElement(turn){
     // Create a clone of element with id duplicate:
@@ -43,7 +39,6 @@ function duplicateThrowElement(turn){
     clone.style.visibility = 'visible';
 
     let h10 = document.createElement('h10');
-
     let textElement = clone.querySelector('#text');
 
     if(turn % 2  == 0) {

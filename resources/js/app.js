@@ -1,2 +1,8 @@
 require('./bootstrap');
-require('./fixturecontrol');
+$(document).ready(function () {
+
+    if ($("#fixtureComponent").length) {
+        require('./fixturecontrol');
+    }
+});
+
