@@ -1,2 +1,7 @@
 require('./bootstrap');
-require('./datatables');
+
+$(document).ready(function () {
+    if ($("#fixturesTable").length) {
+        require('./datatables');
+    }
+})

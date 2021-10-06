@@ -11,7 +11,7 @@
                 <h5>Overzicht van wedstrijden</h5>
             </div>
             <div class="card-body p-0">
-                <table id="fixtures" class="table table-striped table-light pb-0 mb-0">
+                <table id="fixturesTable" class="table table-striped table-light pb-0 mb-0">
                     <thead>
                     <tr>
                         <th scope="col">#</th>

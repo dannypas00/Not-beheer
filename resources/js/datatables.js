@@ -1,3 +1,1 @@
-$(document).ready(function () {
-    $('#fixtures').DataTable();
-});
+$('#fixturesTable').DataTable();
