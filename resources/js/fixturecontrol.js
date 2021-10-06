@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (load) => {
                 }
 
                 if(checkIfInputContainsValue) {
-                    duplicateThrowElement(turn, parent[3]);
+                    duplicateThrowElement(turn);
                     turn++;
                 }
             }
@@ -34,34 +34,48 @@ document.addEventListener('DOMContentLoaded', (load) => {
     })
 })
 
+let player1Turn = 1;
+let player2Turn = 1;
 
 function duplicateThrowElement(turn){
     // Create a clone of element with id duplicate:
-    let clone = document.querySelector('#duplicate').cloneNode( true );
+    let clone = document.getElementById('duplicate').cloneNode( true );
     clone.style.visibility = 'visible';
 
-    let div = document.createElement('h10');
-    div.appendChild(document.createTextNode('Beurt #' + turn));
+    let h10 = document.createElement('h10');
 
-    console.log(clone.getElementsByTagName('text'));
+    let textElement = clone.querySelector('#text');
 
     if(turn % 2  == 0) {
+        h10.appendChild(document.createTextNode('Beurt #' + player1Turn));
+
+        textElement.setAttribute('id', 'text' + player1Turn);
+        textElement.append(h10);
+
         // Change the id attribute of the newly created element:
-        clone.setAttribute( 'id', "player1_turn" + turn);
+        clone.setAttribute( 'id', "player1_turn" + player1Turn);
 
         let player1Container = document.getElementById('player' + 1);
 
         // Append the cloned element to the container
         player1Container.insertBefore(clone, player1Container.firstChild);
+        player1Turn++;
     }
     else {
+        h10.appendChild(document.createTextNode('Beurt #' + player2Turn));
+
+        textElement.setAttribute('id', 'text' + player2Turn);
+        textElement.append(h10);
+
         // Change the id attribute of the newly created element:
-        clone.setAttribute( 'id', "player2_turn" + turn);
+        clone.setAttribute( 'id', "player2_turn" + player2Turn);
 
         let player2Container = document.getElementById('player' + 2);
 
         // Append the cloned element to the container
         player2Container.insertBefore(clone, player2Container.firstChild);
+
+        player2Turn++;
     }
 }
 

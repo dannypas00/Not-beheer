@@ -70,7 +70,7 @@
     </div>
 
     <div id="duplicate" class="mt-3 mb-3" style="visibility: hidden">
-        <div tag="text" class="card-header"></div>
+        <div id="text" class="card-header"></div>
         <div class="input-group mb-3">
             <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="1" maxlength="3">
             <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="1" maxlength="3">
