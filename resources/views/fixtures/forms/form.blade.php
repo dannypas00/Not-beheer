@@ -2,12 +2,10 @@
 
 ?>
 @csrf
-
-
         <div class="mt-3 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <h1>VERSIE 2</h1>
+                    <h1>Wedstrijd instellingen</h1>
 {{--                        Spelers--}}
                     <div class="row">
                         <div class="col-6">
@@ -61,7 +59,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="stle"
+                                    <input class="form-check-input" type="radio" name="style"
                                            id="set" value="set">
                                     <label class="form-check-label" for="set">
                                         Sets
