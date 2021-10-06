@@ -9,6 +9,10 @@ use Tests\TestCase;
 
 class PlayersRoutesTest extends TestCase
 {
+    public array $data = [
+        'name' => 'John Doe',
+    ];
+
     public function testIndex()
     {
         $this->get(route('players.index'))->assertSuccessful()->assertViewIs('players.index');
@@ -21,14 +25,16 @@ class PlayersRoutesTest extends TestCase
 
     public function testCreatePlayer()
     {
-        $this->post(route('players.store'), ['name' => 'TestPlayer'])->assertSuccessful();
+        $this->post(route('players.store'), $this->data)
+            ->assertRedirect(route('players.index'));
     }
 
     public function testDeletePlayer()
     {
-        $player = new Player(['name' => 'TestDeletePlayer']);
-        $player->save();
-        $this->delete(route('players.destroy', ['player' => $player->id]))->assertSuccessful();
+        $player = Player::factory()->create();
+        $response = $this->delete(route('players.destroy', ['player' => $player['id']]));
+        $this->assertSoftDeleted('players', ['id' => $player['id']]);
+        $response->assertRedirect(route('players.index'));
     }
 
     public function testUpdatePlayer()
@@ -36,6 +42,8 @@ class PlayersRoutesTest extends TestCase
         $player = Player::factory()->create();
         $attrs = collect(Player::factory()->make()->getAttributes())->except('image')->toArray();
         $attrs['id'] = $player->id;
-        $this->put(route('players.update'), $attrs)->assertSuccessful();
+        $this->put(route('players.update', ['player' => $player['id']]), $attrs)
+            ->assertRedirect(route('players.index'));
     }
+
 }
