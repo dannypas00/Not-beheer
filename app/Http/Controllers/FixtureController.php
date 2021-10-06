@@ -19,22 +19,9 @@ use Illuminate\Support\Facades\DB;
 class FixtureController extends AbstractController
 {
     /**
-     * @param FixtureIndexRequest $request
-     * @return View|Factory
-     */
-    private Fixture $fixtures;
-
-    /**
-     * @param Fixture $fixture
-     */
-    public function __construct(Fixture $fixture)
-    {
-        $this->fixtures = $fixture;
-    }
-
-    /**
      * Display a listing of the resource.
      *
+     * @param FixtureIndexRequest $request
      * @return Application|Factory|View
      */
     public function index(FixtureIndexRequest $request): View|Factory|Application
@@ -49,8 +36,7 @@ class FixtureController extends AbstractController
      */
     public function create(): View|Factory|Application
     {
-        return view('fixtures.create')
-            ->with('players', Player::all());
+        return app(FixtureHandler::class)->createView();
     }
 
     /**
@@ -74,21 +60,17 @@ class FixtureController extends AbstractController
      */
     public function destroy(Fixture $fixture): Redirector|RedirectResponse|Application
     {
-        $this->fixtures->delete($fixture);
-        return redirect()->route('fixtures.index');
+        return app(FixtureHandler::class)->delete($fixture);
     }
 
     public static function getPlayer($fixtureID, $playerOrder)
     {
-        $player = DB::table('player_fixtures')
+        return DB::table('player_fixtures')
             ->select('name')
         ->where('order', $playerOrder)
         ->where('fixture_id', $fixtureID)
         ->join('fixtures', 'player_fixtures.fixture_id', '=', 'fixtures.id')
         ->join('players', 'player_fixtures.player_id', '=', 'players.id')
             ->value('name');
-
-
-        return $player;
     }
 }

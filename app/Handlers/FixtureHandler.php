@@ -5,6 +5,7 @@ namespace App\Handlers;
 use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
+use App\Models\Player;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -25,33 +26,32 @@ class FixtureHandler
         $fixtures = app(FixtureRepository::class)->all();
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
+
     /**
      * @return View|Factory
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create');
+        return view('fixtures.create')->with('players', Player::all());
     }
+
     /**
      * @param FixtureStoreRequest $request
      * @return Application|RedirectResponse|Redirector
      */
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
-            app(FixtureRepository::class)->create($request);
-            return redirect(route('fixtures.index'));
+        app(FixtureRepository::class)->create($request);
+        return redirect(route('fixtures.index'));
     }
+
     /**
      * @param Fixture $fixture
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Fixture $fixture): Response
+    public function destroy(Fixture $fixture): RedirectResponse
     {
-        try {
             app(FixtureRepository::class)->delete($fixture);
-            return new Response();
-        } catch (\Exception $e) {
-            return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
-        }
+            return redirect()->route('fixtures.index');
     }
 }
