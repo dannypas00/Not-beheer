@@ -40,6 +40,16 @@ class FixtureController extends AbstractController
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return Application|Factory|View
+     */
+    public function fixture(): View|Factory|Application
+    {
+        return view('fixtures.fixture');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param FixtureStoreRequest $request

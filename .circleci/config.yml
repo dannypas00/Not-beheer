@@ -84,9 +84,6 @@ jobs:
       - run:
           name: "Run Static Tests"
           command: |
-            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix app
-            php -d memory_limit=-1 vendor/bin/php-cs-fixer fix tests
-            php -d memory_limit=-1 vendor/bin/phpcbf --standard=PSR12 --extensions=php app tests
             php -d memory_limit=-1 vendor/bin/phpcs --standard=PSR12 --extensions=php app tests
 
 workflows:

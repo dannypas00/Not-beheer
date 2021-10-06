@@ -30,7 +30,9 @@ Route::get('/statistics', function () {
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
+    Route::get('fixture', [FixtureController::class, 'fixture'])->name('fixtures.fixture');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
+
 });
 
 Route::group(['prefix' => 'players'], function () {
@@ -38,6 +40,7 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('create', [PlayerController::class, 'create'])->name('players.create');
     Route::post('store', [PlayerController::class, 'store'])->name('players.store');
     Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
-    Route::put('update', [PlayerController::class, 'update'])->name('players.update');
+    Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
+    Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
 ?>
