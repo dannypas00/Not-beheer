@@ -17,9 +17,3 @@ else
 fi
 
 npm run watch
-
-php artisan migrate
-
-php artisan storage:link
-
-php artisan o:c
