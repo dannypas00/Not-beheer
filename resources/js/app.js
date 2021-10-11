@@ -4,7 +4,8 @@ $(document).ready(function () {
     if ($("#fixturesTable").length) {
         require('./datatables');
     }
-  if ($("#fixtureComponent").length) {
+
+    if ($("#fixtureComponent").length) {
         require('./fixturecontrol');
     }
-})
+});
