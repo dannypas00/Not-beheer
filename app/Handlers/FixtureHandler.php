@@ -23,7 +23,7 @@ class FixtureHandler
      */
     public function index(FixtureIndexRequest $request): Factory|View
     {
-        $fixtures = app(FixtureRepository::class)->all();
+        $fixtures = collect(app(FixtureRepository::class)->all());
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
 
@@ -32,7 +32,8 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create')->with('players', Player::all());
+        return view('fixtures.create')
+            ->with('players', Player::all());
     }
 
     /**
