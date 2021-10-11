@@ -65,12 +65,13 @@ class PlayerController extends AbstractController
     }
 
     /**
+     * @param Player $player
      * @param PlayerUpdateRequest $request
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(PlayerUpdateRequest $request): Application|RedirectResponse|Redirector
+    public function update(Player $player, PlayerUpdateRequest $request): Application|RedirectResponse|Redirector
     {
-        app(PlayerHandler::class)->update($request);
+        app(PlayerHandler::class)->update($player, $request);
         return redirect(route('players.index'));
     }
 }

@@ -10,7 +10,7 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{route('players.store')}}">
+                <form method="POST" enctype='multipart/form-data' action="{{route('players.store')}}">
                     @include('players.forms.form')
                 </form>
             </div>

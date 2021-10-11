@@ -29,6 +29,7 @@ class PlayerRepository extends AbstractRepository
      */
     public function createWithAvatar(PlayerStoreRequest $request)
     {
+
         // First we store the item by calling the parent
         $player = parent::create($request->validated());
 

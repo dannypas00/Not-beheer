@@ -15,14 +15,14 @@ class PlayerUpdateRequest extends AbstractRequest
             '_method' => 'sometimes',
             '_token' => 'sometimes',
             'id' => 'required|int|exists:players,id',
-            'name' => 'required|string|unique:players',
+            'name' => 'required|string|unique:players,name,' . $this->id,
         ];
     }
 
     public function prepareForValidation()
     {
         $this->merge([
-            'id' => $this->route()->parameter('player')
+            'id' => $this->route()->parameter('player')->id
         ]);
     }
 }
