@@ -14,8 +14,8 @@ class DropDateFromFixturesAndAddDateTimeToFixtures extends Migration
     public function up()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            $table->dropColumn('date');
-            $table->dateTime('date_time');
+            $table->dateTime('date')->change();
+            $table->renameColumn('date', 'date_time');
         });
     }
 
