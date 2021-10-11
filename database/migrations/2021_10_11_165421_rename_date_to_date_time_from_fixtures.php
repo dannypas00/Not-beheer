@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeDateToDateTimeInFixtures extends Migration
+class RenameDateToDateTimeFromFixtures extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class ChangeDateToDateTimeInFixtures extends Migration
     public function up()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            $table->dateTime('date')->change();
+            $table->renameColumn('date', 'date_time');
         });
     }
 
