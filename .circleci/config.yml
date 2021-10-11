@@ -23,7 +23,7 @@ jobs:
       - run:
           name: "Prepare Environment"
           command: |
-            docker-php-ext-install zip
+            docker-php-ext-install zip sqlite
       - run:
           name: "Create Environment file"
           command: |
