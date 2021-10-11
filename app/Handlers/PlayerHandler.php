@@ -27,14 +27,6 @@ class PlayerHandler
      */
     public function index(PlayerIndexRequest $request): View|Factory
     {
-        // TODO: Temp shortcut, it's late lol
-        return $this->indexWithWinrate($request);
-        $players = app(PlayerRepository::class)->all();
-        return view('players.index', ['players' => $players]);
-    }
-
-    public function indexWithWinrate(PlayerIndexRequest $request): View|Factory
-    {
         $players = app(PlayerRepository::class)->all();
         $players->transform(function (Player $player) {
             $player->setAttribute('winrate', app(PlayerHandler::class)->getFixtureWinrate($player));
