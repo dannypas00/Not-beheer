@@ -22,7 +22,8 @@
                         <th scope="col">Player 1</th>
                         <th scope="col">Player 2</th>
                         <th scope="col">Start Score</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">Location</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -37,7 +38,8 @@
                             <td>{{$fixture->player1->name}}</td>
                             <td>{{$fixture->player2->name}}</td>
                             <td>{{$fixture->start_score}}</td>
-                            <td>{{$fixture->date}}</td>
+                            <td>{{$fixture->date_time}}</td>
+                            <td>{{$fixture->location}}</td>
 
                             <td>
                                 <button type="button" class="btn btn-secondary btn-sm ">

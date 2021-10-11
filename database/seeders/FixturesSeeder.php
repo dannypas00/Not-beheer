@@ -26,8 +26,9 @@ class FixturesSeeder extends Seeder
             'player_1' => Player::factory()->create()->id,
             'player_2' => Player::factory()->create()->id,
             'start_score' => 501,
-            'date' => Carbon::today(),
+            'date_time' => Carbon::today(),
             'winner' => null,
+            'location' => "Amsterdam (NL)",
         ]);
 
         Fixture::query()->firstOrCreate([
@@ -39,8 +40,9 @@ class FixturesSeeder extends Seeder
             'player_1' => Player::factory()->create()->id,
             'player_2' => Player::factory()->create()->id,
             'start_score' => 501,
-            'date' => Carbon::today(),
+            'date_time' => Carbon::today(),
             'winner' => null,
+            'location' => "London (UK)",
         ]);
     }
 }
