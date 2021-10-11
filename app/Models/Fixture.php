@@ -14,8 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $style
  * @property int $length
  * @property int $start_score
- * @property int $average_score
- * @property \DateTime $date
+ * @property \DateTime $date_time
  * @property Player $player1
  * @property Player $player2
  */
@@ -29,7 +28,7 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['average_score', 'type', 'style', 'length', 'start_score', 'date', 'player_1', 'player_2'];
+    protected $fillable = ['type', 'style', 'length', 'start_score', 'date_time', 'player_1', 'player_2','winner'];
 
     /**
      * The attributes that should be guarded.
