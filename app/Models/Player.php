@@ -36,14 +36,6 @@ class Player extends Model
         'deleted_at'
     ];
 
-    /**
-     * @return HasManyThrough
-     */
-    public function fixture(): HasManyThrough
-    {
-        return $this->hasManyThrough(Fixture::class, PlayerFixture::class);
-    }
-
     public function turns(): HasMany
     {
         return $this->hasMany(Turn::class);

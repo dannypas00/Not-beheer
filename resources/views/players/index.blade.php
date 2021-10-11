@@ -44,7 +44,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <small class="text-muted">9 mins</small>
+                                        <small class="text-muted">{{ $player->winrate }}</small>
                                     </div>
                                 </div>
                             </div>
