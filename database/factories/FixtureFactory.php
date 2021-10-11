@@ -27,8 +27,8 @@ class FixtureFactory extends Factory
                 'style' => $this->faker->boolean ? 'sets' : 'legs',
                 'length' => $this->faker->numberBetween(3, 15),
                 'start_score' => $this->faker->numberBetween(180, 1024),
-                'average_score' => (double) $this->faker->numberBetween(0, 180),
-                'date' => $this->faker->date
+                'date_time' => $this->faker->date,
+                'location' => $this->faker->boolean ? 'Amsterdam(NL)' : 'Londen(UK)',
             ];
     }
 }
