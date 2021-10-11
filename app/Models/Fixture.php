@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -52,5 +52,21 @@ class Fixture extends Model
     public function legs(): MorphMany
     {
         return $this->morphMany(Leg::class, Game::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function player1(): BelongsTo
+    {
+        return $this->belongsTo(Player::class, 'player_1', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function player2(): BelongsTo
+    {
+        return $this->belongsTo(Player::class, 'player_2', 'id');
     }
 }

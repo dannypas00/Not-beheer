@@ -4,7 +4,7 @@ namespace App\Http\Requests\Players;
 
 use App\Http\Requests\AbstractRequest;
 
-class PlayerStoreRequest extends AbstractRequest
+class PlayerUpdateRequest extends AbstractRequest
 {
     /**
      * @return array<string>
@@ -12,10 +12,17 @@ class PlayerStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
+            '_method' => 'sometimes',
             '_token' => 'sometimes',
-            'id' => 'sometimes|int',
+            'id' => 'required|int|exists:players,id',
             'name' => 'required|string|unique:players',
-            'file' => 'sometimes|nullable|mimes:jpeg,png'
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'id' => $this->route()->parameter('player')
+        ]);
     }
 }
