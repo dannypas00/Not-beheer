@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $style
  * @property int $length
  * @property int $start_score
- * @property \DateTime $date_time
+ * @property DateTime $date_time
  * @property Player $player1
  * @property Player $player2
  */
@@ -28,7 +29,8 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['type', 'style', 'length', 'start_score', 'date_time', 'player_1', 'player_2','winner', 'location'];
+    protected $fillable = ['type', 'style', 'length', 'start_score', 'date_time',
+                           'player_1', 'player_2','winner', 'location'];
 
     /**
      * The attributes that should be guarded.
