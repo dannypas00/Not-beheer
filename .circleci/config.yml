@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Prepare dependencies"
           command: |
-            apk add libzip-dev php8-sqlite3
+            apk add libzip-dev
       - run:
           name: "Prepare Environment"
           command: |
