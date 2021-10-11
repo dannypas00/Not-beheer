@@ -19,11 +19,11 @@ jobs:
       - run:
           name: "Prepare dependencies"
           command: |
-            apk add libzip-dev
+            apk add libzip-dev php8-sqlite3
       - run:
           name: "Prepare Environment"
           command: |
-            docker-php-ext-install zip sqlite
+            docker-php-ext-install zip
       - run:
           name: "Create Environment file"
           command: |
