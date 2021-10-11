@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Fixture;
+use App\Models\Player;
 use Carbon\Carbon;
+use Database\Factories\PlayerFactory;
 use Illuminate\Database\Seeder;
 
 class FixturesSeeder extends Seeder
@@ -21,6 +23,8 @@ class FixturesSeeder extends Seeder
             'type' => 'best_of',
             'style' => 'sets',
             'length' => 3,
+            'player_1' => Player::factory()->create()->id,
+            'player_2' => Player::factory()->create()->id,
             'start_score' => 501,
             'date' => Carbon::today(),
             'winner' => null,
@@ -32,6 +36,8 @@ class FixturesSeeder extends Seeder
             'type' => 'first_to',
             'style' => 'legs',
             'length' => 3,
+            'player_1' => Player::factory()->create()->id,
+            'player_2' => Player::factory()->create()->id,
             'start_score' => 501,
             'date' => Carbon::today(),
             'winner' => null,
