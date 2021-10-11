@@ -34,8 +34,8 @@
                             <td>{{$fixture->style}}</td>
                             <td>{{$fixture->length}}</td>
                             <td>{{$fixture->winner}}</td>
-                            <td>{{$fixture->player1->name}}</td>
-                            <td>{{$fixture->player2->name}}</td>
+                            <td>{{$fixture->player1->name ?? "player not found"}}</td>
+                            <td>{{$fixture->player2->name ?? "player not found"}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date}}</td>
 
