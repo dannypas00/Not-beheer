@@ -7,7 +7,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "66:eb:41:94:f3:6c:60:9c:29:0c:e6:14:61:12:f1:41"
+            - "22:4c:98:20:7c:ba:07:24:56:d4:43:35:e6:76:5d:7a"
       - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
   build:
     docker:
