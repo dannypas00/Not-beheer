@@ -71,6 +71,9 @@ class Fixture extends Model
         return $this->belongsTo(Player::class, 'player_2', 'id');
     }
 
+    /**
+     * @return HasOne
+     */
     public function winner(): HasOne
     {
         return $this->hasOne(Player::class, 'id', 'winner');

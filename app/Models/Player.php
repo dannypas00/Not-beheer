@@ -36,6 +36,9 @@ class Player extends Model
         'deleted_at'
     ];
 
+    /**
+     * @return HasMany
+     */
     public function turns(): HasMany
     {
         return $this->hasMany(Turn::class);
