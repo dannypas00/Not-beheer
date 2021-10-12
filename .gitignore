@@ -27,3 +27,4 @@ yarn.lock
 /Vagrantfile
 !/.php-cs-fixer.cache
 /.php-cs-fixer.cache
+tests/testdb.sqlite
