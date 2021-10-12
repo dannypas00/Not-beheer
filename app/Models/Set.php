@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -28,6 +29,14 @@ class Set extends Model
      * @var string[]
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * @return HasOne
+     */
+    public function winner(): HasOne
+    {
+        return $this->hasOne(Player::class, 'id', 'winner');
+    }
 
     /**
      * @return HasMany

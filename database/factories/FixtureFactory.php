@@ -25,7 +25,7 @@ class FixtureFactory extends Factory
             [
                 'type' => $this->faker->boolean ? 'best_of' : 'first_to',
                 'style' => $this->faker->boolean ? 'sets' : 'legs',
-                'length' => $this->faker->numberBetween(3, 15),
+                'length' => $this->faker->randomElement([1, 3, 5, 7, 9, 11, 13, 15]),
                 'start_score' => $this->faker->numberBetween(180, 1024),
                 'average_score' => (double) $this->faker->numberBetween(0, 180),
                 'date' => $this->faker->date
