@@ -105,6 +105,6 @@ class PlayerHandler
     {
         $fixtureCount = app(FixtureRepository::class)->fixturesWithPlayer($player)->count();
         $winCount = app(FixtureRepository::class)->fixturesWonByPlayer($player)->count();
-        return $winCount > 0 ? $fixtureCount / $winCount : 0;
+        return $winCount > 0 ? round($winCount / $fixtureCount, 2) : 0;
     }
 }
