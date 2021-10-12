@@ -113,9 +113,7 @@
                             <h5>
                                 Land en Stad
                             </h5>
-                            <h1>
-                                PLACEHOLDER
-                            </h1>
+                            <input class="form-control" id="location" name="location" type="text" placeholder="test">
                         </label>
                     </div>
                 </div>

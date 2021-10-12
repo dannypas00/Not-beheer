@@ -53,9 +53,9 @@ class FixtureController extends AbstractController
      * Store a newly created resource in storage.
      *
      * @param FixtureStoreRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(FixtureStoreRequest $request): Response
+    public function store(FixtureStoreRequest $request): RedirectResponse
     {
         return app(FixtureHandler::class)->store($request);
     }
