@@ -21,10 +21,9 @@ class GameFactory extends Factory
      */
     public function definition()
     {
-        $fixture = FixtureFactory::new()->create();
         $gameable = $this->faker->boolean ? SetFactory::new()->create() : LegFactory::new()->create();
         return [
-            'fixture_id' => $fixture->id,
+            'fixture_id' => null,
             'gameable_type' => $gameable::class,
             'gameable_id' => $gameable->id
         ];

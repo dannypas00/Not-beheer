@@ -12,8 +12,9 @@ class PlayerStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
+            '_token' => 'sometimes',
             'id' => 'sometimes|int',
-            'name' => 'required|string',
+            'name' => 'required|string|unique:players,name',
             'file' => 'sometimes|nullable|mimes:jpeg,png'
         ];
     }

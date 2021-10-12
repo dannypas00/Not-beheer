@@ -17,25 +17,31 @@
                     @foreach($players as $player)
                         <div class="col">
                             <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <p class="card-title">{{$player->name}}</p>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Deserunt eum exercitationem iste maxime optio recusandae sapiente sint
-                                        voluptatem? Culpa, illum?</p>
+                                @if(!is_null($player->image))
+                                    <img class="card-img-top" style="max-height: 200px;" alt="Card image cap"
+                                         src="{{url($player->image)}}">
+                                @else
+                                    <img class="card-img-top" style="max-height: 200px;" alt="Card image cap"
+                                         src="https://picsum.photos/id/237/500/300.jpg">
+                                @endif
+
+                                <div class="card-body" style="{{ $player->winrate > 0.95 ? "background-color: gold;" : ($player->winrate < 0.05 && $player->winrate > 0 ? "background-color: black" : '') }}">
+                                    <p class="card-title" style="color: {{ $player->winrate < 0.05 && $player->winrate > 0 ? 'white' : 'black' }}">{{ $player->name }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="me-2 rounded btn btn-sm btn-outline-secondary">
-                                                Edit
-                                            </button>
+                                            <a type="button" href="{{route('players.edit', $player)}}"
+                                               class="me-2 rounded btn btn-sm btn-outline-secondary">
+                                                Bewerk Speler
+                                            </a>
 
                                             <form method="post" action="{{route('players.destroy', $player)}}">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Verwijder
                                                 </button>
                                             </form>
                                         </div>
-                                        <small class="text-muted">9 mins</small>
+                                        <small class="text-muted" style="color: {{ $player->winrate >= 0.5 ? "green" : "red" }} !important">{{ sprintf('%s%%', $player->winrate * 100) }}</small>
                                     </div>
                                 </div>
                             </div>

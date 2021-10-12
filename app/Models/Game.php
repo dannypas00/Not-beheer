@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property $fixture_id
+ * @property $gameable_type
+ * @property $gameable_id
+ */
 class Game extends Model
 {
     use HasFactory;
@@ -38,7 +43,7 @@ class Game extends Model
     /**
      * @return MorphTo
      */
-    public function matchable(): MorphTo
+    public function gameable(): MorphTo
     {
         return $this->morphTo();
     }

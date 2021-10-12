@@ -1,21 +1,18 @@
 <?php
 
 ?>
-@extends('layouts.app')
-
-@section('content')
-    <div class="container">
+@csrf
         <div class="mt-3 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <h1>VERSIE 2</h1>
+                    <h1>Wedstrijd instellingen</h1>
 {{--                        Spelers--}}
                     <div class="row">
                         <div class="col-6">
                             <div class="mt-3 mb-3">
                                 <h5>Speler 1</h5>
                                 <label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="player_1">
                                         @foreach($players as $player)
                                             <option value="{{$player->id}}">{{$player->name}}</option>
                                         @endforeach
@@ -27,7 +24,7 @@
                             <div class="mt-3 mb-3">
                                 <h5>Speler 2</h5>
                                 <label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="player_2">
                                         @foreach($players as $player)
                                             <option value="{{$player->id}}">{{$player->name}}</option>
                                         @endforeach
@@ -47,24 +44,24 @@
                             <div class="mt-3 mb-3">
                                 <h5>Selecteer speltype</h5>
                                 <label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="type">
                                         <option value="FirstTo">First to</option>
-                                        <option value="BestOf">Best of</option>
+                                        <option value="BestOf">Best of</option>id
                                     </select>
                                 </label>
                             </div>
                             <div class="mt-3 mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                           id="exampleRadios1" value="option1" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
+                                    <input class="form-check-input" type="radio" name="style"
+                                           id="leg" value="leg" checked>
+                                    <label class="form-check-label" for="leg">
                                         Legs
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                           id="exampleRadios2" value="option2">
-                                    <label class="form-check-label" for="exampleRadios2">
+                                    <input class="form-check-input" type="radio" name="style"
+                                           id="set" value="set">
+                                    <label class="form-check-label" for="set">
                                         Sets
                                     </label>
                                 </div>
@@ -79,14 +76,14 @@
                                 <h5>Aantal sets/legs</h5>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend"></div>
-                                    <input type="number" style="max-width: 80px" class="form-control"
+                                    <input name="length" type="number" style="max-width: 80px" class="form-control"
                                            aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                 </div>
                             </div>
                             <div class="mt-3 mb-3">
                                 <h5>Beginscore</h5>
                                 <label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="start_score">
                                         <option value="301">301</option>
                                         <option value="501">501</option>
                                         <option value="701">701</option>
@@ -110,11 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-3 mb-3">
-                <input class="btn btn-primary" type="submit" value="Submit">
-            </div>
         </div>
-    </div>
-
-
-@endsection
+        <div class="mt-3 mb-3">
+            <button class="btn btn-primary" type="submit">Button</button>
+        </div>

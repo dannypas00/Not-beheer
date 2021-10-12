@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "doctrine/dbal": "^3.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "smknstd/fakerphp-picsum-images": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -21,7 +23,6 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpstan/phpstan": "^0.12.99",
         "phpunit/phpunit": "^9.3.3",
         "squizlabs/php_codesniffer": "^3.6"
     },

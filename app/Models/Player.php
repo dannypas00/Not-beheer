@@ -37,13 +37,8 @@ class Player extends Model
     ];
 
     /**
-     * @return HasManyThrough
+     * @return HasMany
      */
-    public function fixture(): HasManyThrough
-    {
-        return $this->hasManyThrough(Fixture::class, PlayerFixture::class);
-    }
-
     public function turns(): HasMany
     {
         return $this->hasMany(Turn::class);

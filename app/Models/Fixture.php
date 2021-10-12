@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,8 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $start_score
  * @property int $average_score
  * @property \DateTime $date
- * @property Player $player1
- * @property Player $player2
+ * @property Player $player_1
+ * @property Player $player_2
  */
 class Fixture extends Model
 {
@@ -52,5 +53,29 @@ class Fixture extends Model
     public function legs(): MorphMany
     {
         return $this->morphMany(Leg::class, Game::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function player1(): BelongsTo
+    {
+        return $this->belongsTo(Player::class, 'player_1', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function player2(): BelongsTo
+    {
+        return $this->belongsTo(Player::class, 'player_2', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function winner(): HasOne
+    {
+        return $this->hasOne(Player::class, 'id', 'winner');
     }
 }

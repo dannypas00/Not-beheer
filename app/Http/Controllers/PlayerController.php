@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Handlers\PlayerHandler;
 use App\Http\Requests\Players\PlayerIndexRequest;
 use App\Http\Requests\Players\PlayerStoreRequest;
+use App\Http\Requests\Players\PlayerUpdateRequest;
 use App\Models\Player;
+use App\Repositories\PlayerRepository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 
 class PlayerController extends AbstractController
 {
@@ -31,19 +37,41 @@ class PlayerController extends AbstractController
 
     /**
      * @param PlayerStoreRequest $request
-     * @return Response
+     * @return RedirectResponse|Redirector|Application
      */
-    public function store(PlayerStoreRequest $request): Response
+    public function store(PlayerStoreRequest $request): Application|RedirectResponse|Redirector
     {
-        return app(PlayerHandler::class)->store($request);
+        app(PlayerHandler::class)->store($request);
+        return redirect(route('players.index'));
     }
 
     /**
      * @param Player $player
-     * @return Response
+     * @return Application|Redirector|RedirectResponse
      */
-    public function destroy(Player $player): Response
+    public function destroy(Player $player): Application|RedirectResponse|Redirector
     {
-        return app(PlayerHandler::class)->destroy($player);
+        app(PlayerHandler::class)->destroy($player);
+        return redirect(route('players.index'));
+    }
+
+    /**
+     * @param Player $player
+     * @return View|Factory
+     */
+    public function edit(Player $player): View|Factory
+    {
+        return app(PlayerHandler::class)->editView($player);
+    }
+
+    /**
+     * @param Player $player
+     * @param PlayerUpdateRequest $request
+     * @return Application|Redirector|RedirectResponse
+     */
+    public function update(Player $player, PlayerUpdateRequest $request): Application|RedirectResponse|Redirector
+    {
+        app(PlayerHandler::class)->update($player, $request);
+        return redirect(route('players.index'));
     }
 }
