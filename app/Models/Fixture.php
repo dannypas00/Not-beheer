@@ -29,15 +29,28 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['type', 'style', 'length', 'start_score', 'date_time',
-                           'player_1', 'player_2','winner', 'location'];
+    protected $fillable = [
+        'type',
+        'style',
+        'length',
+        'start_score',
+        'date_time',
+        'player_1',
+        'player_2',
+        'winner',
+        'location'
+    ];
 
     /**
      * The attributes that should be guarded.
      *
      * @var string[]
      */
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * @return MorphMany
