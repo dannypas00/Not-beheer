@@ -25,11 +25,8 @@
                                          src="https://picsum.photos/id/237/500/300.jpg">
                                 @endif
 
-                                <div class="card-body">
-                                    <p class="card-title">{{$player->name}}</p>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Deserunt eum exercitationem iste maxime optio recusandae sapiente sint
-                                        voluptatem? Culpa, illum?</p>
+                                <div class="card-body" style="{{ $player->winrate > 0.95 ? "background-color: gold;" : ($player->winrate < 0.05 && $player->winrate > 0 ? "background-color: black" : '') }}">
+                                    <p class="card-title" style="color: {{ $player->winrate < 0.05 && $player->winrate > 0 ? 'white' : 'black' }}">{{ $player->name }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a type="button" href="{{route('players.edit', $player)}}"
@@ -44,7 +41,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <small class="text-muted">9 mins</small>
+                                        <small class="text-muted" style="color: {{ $player->winrate >= 0.5 ? "green" : "red" }} !important">{{ sprintf('%s%%', $player->winrate * 100) }}</small>
                                     </div>
                                 </div>
                             </div>

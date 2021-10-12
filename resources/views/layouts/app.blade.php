@@ -30,7 +30,6 @@
 
 
     <script src="../../js/app.js"></script>
-
 </head>
 <body>
 
