@@ -26,7 +26,7 @@
                                 @endif
 
                                 <div class="card-body">
-                                    <p class="card-title">{{ str_limit($player->name, 15, '...') }}</p>
+                                    <p class="card-title">{{ $player->name }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a type="button" href="{{route('players.edit', $player)}}"
