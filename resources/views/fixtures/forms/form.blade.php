@@ -46,8 +46,8 @@
                             <h5>Selecteer speltype</h5>
                             <label>
                                 <select class="form-select" name="type">
-                                    <option value="FirstTo">First to</option>
-                                    <option value="BestOf">Best of</option>
+                                    <option value="first_to">First to</option>
+                                    <option value="best_of">Best of</option>
                                     id
                                 </select>
                             </label>

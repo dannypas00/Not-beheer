@@ -55,4 +55,6 @@ class FixtureHandler
         app(FixtureRepository::class)->delete($fixture);
         return redirect()->route('fixtures.index');
     }
+
+
 }
