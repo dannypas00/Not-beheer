@@ -69,13 +69,22 @@
         </div>
     </div>
 
-    <div id="duplicate" class="mt-3 mb-3" style="visibility: hidden">
-        <div id="text" class="card-header"></div>
-        <div class="input-group mb-3">
-            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="1" maxlength="3">
-            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="1" maxlength="3">
-            <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="1" maxlength="3">
+    <div id="duplicate" style="visibility: hidden">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button id="text" tabindex="-1" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDuplicate" aria-expanded="true">
+
+                </button>
+            </h2>
+            <div id="collapseDuplicate" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    <div class="input-group mb-3">
+                        <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 1" required="required" minlength="1" maxlength="3">
+                        <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 2" required="required" minlength="1" maxlength="3">
+                        <input type="text" tag="input" name="worp[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Worp 3" required="required" minlength="1" maxlength="3">
+                    </div>
+                </div>
+            </div>
         </div>
-        </hr>
     </div>
 @endsection

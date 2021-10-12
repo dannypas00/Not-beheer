@@ -19,7 +19,6 @@ document.addEventListener("keydown", function(event) {
             let checkIfInputContainsValue = true;
 
             for (let index = 0; index < inputs.length; ++index) {
-
                 if (inputs[index].value == '') {
                     checkIfInputContainsValue = false;
                 }
@@ -38,38 +37,49 @@ function duplicateThrowElement(turn){
     let clone = document.getElementById('duplicate').cloneNode( true );
     clone.style.visibility = 'visible';
 
-    let h10 = document.createElement('h10');
-    let textElement = clone.querySelector('#text');
+    let turnText = document.createElement('h10');
+    let playerScoreElement = document.createElement('b');
+    let whereTheTurnTextNeedToGo = clone.querySelector('#text');
+    let collapseID = clone.querySelector('#collapseDuplicate');
 
     if(turn % 2  == 0) {
-        h10.appendChild(document.createTextNode('Beurt #' + player1Turn));
 
-        textElement.setAttribute('id', 'text' + player1Turn);
-        textElement.append(h10);
+        let duplicatedElement = createCloneElement('Player1_',501, player1Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
+        let player1Container = document.getElementById('player1');
 
-        // Change the id attribute of the newly created element:
-        clone.setAttribute( 'id', "player1_turn" + player1Turn);
-
-        let player1Container = document.getElementById('player' + 1);
-
-        // Append the cloned element to the container
-        player1Container.insertBefore(clone, player1Container.firstChild);
+        // Append the duplicated element to the container
+        player1Container.insertBefore(duplicatedElement, player1Container.firstChild);
         player1Turn++;
     }
     else {
-        h10.appendChild(document.createTextNode('Beurt #' + player2Turn));
 
-        textElement.setAttribute('id', 'text' + player2Turn);
-        textElement.append(h10);
+        let duplicatedElement = createCloneElement('Player2_',501, player2Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
 
-        // Change the id attribute of the newly created element:
-        clone.setAttribute( 'id', "player2_turn" + player2Turn);
+        let player2Container = document.getElementById('player2');
 
-        let player2Container = document.getElementById('player' + 2);
-
-        // Append the cloned element to the container
-        player2Container.insertBefore(clone, player2Container.firstChild);
-
+        // Append the duplicated element to the container
+        player2Container.insertBefore(duplicatedElement, player2Container.firstChild);
         player2Turn++;
     }
+
+    whereTheTurnTextNeedToGo.append(turnText);
+    whereTheTurnTextNeedToGo.append(playerScoreElement);
+}
+
+function createCloneElement(player, playerScore, playerTurn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone) {
+    turnText.appendChild(document.createTextNode('Beurt #' + playerTurn));
+
+    playerScoreElement.setAttribute('class', 'b-text-right');
+    //add the score to the textElement
+    playerScoreElement.appendChild(document.createTextNode(playerScore));
+
+    whereTheTurnTextNeedToGo.setAttribute('id', 'text' + player + playerTurn);
+    whereTheTurnTextNeedToGo.setAttribute('data-bs-target', '#collapse' + player + playerTurn);
+
+    collapseID.setAttribute('id', 'collapse' + player + playerTurn);
+
+    // Change the id attribute of the newly created element:
+    clone.setAttribute( 'id', "turn" + player + playerTurn);
+
+    return clone;
 }

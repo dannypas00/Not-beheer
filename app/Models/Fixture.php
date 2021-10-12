@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $length
  * @property int $start_score
  * @property int $average_score
- * @property \DateTime $date
+ * @property DateTime $date
  * @property Player $player1
  * @property Player $player2
  */
