@@ -3,7 +3,6 @@
 ?>
 @csrf
 
-
 <div class="mt-3 mb-3">
     <div class="card">
         <div class="card-header">
@@ -14,7 +13,7 @@
                     <div class="mt-3 mb-3">
                         <h5>Speler 1</h5>
                         <label>
-                            <select class="form-select" name="player_1">
+                            <select class="form-select js-example-basic-single" name="player_1">
                                 @foreach($players as $player)
                                     <option value="{{$player->id}}">{{$player->name}}</option>
                                 @endforeach
@@ -26,7 +25,7 @@
                     <div class="mt-3 mb-3">
                         <h5>Speler 2</h5>
                         <label>
-                            <select class="form-select" name="player_2">
+                            <select class="form-select js-example-basic-single" name="player_2">
                                 @foreach($players as $player)
                                     <option value="{{$player->id}}">{{$player->name}}</option>
                                 @endforeach
@@ -69,9 +68,6 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="mt-3 mb-3">
-
-                        </div>
                     </div>
                     <div class="col-6">
                         {{--            Sets/legs & Beginscore--}}
@@ -99,10 +95,11 @@
         </div>
     </div>
     <div class="mt-3 mb-3">
+
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-6">
                         <label>
                             <h5>
                                 Datum en Tijd
@@ -111,11 +108,22 @@
                                    placeholder="..." data-id="date_time" readonly="readonly">
                         </label>
                     </div>
+                    <div class="col-6">
+                        <label>
+                            <h5>
+                                Land en Stad
+                            </h5>
+                            <h1>
+                                PLACEHOLDER
+                            </h1>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="mt-3 mb-3">
     <button class="btn btn-primary" type="submit">Maak aan</button>
 </div>
@@ -129,6 +137,7 @@
                 time_24hr: true,
                 locale: "nl"
             });
+            $('.js-example-basic-single').select2()
         });
     </script>
 @endsection
