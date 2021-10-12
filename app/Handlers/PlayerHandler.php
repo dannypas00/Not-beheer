@@ -71,13 +71,14 @@ class PlayerHandler
     }
 
     /**
+     * @param Player $player
      * @param PlayerUpdateRequest $request
      * @return Response
      */
-    public function update(PlayerUpdateRequest $request): Response
+    public function update(Player $player, PlayerUpdateRequest $request): Response
     {
         try {
-            app(PlayerRepository::class)->update($request);
+            app(PlayerRepository::class)->update($request->validated(), $player);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);

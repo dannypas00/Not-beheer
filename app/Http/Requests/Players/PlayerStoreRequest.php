@@ -14,7 +14,7 @@ class PlayerStoreRequest extends AbstractRequest
         return [
             '_token' => 'sometimes',
             'id' => 'sometimes|int',
-            'name' => 'required|string|unique:players',
+            'name' => 'required|string|unique:players,name',
             'file' => 'sometimes|nullable|mimes:jpeg,png'
         ];
     }
