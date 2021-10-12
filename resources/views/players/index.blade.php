@@ -26,10 +26,7 @@
                                 @endif
 
                                 <div class="card-body">
-                                    <p class="card-title">{{$player->name}}</p>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Deserunt eum exercitationem iste maxime optio recusandae sapiente sint
-                                        voluptatem? Culpa, illum?</p>
+                                    <p class="card-title">{{ str_limit($player->name, 15, '...') }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a type="button" href="{{route('players.edit', $player)}}"
