@@ -3,6 +3,7 @@
 ?>
 @csrf
 
+
 <div class="mt-3 mb-3">
     <div class="card">
         <div class="card-header">
@@ -106,8 +107,8 @@
                             <h5>
                                 Datum en Tijd
                             </h5>
-                            <input class="form-control" id="dateTime" name="dateTime" type="text"
-                                   placeholder="..." data-id="dateTime" readonly="readonly">
+                            <input class="form-control" id="dateTime" name="date_time" type="text"
+                                   placeholder="..." data-id="date_time" readonly="readonly">
                         </label>
                     </div>
                 </div>
@@ -119,10 +120,15 @@
     <button class="btn btn-primary" type="submit">Maak aan</button>
 </div>
 
-<script>
-    var fp = flatpickr("#dateTime", {
-        enableTime: true,
-        time_24hr: true,
-        locale: "nl"
-    })
-</script>
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            var fp = flatpickr("#dateTime", {
+                enableTime: true,
+                time_24hr: true,
+                locale: "nl"
+            });
+        });
+    </script>
+@endsection

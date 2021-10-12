@@ -53,10 +53,9 @@ class FixtureController extends AbstractController
      * Store a newly created resource in storage.
      *
      * @param FixtureStoreRequest $request
-     * @return Application|Redirector|RedirectResponse
-     * @throws Exception
+     * @return Response
      */
-    public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
+    public function store(FixtureStoreRequest $request): Response
     {
         return app(FixtureHandler::class)->store($request);
     }
@@ -70,16 +69,5 @@ class FixtureController extends AbstractController
     public function destroy(Fixture $fixture): Redirector|RedirectResponse|Application
     {
         return app(FixtureHandler::class)->delete($fixture);
-    }
-
-    public static function getPlayer($fixtureID, $playerOrder)
-    {
-        return DB::table('player_fixtures')
-            ->select('name')
-        ->where('order', $playerOrder)
-        ->where('fixture_id', $fixtureID)
-        ->join('fixtures', 'player_fixtures.fixture_id', '=', 'fixtures.id')
-        ->join('players', 'player_fixtures.player_id', '=', 'players.id')
-            ->value('name');
     }
 }
