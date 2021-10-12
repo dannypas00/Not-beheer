@@ -43,4 +43,20 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
-?>
+
+Route::get('/geotest', function () {
+    $client = new \GuzzleHttp\Client();
+
+    $header = [
+        'x-rapidapi-host' => 'wft-geo-db.p.rapidapi.com',
+        'x-rapidapi-key'  => 'b706efe108msha6bbf7eeb50b598p1420d4jsn2b1097440c2e'
+    ];
+    $urlBase = (new \GuzzleHttp\Psr7\Uri('https://wft-geo-db.p.rapidapi.com'))
+        ->withPath('/v1/geo/cities')
+        ->withQuery(http_build_query([
+            'limit'  => 10,
+            'offset' => 0
+        ]));
+    //$request = new \GuzzleHttp\Psr7\Request('GET', $urlBase, $header, null);
+    dd(json_decode($client->get($urlBase, ['headers' => $header])->getBody()->getContents()));
+});
