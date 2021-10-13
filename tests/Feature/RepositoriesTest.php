@@ -121,8 +121,9 @@ class RepositoriesTest extends TestCase
             $repository = $pair[1];
             $model = $model::factory()->create();
             $repository->delete($model);
-            $this->assertDatabaseMissing($model->getTable(), ['id'         => $model->id,
-                                                              'deleted_at' => null
+            $this->assertDatabaseMissing($model->getTable(), [
+                'id'         => $model->id,
+                'deleted_at' => null
             ]);
         }
     }

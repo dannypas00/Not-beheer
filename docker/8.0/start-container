@@ -10,6 +10,11 @@ fi
 
 chmod -R ugo+rw /.composer
 
+composer install --no-progress --no-scripts
+php artisan migrate
+php artisan storage:link
+php artisan o:c
+
 if [ $# -gt 0 ];then
     exec gosu $WWWUSER "$@"
 else

@@ -17,7 +17,9 @@ class FixtureStoreRequest extends AbstractRequest
             'type' => 'required|string',
             'style' => 'required|string',
             'length' => 'required|int',
-            'start_score' => 'required|int'
+            'start_score' => 'required|int',
+            'date_time' => 'required|date',
+            'location' => 'required|string'
         ]);
     }
 }
