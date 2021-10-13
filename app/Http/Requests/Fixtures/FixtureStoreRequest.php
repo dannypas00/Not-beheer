@@ -16,9 +16,9 @@ class FixtureStoreRequest extends AbstractRequest
             'player_2' => 'required|int|exists:players,id',
             'type' => 'required|string',
             'style' => 'required|string',
-            'length' => 'required|filled|int',
+            'length' => 'required|int',
             'start_score' => 'required|int',
-            'date_time' => 'required|filled|date',
+            'date_time' => 'required|date',
             'location' => 'required|string'
         ]);
     }

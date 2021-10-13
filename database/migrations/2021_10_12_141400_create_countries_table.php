@@ -20,7 +20,6 @@ class CreateCountriesTable extends Migration
             $table->string('iso2');
             $table->string('emoji');
             $table->timestamps();
-            //id,name,iso3,iso2,numeric_code,phone_code,capital,currency,currency_symbol,tld,native,region,subregion,timezones,latitude,longitude,emoji,emojiU
         });
     }
 
@@ -31,6 +30,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-//        Schema::dropIfExists('countries');
+        Schema::dropIfExists('countries');
     }
 }
