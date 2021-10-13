@@ -69,6 +69,5 @@ class FixtureController extends AbstractController
     public function destroy(Fixture $fixture): RedirectResponse
     {
         return app(FixtureHandler::class)->destroy($fixture);
-
     }
 }
