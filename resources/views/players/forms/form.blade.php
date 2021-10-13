@@ -2,8 +2,6 @@
 <?php ?>
 @csrf
 
-
-
 {{-- Name --}}
 <div class="row">
     <div class="col-6">

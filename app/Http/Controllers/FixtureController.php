@@ -64,9 +64,9 @@ class FixtureController extends AbstractController
      * Remove the specified resource from storage.
      *
      * @param Fixture $fixture
-     * @return Redirector|RedirectResponse|Application
+     * @return RedirectResponse
      */
-    public function destroy(Fixture $fixture): Redirector|RedirectResponse|Application
+    public function destroy(Fixture $fixture): RedirectResponse
     {
         return app(FixtureHandler::class)->destroy($fixture);
     }
