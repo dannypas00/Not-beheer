@@ -26,7 +26,7 @@ class ChangeDateToDateTimeInFixtures extends Migration
     public function down()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            //
+            $table->date('date')->change();
         });
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::get('/statistics', function () {
     return view('statistics.index');
 });
 
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
+});
+
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
@@ -43,4 +48,3 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
-?>
