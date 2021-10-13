@@ -26,6 +26,13 @@ class CityRepository extends AbstractRepository
         parent::__construct($model);
     }
 
+    public function getCityWithCountry(int $cityId): Collection
+    {
+        return City::query()
+            ->whereKey($cityId)
+            ->with('country')->get();
+    }
+
     /**
      * @param string|null $search
      * @return Collection

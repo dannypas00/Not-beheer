@@ -14,10 +14,8 @@
                         <label for="player_1-select2" class="text-xl-left">
                             Speler 1
                         </label>
-                        <select class="form-select w-100" id="player_1-select2" name="player_1">
-                            @foreach($players as $player)
-                                <option value="{{$player->id}}">{{$player->name}}</option>
-                            @endforeach
+                        <select class="form-select d-block h-auto w-100" id="player_1-select2" name="player_1">
+
                         </select>
                     </div>
                 </div>
@@ -26,7 +24,7 @@
                         <label for="player_2-select2" class="text-xl-left">
                             Speler 2
                         </label>
-                        <select class="form-select w-100" id="player_2-select2" name="player_2">
+                        <select class="form-select d-block h-auto w-100" id="player_2-select2" name="player_2">
                             @foreach($players as $player)
                                 <option value="{{$player->id}}">{{$player->name}}</option>
                             @endforeach
@@ -46,10 +44,10 @@
                             <label for="type" class="text-xl-left">
                                 Speltype
                             </label>
-                                <select id="type" class="form-select w-25" name="type">
-                                    <option value="first_to">First to</option>
-                                    <option value="best_of">Best of</option>
-                                </select>
+                            <select id="type" class="form-select w-25" name="type">
+                                <option value="first_to">First to</option>
+                                <option value="best_of">Best of</option>
+                            </select>
                         </div>
                         <div class="mt-3 mb-3">
                             <div class="form-check">
@@ -102,15 +100,15 @@
                         <label for="dateTime" class="text-xl-left">
                             Datum en Tijd
                         </label>
-                        <input class="form-control w-50" id="dateTime" name="date_time" type="text"
+                        <input class="form-control d-block h-auto w-50" id="dateTime" name="date_time" type="text"
                                placeholder="..." data-id="date_time" readonly="readonly">
                     </div>
                     <div class="col-6">
                         <label for="location-select2" class="text-xl-left">
-                            Land en Stad
+                            Locatie
                         </label>
                         <br>
-                        <select id="location-select2" class="form-select w-50" name="player_1"></select>
+                        <select id="location-select2" class="form-select d-block h-auto w-100" name="location"></select>
                     </div>
                 </div>
             </div>
@@ -122,18 +120,48 @@
     <button class="btn btn-primary" type="submit">Maak aan</button>
 </div>
 
+<style>
+    .select2-selection__arrow {
+        display: none;
+    }
+</style>
+
 
 @section('js')
     <script>
         $(document).ready(function () {
+            const players = [
+                    @foreach($players as $player)
+                {
+                    id: {{ $player->id }},
+                    text: "{{ $player->name }}",
+                    image: "{{ $player->image }}"
+                },
+                @endforeach
+            ];
+            console.log(players);
             var fp = flatpickr("#dateTime", {
                 enableTime: true,
                 time_24hr: true,
                 locale: "nl"
             });
-            $('#player_1-select2').select2();
-            $('#player_2-select2').select2();
+            $('#player_1-select2').select2({
+                data: players,
+                templateResult: templatePlayer,
+                templateSelection: templatePlayer,
+                selectionCssClass: ':all:'
+            });
+            $('#player_2-select2').select2({
+                data: players,
+                templateResult: templatePlayer,
+                templateSelection: templatePlayer,
+                selectionCssClass: ':all:'
+            });
             $('#location-select2').select2({
+                templateResult: templateCity,
+                templateSelection: templateCity,
+                placeholder: "empty",
+                selectionCssClass: ':all:',
                 ajax: {
                     transport: function (params, success, failure) {
                         console.log(params);
@@ -150,6 +178,8 @@
                                 return {
                                     id: data.id,
                                     text: data.name
+                                        + " (" + data.country.iso2 + ")",
+                                    flag: convertToEmoji(data.country.emoji)
                                 }
                             });
                         console.log(results);
@@ -160,6 +190,24 @@
                 },
                 minimumInputLength: 3
             });
+
+            function convertToEmoji(unicode) {
+                unicode = unicode.split(' ').map(function (data) {
+                    return data.replace('U+', '0x');
+                });
+                return String.fromCodePoint.apply(this, unicode);
+            }
+
+            function templateCity(city) {
+                if (city.text == "empty") {
+                    return $('<span>Selecteer een locatie</span>');
+                }
+                return $('<span>' + city.flag + ' ' + city.text + '</span>');
+            }
+
+            function templatePlayer (data) {
+                return $('<img width=20 height=20 class="inline" src="' + data.image + '">  <span>' + data.text + '</span>');
+            }
         });
     </script>
 @endsection
