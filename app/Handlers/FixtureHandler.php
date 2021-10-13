@@ -32,8 +32,15 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create')
-            ->with('players', Player::all());
+        return view('fixtures.create',['players', Player::all()]);
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @return View|Factory
+     */
+    public function show(Fixture $fixture) : View|Factory{
+        return view('fixtures.fixture', ['fixture' => $fixture]);
     }
 
     /**

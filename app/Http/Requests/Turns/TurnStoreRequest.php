@@ -12,7 +12,11 @@ class TurnStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-
+            'player' => 'required|string',
+            'leg' => 'required|int',
+            'throw_1' => 'required|string',
+            'throw_2'=> 'required|string',
+            'throw_3'=> 'required|string'
         ];
     }
 }

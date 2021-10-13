@@ -10,7 +10,7 @@
                             <table class="table table-sm">
                                 <thead>
                                 <tr>
-                                    <th>Best of 3 of 5</th>
+{{--                                    <th>{{$gameType}}</th>--}}
                                     <th>Set</th>
                                     <th>Leg</th>
                                     <th>Punten</th>
@@ -18,7 +18,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Nam</td>
+{{--                                    <td>{{$player1->name}}</td>--}}
                                     <td>1</td>
                                     <td>1</td>
                                     <td>80</td>
@@ -26,7 +26,7 @@
                                 </tbody>
                                 <tbody>
                                 <tr>
-                                    <td>Mathijs</td>
+{{--                                    <td>{{$player2->name}}</td>--}}
                                     <td>2</td>
                                     <td>1</td>
                                     <td>240</td>

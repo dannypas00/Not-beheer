@@ -6,17 +6,15 @@ use App\Handlers\TurnHandler;
 use App\Http\Requests\Turns\TurnIndexRequest;
 use App\Http\Requests\Turns\TurnStoreRequest;
 use App\Models\Turn;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 
 class TurnController extends AbstractController
 {
     /**
      * @param TurnIndexRequest $request
-     * @return View|Factory
+     * @return Response
      */
-    public function index(TurnIndexRequest $request): View|Factory
+    public function index(TurnIndexRequest $request): Response
     {
         return app(TurnHandler::class)->index($request);
     }
