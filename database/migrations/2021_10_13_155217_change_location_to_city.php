@@ -26,7 +26,7 @@ class ChangeLocationToCity extends Migration
     public function down()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            $table->string('localtion')->change();
+            $table->string('location')->change();
         });
     }
 }
