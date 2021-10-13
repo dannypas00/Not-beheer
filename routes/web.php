@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::get('/export', function () {
 
 Route::get('/statistics', function () {
     return view('statistics.index');
+});
+
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
 });
 
 Route::group(['prefix' => 'fixtures'], function () {
