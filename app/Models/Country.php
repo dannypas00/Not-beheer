@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property $id
@@ -22,4 +23,9 @@ class Country extends Model
         'iso2',
         'emoji'
     ];
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class, 'country_id');
+    }
 }
