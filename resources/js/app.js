@@ -8,4 +8,8 @@ $(document).ready(function () {
     if ($("#fixtureComponent").length) {
         require('./fixturecontrol');
     }
+
+    if ($("#playerCard").length) {
+        require('./players');
+    }
 });
