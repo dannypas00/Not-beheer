@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property DateTime $date_time
  * @property Player $player1
  * @property Player $player2
+ * @property City $location
  */
 class Fixture extends Model
 {
@@ -91,5 +92,10 @@ class Fixture extends Model
     public function winner(): HasOne
     {
         return $this->hasOne(Player::class, 'id', 'winner');
+    }
+
+    public function location(): HasOne
+    {
+        return $this->hasOne(City::class, 'id', 'location');
     }
 }
