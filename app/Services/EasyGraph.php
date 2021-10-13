@@ -18,19 +18,37 @@ class EasyGraph {
         isset($params["type"]) ? $this->chartType = $params['type'] : "Not set";
         return $this;
     }
+
+    /**
+     * @param $data
+     * @return EasyGraph
+     */
     public function data($data){
         $this->data = $data;
         return $this;
     }
+
+    /**
+     * @param $labels
+     * @return EasyGraph
+     */
     public function setChartLabels($labels){
         $this->chartLabels = $labels;
         return $this;
     }
+
+    /**
+     * @param $data
+     * @return EasyGraph
+     */
     public function setDataLabels($labels){
         $this->chartDataLabels = $labels;
         return $this;
     }
 
+    /**
+     * @return JSON $array
+     */
     public function generateLabels(){
         $data = isset($this->chartDataLabels) ? $this->chartDataLabels : $this->data;
         $array = array();
@@ -40,6 +58,9 @@ class EasyGraph {
         return json_encode($array);
     }
     
+    /**
+     * @return String $url
+     */
     public function generateUrl(){
             $this->chart = new QuickChart(array(
             'width' => $this->width,

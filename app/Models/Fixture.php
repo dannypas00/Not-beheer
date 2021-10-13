@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,19 +40,19 @@ class Fixture extends Model
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * @return MorphMany
+     * @return hasManyThrough
      */
-    public function sets(): MorphMany
+    public function sets(): hasManyThrough
     {
-        return $this->morphMany(Set::class, Game::class);
+        return $this->hasManyThrough(Set::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
-     * @return MorphMany
+     * @return hasManyThrough
      */
-    public function legs(): MorphMany
+    public function legs(): hasManyThrough
     {
-        return $this->morphMany(Leg::class, Game::class);
+        return $this->hasManyThrough(Leg::class, Game::class, 'fixture_id', 'id');
     }
 
     /**

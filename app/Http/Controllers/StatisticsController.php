@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\StatisticsHandler;
+use App\Http\Requests\Statistics\StatisticsIndexRequest;
 use Illuminate\Http\Request;
-use App\Services\EasyGraph;
+use App\Models\Fixture;
 
 class StatisticsController extends AbstractController
 {
-    public function find($gameId, EasyGraph $graph){
-        $graphOne = $graph->config(['type' => 'bar'])->setDataLabels(["foo", "bar", "test", "bruh"])->setChartLabels(1)->data([20, 2, 30, 20])->generateUrl();
-        $graphTwo = $graph->config(['type' => 'line'])->setDataLabels(["foo", "bar", "test", "bruh"])->setChartLabels(1)->data([0, 20, 30, 10])->generateUrl();
+    /**
+     * Show the statistics from a game.
+     *
+     * @return Application|Factory|View
+     */
+    public function find(Fixture $fixture, StatisticsIndexRequest $request){
         
-        return view('statistics.index')->withGraphOne($graphOne)->withGraphTwo($graphTwo);
+        return app(StatisticsHandler::class)->index($fixture, $request);
     }
 }
