@@ -43,7 +43,7 @@ class FixtureHandler
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
         app(FixtureRepository::class)->create($request);
-        return redirect(route('fixtures.index'));
+        return redirect()->route('fixtures.index');
     }
 
     /**

@@ -26,7 +26,7 @@ class AddLocationToFixtures extends Migration
     public function down()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            //
+            $table->dropColumn('location');
         });
     }
 }
