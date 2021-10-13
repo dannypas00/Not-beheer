@@ -28,7 +28,8 @@ class Leg extends Model
     protected $fillable = [
         'average_score',
         'winner',
-        'set_id'
+        'set_id',
+        'average_score'
     ];
 
     /**

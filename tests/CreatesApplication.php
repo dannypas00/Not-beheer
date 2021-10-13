@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 trait CreatesApplication
 {
@@ -19,6 +20,7 @@ trait CreatesApplication
         $app->make(Kernel::class)->bootstrap();
 
         Artisan::call('migrate:fresh --seed');
+//        File::copy(config('database.connections.sqlite.url'), 'testdb_backup.sqlite');
 
         return $app;
     }
