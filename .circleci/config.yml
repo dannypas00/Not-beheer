@@ -18,12 +18,12 @@ jobs:
       - run:
           name: "Install git"
           command: |
-            apk add git
+            apk add git openssh
       - checkout
       - run:
           name: "Fix git checkout"
           command: |
-            git branch --set-upstream-to=`git branch --show-current` `git branch --show-current`
+            git branch --set-upstream-to=origin/`git branch --show-current` `git branch --show-current`
             git pull origin `git branch --show-current`
       - run:
           name: "Prepare dependencies"
