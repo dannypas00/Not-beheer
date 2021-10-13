@@ -15,6 +15,10 @@ jobs:
       - image: php:8.0-alpine
 
     steps:
+      - run:
+          name: "Install git"
+          command: |
+            apk add git
       - checkout
       - run:
           name: "Prepare dependencies"
