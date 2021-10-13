@@ -35,6 +35,4 @@ class CountryRepository extends AbstractRepository
     {
         $model->cities()->where('name', 'like', sprintf('%%%s%%', $search));
     }
-
-
 }
