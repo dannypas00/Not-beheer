@@ -11,26 +11,26 @@
             <div class="row">
                 <div class="col-6">
                     <div class="mt-3 mb-3">
-                        <h5>Speler 1</h5>
-                        <label>
-                            <select class="form-select js-example-basic-single" name="player_1">
-                                @foreach($players as $player)
-                                    <option value="{{$player->id}}">{{$player->name}}</option>
-                                @endforeach
-                            </select>
+                        <label for="player_1-select2" class="text-xl-left">
+                            Speler 1
                         </label>
+                        <select class="form-select w-100" id="player_1-select2" name="player_1">
+                            @foreach($players as $player)
+                                <option value="{{$player->id}}">{{$player->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="mt-3 mb-3">
-                        <h5>Speler 2</h5>
-                        <label>
-                            <select class="form-select js-example-basic-single" name="player_2">
-                                @foreach($players as $player)
-                                    <option value="{{$player->id}}">{{$player->name}}</option>
-                                @endforeach
-                            </select>
+                        <label for="player_2-select2" class="text-xl-left">
+                            Speler 2
                         </label>
+                        <select class="form-select w-100" id="player_2-select2" name="player_2">
+                            @foreach($players as $player)
+                                <option value="{{$player->id}}">{{$player->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -43,14 +43,13 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="mt-3 mb-3">
-                            <h5>Selecteer speltype</h5>
-                            <label>
-                                <select class="form-select" name="type">
+                            <label for="type" class="text-xl-left">
+                                Speltype
+                            </label>
+                                <select id="type" class="form-select w-25" name="type">
                                     <option value="first_to">First to</option>
                                     <option value="best_of">Best of</option>
-                                    id
                                 </select>
-                            </label>
                         </div>
                         <div class="mt-3 mb-3">
                             <div class="form-check">
@@ -100,21 +99,18 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <label>
-                            <h5>
-                                Datum en Tijd
-                            </h5>
-                            <input class="form-control" id="dateTime" name="date_time" type="text"
-                                   placeholder="..." data-id="date_time" readonly="readonly">
+                        <label for="dateTime" class="text-xl-left">
+                            Datum en Tijd
                         </label>
+                        <input class="form-control w-50" id="dateTime" name="date_time" type="text"
+                               placeholder="..." data-id="date_time" readonly="readonly">
                     </div>
                     <div class="col-6">
-                        <label>
-                            <h5>
-                                Land en Stad
-                            </h5>
-                            <input class="form-control" id="location" name="location" type="text" placeholder="test">
+                        <label for="location-select2" class="text-xl-left">
+                            Land en Stad
                         </label>
+                        <br>
+                        <select id="location-select2" class="form-select w-50" name="player_1"></select>
                     </div>
                 </div>
             </div>
@@ -135,7 +131,35 @@
                 time_24hr: true,
                 locale: "nl"
             });
-            $('.js-example-basic-single').select2()
+            $('#player_1-select2').select2();
+            $('#player_2-select2').select2();
+            $('#location-select2').select2({
+                ajax: {
+                    transport: function (params, success, failure) {
+                        console.log(params);
+                        $.get({
+                            url: "{{ route('cities.search', ['search' => 'xxx']) }}".replace('xxx', params.data.term),
+                            success: success,
+                            failure: failure
+                        });
+                    },
+                    cache: true,
+                    processResults: function (data) {
+                        let results =
+                            data.map(function (data) {
+                                return {
+                                    id: data.id,
+                                    text: data.name
+                                }
+                            });
+                        console.log(results);
+                        return {
+                            results: results
+                        };
+                    },
+                },
+                minimumInputLength: 3
+            });
         });
     </script>
 @endsection
