@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @foreach($players as $player)
-                        <div class="col">
+                        <div id="playerCard" class="col">
                             <div class="card shadow-sm">
                                 @if(!is_null($player->image))
                                     <img class="card-img-top" style="max-height: 200px;" alt="Card image cap"
