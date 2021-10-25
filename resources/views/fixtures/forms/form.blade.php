@@ -140,7 +140,8 @@
             var fp = flatpickr("#dateTime", {
                 enableTime: true,
                 time_24hr: true,
-                locale: "nl"
+                locale: "nl",
+                minDate: "today"
             });
             $('#player_1-select2').select2({
                 data: players,
@@ -202,7 +203,7 @@
                 return $('<span>' + city.flag + ' ' + city.text + '</span>');
             }
 
-            function templatePlayer (data) {
+            function templatePlayer(data) {
                 return $('<img width=20 height=20 class="inline" src="' + data.image + '">  <span>' + data.text + '</span>');
             }
         });
