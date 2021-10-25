@@ -137,7 +137,6 @@
                 },
                 @endforeach
             ];
-            console.log(players);
             var fp = flatpickr("#dateTime", {
                 enableTime: true,
                 time_24hr: true,
