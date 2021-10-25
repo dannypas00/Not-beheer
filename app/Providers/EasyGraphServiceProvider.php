@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -23,7 +24,7 @@ class EasyGraphServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->bind('App\Services\EasyGraph', function($app){
+        $this->app->bind('App\Services\EasyGraph', function ($app) {
             return new \App\Services\EasyGraph();
         });
     }

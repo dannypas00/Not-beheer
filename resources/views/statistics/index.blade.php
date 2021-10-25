@@ -13,6 +13,20 @@
                 <h5>Statistieken</h5>
             </div>
             <div class="card-body">
+                <div class="row row-cols-md-3">
+                    <div class="col text-center">
+                        <img width="300" class="img-thumbnail rounded" src="{{$fixture->player1->image}}">
+                        <h2>{{$fixture->player1->name}}</h2>
+                    </div>
+                    <div class="col text-center">
+                        <span>{{$fixture->date}}</span>
+                        <h2>2 - 4</h2>
+                    </div>
+                    <div class="col text-center">
+                        <img width="300" class="img-thumbnail rounded " src="{{$fixture->player2->image}}">
+                        <h2>{{$fixture->player2->name}}</h2>
+                    </div>
+                </div>
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
                     <div class="col">
                         <img class="responsive" src="{{$graphOne}}">

@@ -14,8 +14,8 @@ class StatisticsController extends AbstractController
      *
      * @return Application|Factory|View
      */
-    public function find(Fixture $fixture, StatisticsIndexRequest $request){
-        
+    public function find(Fixture $fixture, StatisticsIndexRequest $request)
+    {
         return app(StatisticsHandler::class)->index($fixture, $request);
     }
 }
