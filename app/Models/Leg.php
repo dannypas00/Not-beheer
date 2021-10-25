@@ -28,7 +28,8 @@ class Leg extends Model
     protected $fillable = [
         'average_score',
         'winner',
-        'set_id'
+        'set_id',
+        'average_score'
     ];
 
     /**
@@ -42,16 +43,25 @@ class Leg extends Model
         'deleted_at'
     ];
 
+    /**
+     * @return HasOne
+     */
     public function winner(): HasOne
     {
         return $this->hasOne('player', 'id', 'winner');
     }
 
+    /**
+     * @return HasMany
+     */
     public function turns(): HasMany
     {
         return $this->hasMany(Turn::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function set(): BelongsTo
     {
         return $this->belongsTo(Set::class);

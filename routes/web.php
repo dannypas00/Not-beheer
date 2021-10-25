@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\StatisticsController;
@@ -35,6 +36,10 @@ Route::get('/statistics', function () {
     return view('statistics.index');
 });
 
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
+});
+
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
@@ -51,4 +56,7 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
+<<<<<<< HEAD
 ?>
+=======
+>>>>>>> e1d5d95a8beb14f7625a1b6da07cd63209cdd659

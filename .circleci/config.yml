@@ -15,7 +15,16 @@ jobs:
       - image: php:8.0-alpine
 
     steps:
+      - run:
+          name: "Install git"
+          command: |
+            apk add git openssh
       - checkout
+      - run:
+          name: "Fix git checkout"
+          command: |
+            git branch --set-upstream-to=origin/`git branch --show-current` `git branch --show-current`
+            git pull origin `git branch --show-current`
       - run:
           name: "Prepare dependencies"
           command: |
