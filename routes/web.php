@@ -56,7 +56,3 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
-<<<<<<< HEAD
-?>
-=======
->>>>>>> e1d5d95a8beb14f7625a1b6da07cd63209cdd659
