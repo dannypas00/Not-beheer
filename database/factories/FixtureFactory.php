@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Fixture;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,7 +29,7 @@ class FixtureFactory extends Factory
                 'length' => $this->faker->randomElement([1, 3, 5, 7, 9, 11, 13, 15]),
                 'start_score' => $this->faker->numberBetween(180, 1024),
                 'date_time' => $this->faker->date,
-                'location' => $this->faker->boolean ? 'Amsterdam(NL)' : 'Londen(UK)',
+                'location' => City::inRandomOrder()->first()->id
             ];
     }
 }

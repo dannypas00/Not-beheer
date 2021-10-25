@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PlayersSeeder::class);
-        $this->call(FixturesSeeder::class);
         switch (env('DB_CONNECTION')) {
             case 'mysql':
                 Log::info('MYSQL import');
@@ -41,5 +39,8 @@ class DatabaseSeeder extends Seeder
                     )
                 );
         }
+        $this->call(PlayersSeeder::class);
+        $this->call(FixturesSeeder::class);
+
     }
 }

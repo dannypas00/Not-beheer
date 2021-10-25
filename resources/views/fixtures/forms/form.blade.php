@@ -11,26 +11,22 @@
             <div class="row">
                 <div class="col-6">
                     <div class="mt-3 mb-3">
-                        <h5>Speler 1</h5>
-                        <label>
-                            <select class="form-select js-example-basic-single" name="player_1">
-                                @foreach($players as $player)
-                                    <option value="{{$player->id}}">{{$player->name}}</option>
-                                @endforeach
-                            </select>
+                        <label for="player_1-select2" class="text-xl-left">
+                            Speler 1
                         </label>
+                        <select class="form-select d-block h-auto w-100" id="player_1-select2" name="player_1">
+
+                        </select>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="mt-3 mb-3">
-                        <h5>Speler 2</h5>
-                        <label>
-                            <select class="form-select js-example-basic-single" name="player_2">
-                                @foreach($players as $player)
-                                    <option value="{{$player->id}}">{{$player->name}}</option>
-                                @endforeach
-                            </select>
+                        <label for="player_2-select2" class="text-xl-left">
+                            Speler 2
                         </label>
+                        <select class="form-select d-block h-auto w-100" id="player_2-select2" name="player_2">
+
+                        </select>
                     </div>
                 </div>
             </div>
@@ -43,14 +39,13 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="mt-3 mb-3">
-                            <h5>Selecteer speltype</h5>
-                            <label>
-                                <select class="form-select" name="type">
-                                    <option value="first_to">First to</option>
-                                    <option value="best_of">Best of</option>
-                                    id
-                                </select>
+                            <label for="type" class="text-xl-left">
+                                Speltype
                             </label>
+                            <select id="type" class="form-select w-25" name="type">
+                                <option value="first_to">First to</option>
+                                <option value="best_of">Best of</option>
+                            </select>
                         </div>
                         <div class="mt-3 mb-3">
                             <div class="form-check">
@@ -100,21 +95,18 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <label>
-                            <h5>
-                                Datum en Tijd
-                            </h5>
-                            <input class="form-control" id="dateTime" name="date_time" type="text"
-                                   placeholder="..." data-id="date_time" readonly="readonly">
+                        <label for="dateTime" class="text-xl-left">
+                            Datum en Tijd
                         </label>
+                        <input class="form-control d-block h-auto w-50" id="dateTime" name="date_time" type="text"
+                               placeholder="..." data-id="date_time" readonly="readonly">
                     </div>
                     <div class="col-6">
-                        <label>
-                            <h5>
-                                Land en Stad
-                            </h5>
-                            <input class="form-control" id="location" name="location" type="text" placeholder="test">
+                        <label for="location-select2" class="text-xl-left">
+                            Locatie
                         </label>
+                        <br>
+                        <select id="location-select2" class="form-select d-block h-auto w-100" name="location"></select>
                     </div>
                 </div>
             </div>
@@ -126,16 +118,93 @@
     <button class="btn btn-primary" type="submit">Maak aan</button>
 </div>
 
+<style>
+    .select2-selection__arrow {
+        display: none;
+    }
+</style>
+
 
 @section('js')
     <script>
         $(document).ready(function () {
+            const players = [
+                    @foreach($players as $player)
+                {
+                    id: {{ $player->id }},
+                    text: "{{ $player->name }}",
+                    image: "{{ $player->image }}"
+                },
+                @endforeach
+            ];
             var fp = flatpickr("#dateTime", {
                 enableTime: true,
                 time_24hr: true,
                 locale: "nl"
             });
-            $('.js-example-basic-single').select2()
+            $('#player_1-select2').select2({
+                data: players,
+                templateResult: templatePlayer,
+                templateSelection: templatePlayer,
+                selectionCssClass: ':all:'
+            });
+            $('#player_2-select2').select2({
+                data: players,
+                templateResult: templatePlayer,
+                templateSelection: templatePlayer,
+                selectionCssClass: ':all:'
+            });
+            $('#location-select2').select2({
+                templateResult: templateCity,
+                templateSelection: templateCity,
+                placeholder: "empty",
+                selectionCssClass: ':all:',
+                ajax: {
+                    transport: function (params, success, failure) {
+                        console.log(params);
+                        $.get({
+                            url: "{{ route('cities.search', ['search' => 'xxx']) }}".replace('xxx', params.data.term),
+                            success: success,
+                            failure: failure
+                        });
+                    },
+                    cache: true,
+                    processResults: function (data) {
+                        let results =
+                            data.map(function (data) {
+                                return {
+                                    id: data.id,
+                                    text: data.name
+                                        + " (" + data.country.iso2 + ")",
+                                    flag: convertToEmoji(data.country.emoji)
+                                }
+                            });
+                        console.log(results);
+                        return {
+                            results: results
+                        };
+                    },
+                },
+                minimumInputLength: 3
+            });
+
+            function convertToEmoji(unicode) {
+                unicode = unicode.split(' ').map(function (data) {
+                    return data.replace('U+', '0x');
+                });
+                return String.fromCodePoint.apply(this, unicode);
+            }
+
+            function templateCity(city) {
+                if (city.text == "empty") {
+                    return $('<span>Selecteer een locatie</span>');
+                }
+                return $('<span>' + city.flag + ' ' + city.text + '</span>');
+            }
+
+            function templatePlayer (data) {
+                return $('<img width=20 height=20 class="inline" src="' + data.image + '">  <span>' + data.text + '</span>');
+            }
         });
     </script>
 @endsection

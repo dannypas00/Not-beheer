@@ -19,7 +19,7 @@ class FixtureStoreRequest extends AbstractRequest
             'length' => 'required|int',
             'start_score' => 'required|int',
             'date_time' => 'required|date',
-            'location' => 'required|string'
+            'location' => 'required|exists:cities,id'
         ]);
     }
 }
