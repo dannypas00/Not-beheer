@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,7 +29,8 @@ class Leg extends Model
     protected $fillable = [
         'average_score',
         'winner',
-        'set_id'
+        'set_id',
+        'average_score'
     ];
 
     /**
@@ -42,16 +44,25 @@ class Leg extends Model
         'deleted_at'
     ];
 
+    /**
+     * @return HasOne
+     */
     public function winner(): HasOne
     {
         return $this->hasOne('player', 'id', 'winner');
     }
 
+    /**
+     * @return HasMany
+     */
     public function turns(): HasMany
     {
-        return $this->hasMany(Turn::class);
+        return $this->hasMany(Turn::class, 'leg', 'id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function set(): BelongsTo
     {
         return $this->belongsTo(Set::class);
