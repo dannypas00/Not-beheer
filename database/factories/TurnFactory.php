@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Fixture;
+use App\Models\Game;
 use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Turn;
@@ -23,15 +25,16 @@ class TurnFactory extends Factory
      */
     public function definition()
     {
-        $leg = Leg::inRandomOrder()->first();
+        $fixture = Fixture::query()->with(['legs', 'player1', 'player2'])->inRandomOrder()->first();
+        $leg = collect($fixture->legs)->random();
         return [
-            'player' => $this->faker->boolean() ? $leg->player_1 : $leg->player_2,
-            'leg' => $leg,
-            'throw_1' => $this->faker->boolean(90)
+            'player' => $this->faker->boolean() ? $fixture->player_1 : $fixture->player_2,
+            'leg'    => $leg->id,
+            'throw_1'   => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'M',
-            'throw_2' => $this->faker->boolean(90)
+            'throw_2'   => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'BE',
-            'throw_3' => $this->faker->boolean(90)
+            'throw_3'   => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'B'
         ];
     }
