@@ -25,9 +25,7 @@
                             Speler 2
                         </label>
                         <select class="form-select d-block h-auto w-100" id="player_2-select2" name="player_2">
-                            @foreach($players as $player)
-                                <option value="{{$player->id}}">{{$player->name}}</option>
-                            @endforeach
+
                         </select>
                     </div>
                 </div>
