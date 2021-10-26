@@ -21,37 +21,12 @@ class FixturesSeeder extends Seeder
      */
     public function run()
     {
-//        Fixture::query()->firstOrCreate([
-//            'id' => '1',
-//        ], [
-//            'type' => 'best_of',
-//            'style' => 'sets',
-//            'length' => 3,
-//            'player_1' => Player::factory()->create()->id,
-//            'player_2' => Player::factory()->create()->id,
-//            'start_score' => 501,
-//            'date' => Carbon::today(),
-//            'winner' => null,
-//        ]);
-
-//        Fixture::query()->firstOrCreate([
-//            'id' => '2',
-//        ], [
-//            'type' => 'first_to',
-//            'style' => 'legs',
-//            'length' => 3,
-//            'player_1' => Player::factory()->create()->id,
-//            'player_2' => Player::factory()->create()->id,
-//            'start_score' => 501,
-//            'date' => Carbon::today(),
-//            'winner' => null,
-//        ]);
-        $fixtures = Fixture::factory()->count(5)->afterCreating(function (Fixture $fixture) {
+        $fixtures = Fixture::factory()->count(20)->afterCreating(function (Fixture $fixture) {
             $players = Player::all()->random(2)->pluck('id');
             $fixture->player_1 = $players[0];
             $fixture->player_2 = $players[1];
             Game::factory()->count($fixture->length)->create([
-                'gameable_type' => $fixture->style == 'legs' ? Leg::class : Set::class,
+                'gameable_type' => $fixture->style === 'legs' ? Leg::class : Set::class,
                 'fixture_id'    => $fixture->id
             ]);
             $fixture->save();
