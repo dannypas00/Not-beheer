@@ -50,7 +50,8 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="../" class="nav-link text-white {{ (request()->is('players')) ? 'active' : '' }}"
+                <a href="../" class="nav-link text-white
+                            {{ (request()->is('players')) ? 'active' : '' }}"
                    aria-current="page">
                     <i class="bi bi-person-fill"></i>
                     Spelers
@@ -63,23 +64,9 @@
                     Wedstrijden
                 </a>
             </li>
-            <li>
-                <a href="../statistics" class="nav-link text-white
-                            {{ (request()->is('statistics')) ? 'active' : '' }}">
-                    <i class="bi bi-bar-chart-line"></i>
-                    Statistieken
-                </a>
-            </li>
-            <li>
-                <a href="../export" class="nav-link text-white
-                            {{ (request()->is('export')) ? 'active' : '' }}">
-                    <i class="bi bi-hdd"></i>
-                    Data import/export
-                </a>
-            </li>
         </ul>
         <hr>
-        <span class="text-center text-uppercase">Copyright Team - 9</span>
+        <span class="text-center text-uppercase">Copyright Not-beheer</span>
     </div>
 
     <div class="container-fluid overflow-auto pt-4 bg-dark">

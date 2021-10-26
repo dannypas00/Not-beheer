@@ -4,9 +4,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    @include('layouts.searchbar.search')
-
     <div class="mt-3 mb-3">
         <div class="card">
             <div class="card-header">
@@ -66,4 +63,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+@section('js')
+
 @endsection

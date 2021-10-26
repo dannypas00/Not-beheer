@@ -58,7 +58,7 @@ class FixtureRepository extends AbstractRepository
             });
     }
 
-    public function fixtureAverageTurnsPerLegStatistics(int $fixtureId)
+    public function turnAveragePerLeg(int $fixtureId)
     {
         $legs = Fixture::query()->whereKey($fixtureId)->with([
             'legs' => function (HasManyThrough $query) {
@@ -74,8 +74,9 @@ class FixtureRepository extends AbstractRepository
 
     /**
      * @param int $fixtureId
+     * @return Collection
      */
-    public function fixtureAverageThrowPerLegPerPlayerStatistics(int $fixtureId)
+    public function averageThrowsPerLeg(int $fixtureId): Collection
     {
         $result = Fixture::query()->whereKey($fixtureId)->with([
             'player1', 'player2', 'legs' => function (HasManyThrough $query) {
@@ -84,30 +85,29 @@ class FixtureRepository extends AbstractRepository
         ])->get()->first();
         $legs = collect($result->toArray()['legs']);
         $playerIds = collect([$result->player_1, $result->player_2]);
-        $players = $legs->map(function ($leg) use ($playerIds) {
+        return $legs->map(function ($leg) use ($playerIds) {
             $turns = collect($leg['turns']);
             return [
                 $playerIds[0] => $this->calculateAveragePlayerThrowForTurns($turns, $playerIds[0]),
                 $playerIds[1] => $this->calculateAveragePlayerThrowForTurns($turns, $playerIds[1])
             ];
         });
-        dd($players);
     }
 
     /**
      * @param Collection $turns
      * @param int $playerId
-     * @return mixed
+     * @return Collection
      */
-    private function calculateAveragePlayerThrowForTurns(Collection $turns, int $playerId)
+    private function calculateAveragePlayerThrowForTurns(Collection $turns, int $playerId): Collection
     {
-        return $turns->where('player', '=', $playerId)->average(function ($turn) {
+        return collect($turns->where('player', '=', $playerId)->average(function ($turn) {
             $throws = [
                 app(ThrowToScoreService::class)->convertThrow($turn['throw_1']),
                 app(ThrowToScoreService::class)->convertThrow($turn['throw_2']),
                 app(ThrowToScoreService::class)->convertThrow($turn['throw_3'])
             ];
             return array_sum($throws);
-        });
+        }));
     }
 }
