@@ -5,6 +5,9 @@ namespace App\Repositories;
 use App\Models\Fixture;
 use App\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -22,6 +25,7 @@ class FixtureRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
+
     /**
      * Returns an eloquent builder with all games (sets or legs) the given player has won
      * @param Player $player
@@ -50,5 +54,33 @@ class FixtureRepository extends AbstractRepository
             ->orWhereHas('player2', function (Builder $query) use ($player) {
                 $query->whereKey($player->id);
             });
+    }
+
+    public function exportFixture(int $fixtureId): Collection
+    {
+        $collection = Fixture::query()->whereKey($fixtureId)->with(['player1', 'player2', 'winner', 'location'])->get();
+        return $this->cleanIds(
+            $collection
+        )->first();
+    }
+
+    /**
+     * @param Collection $toClean
+     * @return Collection
+     */
+    private function cleanIds(Collection $toClean): Collection
+    {
+        return $toClean->map(static function ($cleaningItem, $cleaningKey) {
+            if ($cleaningKey === 'id') {
+                return null;
+            }
+            if ($cleaningItem instanceof Model) {
+                $cleaningItem = $cleaningItem->toArray();
+            }
+            if (is_countable($cleaningItem)) {
+                return app(FixtureRepository::class)->cleanIds(new Collection($cleaningItem));
+            }
+            return $cleaningItem;
+        });
     }
 }

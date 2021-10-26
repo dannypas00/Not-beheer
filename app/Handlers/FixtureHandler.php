@@ -55,4 +55,14 @@ class FixtureHandler
         app(FixtureRepository::class)->delete($fixture);
         return redirect()->route('fixtures.index');
     }
+
+    /**
+     * @param int $fixtureId
+     * @return array
+     */
+    public function export(int $fixtureId): array
+    {
+        $result = app(FixtureRepository::class)->exportFixture($fixtureId);
+        return $result->toArray();
+    }
 }
