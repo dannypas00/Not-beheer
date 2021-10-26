@@ -95,7 +95,7 @@ class Fixture extends Model
         return $this->hasOne(Player::class, 'id', 'winner');
     }
 
-    public function location(): HasOne
+    public function city(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'location');
     }

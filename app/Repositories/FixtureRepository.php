@@ -6,7 +6,6 @@ use App\Models\Fixture;
 use App\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
 
@@ -24,6 +23,14 @@ class FixtureRepository extends AbstractRepository
     #[Pure] public function __construct(Fixture $model)
     {
         parent::__construct($model);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function index(): Collection
+    {
+        return $this->model->newQuery()->with(['city'])->get();
     }
 
     /**
