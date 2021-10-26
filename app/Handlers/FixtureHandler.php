@@ -24,6 +24,11 @@ class FixtureHandler
     public function index(FixtureIndexRequest $request): Factory|View
     {
         $fixtures = collect(app(FixtureRepository::class)->all());
+        $fixtures->transform(function (Fixture $fixture) {
+            $city = $fixture->city()->first();
+            $fixture->city->name = sprintf('%s (%s)', $city->first()->name, $city->country()->first()->iso3);
+            return $fixture;
+        });
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
 
@@ -54,5 +59,15 @@ class FixtureHandler
     {
         app(FixtureRepository::class)->delete($fixture);
         return redirect()->route('fixtures.index');
+    }
+
+    /**
+     * @param int $fixtureId
+     * @return array
+     */
+    public function export(int $fixtureId): array
+    {
+        $result = app(FixtureRepository::class)->exportFixture($fixtureId);
+        return $result->toArray();
     }
 }

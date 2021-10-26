@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -26,6 +27,14 @@ class FixtureRepository extends AbstractRepository
     #[Pure] public function __construct(Fixture $model)
     {
         parent::__construct($model);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function index(): Collection
+    {
+        return $this->model->newQuery()->with(['city'])->get();
     }
 
     /**
@@ -109,5 +118,36 @@ class FixtureRepository extends AbstractRepository
             ];
             return array_sum($throws);
         }));
+    }
+
+    public function exportFixture(int $fixtureId): Collection
+    {
+        $collection = Fixture::query()
+            ->whereKey($fixtureId)
+            ->with(['player1', 'player2', 'winner', 'location', 'sets', 'legs'])
+            ->get();
+        return $this->cleanIds(
+            $collection
+        )->first();
+    }
+
+    /**
+     * @param Collection $toClean
+     * @return Collection
+     */
+    private function cleanIds(Collection $toClean): Collection
+    {
+        return $toClean->map(static function ($cleaningItem, $cleaningKey) {
+            if ($cleaningKey === 'id') {
+                return null;
+            }
+            if ($cleaningItem instanceof Model) {
+                $cleaningItem = $cleaningItem->toArray();
+            }
+            if (is_countable($cleaningItem)) {
+                return app(FixtureRepository::class)->cleanIds(new Collection($cleaningItem));
+            }
+            return $cleaningItem;
+        });
     }
 }

@@ -32,6 +32,7 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
     Route::get('{fixture}/statistics', [StatisticsController::class, 'show'])->name('statistics.find');
+    Route::get('{fixtureId}/export', [FixtureController::class, 'export'])->name('fixtures.export');
 });
 
 Route::group(['prefix' => 'players'], function () {
