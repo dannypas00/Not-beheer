@@ -58,7 +58,10 @@ class FixtureRepository extends AbstractRepository
 
     public function exportFixture(int $fixtureId): Collection
     {
-        $collection = Fixture::query()->whereKey($fixtureId)->with(['player1', 'player2', 'winner', 'location', 'sets', 'legs'])->get();
+        $collection = Fixture::query()
+            ->whereKey($fixtureId)
+            ->with(['player1', 'player2', 'winner', 'location', 'sets', 'legs'])
+            ->get();
         return $this->cleanIds(
             $collection
         )->first();
