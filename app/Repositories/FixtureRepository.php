@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Fixture;
 use App\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -22,6 +23,15 @@ class FixtureRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
+
+    /**
+     * @return Collection
+     */
+    public function index(): Collection
+    {
+        return $this->model->newQuery()->with(['city'])->get();
+    }
+
     /**
      * Returns an eloquent builder with all games (sets or legs) the given player has won
      * @param Player $player
