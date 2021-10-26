@@ -1,40 +1,71 @@
 let player1Turn = 1;
 let player2Turn = 1;
+let leg = 1;
 let set = 1;
 let turn = 0;
-let playerStartedSet = 1;
+let playerStartedLeg = 1;
 
-createSet(set);
-set++;
+let fixtureStyle = 'sets';
+
+if(fixtureStyle == 'sets'){
+    createSet("setOrLegPosition", set);
+    createLeg('legsLocation_' + set,leg);
+}
+else if(fixtureStyle =='legs'){
+    createLeg("setOrLegPosition",leg);
+}
 
 duplicateThrowElement(turn);
 turn++;
 
-
-let btn = document.createElement("button");
-btn.innerHTML = "Save";
-btn.addEventListener("click", function () {
-    for (let i = set-1; i > 0; i--) {
-        for (let j = 1; j < 3; j++) {
-            document.getElementById('textplayer' + j + i).setAttribute('class', 'accordion-button collapsed');
-            document.getElementById('collapseplayer' + j + i).setAttribute('class', 'accordion-collapse collapse');
-        }
+let legBtn = document.createElement("addnewleg");
+legBtn.innerHTML = "Addnewleg";
+legBtn.addEventListener("click", function () {
+    for (let i = 1; i <= leg; i++) {
+        document.getElementById('text' + i).setAttribute('class', 'accordion-button collapsed');
+        document.getElementById('collapse' + i).setAttribute('class', 'accordion-collapse collapse');
     }
 
-    createSet(set);
-    set++;
+    leg++;
+
+    if(fixtureStyle == 'sets'){
+        createLeg('legsLocation_' + set, leg);
+    }
+    if(fixtureStyle =='legs'){
+        createLeg("setOrLegPosition",leg);
+    }
 
     player1Turn = 1;
     player2Turn = 1;
-    turn = playerStartedSet;
+    turn = playerStartedLeg;
     duplicateThrowElement(turn);
     turn++;
-    playerStartedSet = turn;
-
-
+    playerStartedLeg = turn;
 });
-document.body.appendChild(btn);
 
+let setBtn = document.createElement("addnewset");
+setBtn.innerHTML = "Addnewset";
+setBtn.addEventListener("click", function () {
+    for (let i = 1; i <= set; i++) {
+        document.getElementById('setText' + i).setAttribute('class', 'accordion-button collapsed');
+        document.getElementById('setCollapse' + i).setAttribute('class', 'accordion-collapse collapse');
+    }
+
+    set++;
+    leg = 1;
+    player1Turn = 1;
+    player2Turn = 1;
+
+    if(fixtureStyle == 'sets'){
+        createSet("setOrLegPosition", set);
+        createLeg('legsLocation_' + set, leg);
+        duplicateThrowElement(turn);
+        turn++;
+    }
+});
+
+document.body.appendChild(setBtn);
+document.body.appendChild(legBtn);
 
 document.addEventListener("keydown", function(event) {
 
@@ -65,7 +96,7 @@ document.addEventListener("keydown", function(event) {
 
 function duplicateThrowElement(turn){
     // Create a clone of element with id duplicate:
-    let clone = document.getElementById('legDuplicate').cloneNode( true );
+    let clone = document.getElementById('turnDuplicate').cloneNode( true );
     clone.style.visibility = 'visible';
 
     let turnText = document.createElement('h10');
@@ -74,18 +105,18 @@ function duplicateThrowElement(turn){
     let collapseID = clone.querySelector('#collapseDuplicate');
 
     if(turn % 2  == 0) {
-        createLeg('player1_',501, player1Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
+        createTurn('player1_',501, player1Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
         player1Turn++;
     }
     else {
-        createLeg('player2_',100, player2Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
+        createTurn('player2_',501, player2Turn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone);
         player2Turn++;
     }
 
     turn++;
 }
 
-function createLeg(player, playerScore, playerTurn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone) {
+function createTurn(player, playerScore, playerTurn, playerScoreElement, turnText, whereTheTurnTextNeedToGo, collapseID, clone) {
     if(playerScore <= 0)
         return;
 
@@ -100,43 +131,68 @@ function createLeg(player, playerScore, playerTurn, playerScoreElement, turnText
     collapseID.setAttribute('id', 'collapse' + player + playerTurn);
 
     // Change the id attribute of the newly created element:
-    clone.setAttribute( 'id', "turn" + player + playerTurn);
+    clone.setAttribute( 'id', 'turn' + player + playerTurn);
 
     whereTheTurnTextNeedToGo.append(turnText);
     whereTheTurnTextNeedToGo.append(playerScoreElement);
 
-    let playerContainer = document.getElementById(player + 'legs');
+    let playerContainer = document.getElementById('set_' + set + 'leg_' + leg + player);
 
     // Append the duplicated element to the container
     playerContainer.insertBefore(clone, playerContainer.firstChild);
 }
 
-function createSet(set){
-    createSetPlayer("player1", set);
-    createSetPlayer('player2', set);
-}
+function createLeg(elementLocation ,leg){
+    let cloneLeg = document.getElementById('legDuplicate').cloneNode( true );
+    cloneLeg.style.visibility = 'visible';
+    cloneLeg.setAttribute('id', 'leg_' + leg);
 
-function createSetPlayer(player, set){
-    let cloneSetPlayer = document.getElementById('setDuplicate').cloneNode( true );
-    cloneSetPlayer.style.visibility = 'visible';
-    cloneSetPlayer.setAttribute('id', 'set' + player + set);
+    let playerContainer = document.getElementById(elementLocation);
+    cloneLeg.querySelector("#turnsHere").setAttribute('id',  'legs_' + leg);
 
-    let playerContainer = document.getElementById(player);
-    cloneSetPlayer.querySelector("#putAllLegsHere").setAttribute('id', player + '_legs');
+    let legTextLocation = cloneLeg.querySelector('#text');
+    let collapseID = cloneLeg.querySelector('#collapseDuplicate');
+    let player1TurnsPos = cloneLeg.querySelector('#player1_');
+    let player2TurnsPos = cloneLeg.querySelector('#player2_');
 
-    let whereTheTurnTextNeedToGo = cloneSetPlayer.querySelector('#text');
-    let collapseID = cloneSetPlayer.querySelector('#collapseDuplicate');
+    player1TurnsPos.setAttribute('id', 'set_' + set + 'leg_' + leg + "player1_");
+    player2TurnsPos.setAttribute('id', 'set_' + set + 'leg_' + leg + "player2_")
 
     //id and data-bs-target needs to be the same for the accordion/collapse
-    whereTheTurnTextNeedToGo.setAttribute('id', 'text' + player + set);
-    whereTheTurnTextNeedToGo.setAttribute('data-bs-target', '#collapse' + player + set);
-    collapseID.setAttribute('id', 'collapse' + player + set);
+    legTextLocation.setAttribute('id', 'text' + leg);
+    legTextLocation.setAttribute('data-bs-target', '#collapse' + leg);
+    collapseID.setAttribute('id', 'collapse' + leg);
+
+    //add leg text
+    let legText = document.createElement('b');
+    legText.appendChild(document.createTextNode('Leg ' + leg));
+    legTextLocation.append(legText);
+
+    // Append the duplicated element to the container
+    playerContainer.insertBefore(cloneLeg, playerContainer.firstChild);
+}
+
+function createSet(elementLocation, set){
+    let cloneSet = document.getElementById('setDuplicate').cloneNode( true );
+    cloneSet.style.visibility = 'visible';
+    cloneSet.setAttribute('id', 'set_' + set);
+
+    let playerContainer = document.getElementById(elementLocation);
+    cloneSet.querySelector("#legPosition").setAttribute('id',  'legsLocation_' + set);
+
+    let SetTextLocation = cloneSet.querySelector('#text');
+    let collapseID = cloneSet.querySelector('#collapseDuplicate');
+
+    //id and data-bs-target needs to be the same for the accordion/collapse
+    SetTextLocation.setAttribute('id', 'setText' + set);
+    SetTextLocation.setAttribute('data-bs-target', '#setCollapse' + set);
+    collapseID.setAttribute('id', 'setCollapse' + set);
 
     //add set text
     let setText = document.createElement('b');
     setText.appendChild(document.createTextNode('Set ' + set));
-    whereTheTurnTextNeedToGo.append(setText);
+    SetTextLocation.append(setText);
 
     // Append the duplicated element to the container
-    playerContainer.insertBefore(cloneSetPlayer, playerContainer.firstChild);
+    playerContainer.insertBefore(cloneSet, playerContainer.firstChild);
 }
