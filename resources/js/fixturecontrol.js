@@ -2,33 +2,36 @@ let player1Turn = 1;
 let player2Turn = 1;
 let turn = 0;
 duplicateThrowElement(turn);
-console.log("load");
 
 document.addEventListener("keydown", function (event) {
     if (event.which === 9) {
         let parent = event.composedPath();
         const activeTextarea = document.activeElement;
-
+        let inputs = parent[2].getElementsByTagName('input');
         if (activeTextarea.tagName === 'INPUT') {
-
             if (activeTextarea.value !== '') {
-                if (!checkIfInputValid(activeTextarea.value)) return;
-                activeTextarea.setAttribute("disabled", "true");
+                if (checkIfInputValid(activeTextarea.value) === 0) {
+                    activeTextarea.setAttribute("disabled", "true");
+                }
             }
 
-            let inputs = parent[2].getElementsByTagName('input');
-
             for (let index = 0; index < inputs.length; index++) {
-                if (inputs[index].value === '' || !checkIfInputValid(activeTextarea.value)) {
+                if (checkIfInputValid(inputs[index].value) === -1) {
                     return;
                 }
             }
-            duplicateThrowElement();
         }
+        let $throws = [];
+        for (let index = 0; index < inputs.length; index++) {
+            $throws.push(inputs[index].value);
+        }
+        saveTurnToDatabase($throws);
+        duplicateThrowElement();
     }
 })
 
-function duplicateThrowElement() {
+function duplicateThrowElement()
+{
     // Create a clone of element with id duplicate:
     let clone = document.getElementById('duplicate').cloneNode(true);
     clone.style.visibility = 'visible';
@@ -66,8 +69,23 @@ function duplicateThrowElement() {
     turn++;
 }
 
-function checkIfInputValid(input) {
-    let result = input.search(/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9]$)|(^[1-9]$)/);
+function checkIfInputValid(input)
+{
+    let result = input.search(/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/);
     console.log(result);
-    return result.length !== -1;
+    return result;
+}
+
+function saveTurnToDatabase(throws)
+{
+    $.ajax({
+        type: "POST",
+        url: '/turns/store',
+        data: {
+            data: 'test',
+            id: fixtureId
+        },
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+
 }

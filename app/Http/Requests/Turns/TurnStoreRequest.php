@@ -12,11 +12,12 @@ class TurnStoreRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'player' => 'required|string',
-            'leg' => 'required|int',
-            'throw_1' => 'required|string',
-            'throw_2'=> 'required|string',
-            'throw_3'=> 'required|string'
+            'throw1' => 'required|string|regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|
+            (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/',
+            'throw2' => 'required|string|regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|
+            (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/',
+            'throw3' => 'required|string|regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|
+            (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/'
         ];
     }
 }

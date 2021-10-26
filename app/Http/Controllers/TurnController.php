@@ -25,6 +25,7 @@ class TurnController extends AbstractController
      */
     public function store(TurnStoreRequest $request): Response
     {
+        dd($request);
         return app(TurnHandler::class)->store($request);
     }
 

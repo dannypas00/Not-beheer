@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\TurnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +32,14 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
     Route::get('{id}', [FixtureController::class, 'show'])->name('fixtures.show');
-    Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
-    Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+    Route::delete('{id}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+});
+
+Route::group(['prefix' => 'turns'], function () {
+    Route::get('', [TurnController::class, 'index'])->name('turns.index');
+    Route::get('{id}', [TurnController::class, 'show'])->name('turns.show');
+    Route::post('store', [TurnController::class, 'store'])->name('turns.store');
+    Route::delete('{id}/destroy', [TurnController::class, 'destroy'])->name('turns.destroy');
 });
 
 Route::group(['prefix' => 'players'], function () {
@@ -43,4 +50,3 @@ Route::group(['prefix' => 'players'], function () {
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
 });
-?>

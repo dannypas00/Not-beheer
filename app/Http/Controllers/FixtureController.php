@@ -45,9 +45,9 @@ class FixtureController extends AbstractController
      *
      * @return Application|Factory|View
      */
-    public function show(Fixture $fixture): View|Factory|Application
+    public function show(int $id): View|Factory|Application
     {
-        return app(FixtureHandler::class)->show($fixture);
+        return app(FixtureHandler::class)->show($id);
     }
 
     /**

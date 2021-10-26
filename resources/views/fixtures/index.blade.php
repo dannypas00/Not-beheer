@@ -38,10 +38,9 @@
                             <td>{{$fixture->player2->name ?? "Player not found"}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date}}</td>
-
                             <td>
                                 <div class="btn-group">
-                                    <a type="button" href="{{route('fixtures.show', $fixture)}}"
+                                    <a type="button" href="{{route('fixtures.show', $fixture->id)}}"
                                        class="me-2 rounded btn btn-sm btn-outline-secondary bi-eye-fill">
                                         open wedstrijd
                                     </a>
