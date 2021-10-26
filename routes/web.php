@@ -21,21 +21,6 @@ Route::get('/', function () {
     return redirect(route('players.index'));
 });
 
-Route::get('/export', function () {
-    return view('export.index');
-});
-
-Route::get('/matches', function () {
-    return view('matches.index');
-});
-
-Route::group(['prefix' => 'statistics'], function () {
-    Route::get('{gameid}', [StatisticsController::class, 'find'])->name('statistics.find');
-});
-Route::get('/statistics', function () {
-    return view('statistics.index');
-});
-
 Route::group(['prefix' => 'cities'], function () {
     Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
 });
@@ -46,6 +31,7 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::get('fixture', [FixtureController::class, 'fixture'])->name('fixtures.fixture');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+    Route::get('{fixtureId}/statistics', [StatisticsController::class, 'find'])->name('statistics.find');
 });
 
 Route::group(['prefix' => 'players'], function () {
