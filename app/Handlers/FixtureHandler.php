@@ -5,6 +5,7 @@ namespace App\Handlers;
 use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
+use App\Models\Leg;
 use App\Models\Player;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -69,5 +70,24 @@ class FixtureHandler
     {
         $result = app(FixtureRepository::class)->exportFixture($fixtureId);
         return $result->toArray();
+    }
+
+    public function statistics(Fixture $fixture): View
+    {
+        $turnAverage = collect(app(FixtureRepository::class)
+            ->turnAveragePerLeg($fixture->id))
+            ->map(function (Leg $leg) {
+                return $leg->toArray()['turn_count'];
+            });
+        $averageThrows = app(FixtureRepository::class)->averageThrowsPerLeg($fixture->id)->toArray();
+        return view(
+            'fixtures.statistics',
+            [
+                'turnAverage' => $turnAverage->toArray(),
+                'fixture' => $fixture,
+                'player1' => $fixture->player1()->first(),
+                'player2' => $fixture->player2()->first()
+            ]
+        );
     }
 }

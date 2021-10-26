@@ -80,4 +80,13 @@ class FixtureController extends AbstractController
     {
         return new JsonResponse(app(FixtureHandler::class)->export($fixtureId));
     }
+
+    /**
+     * @param Fixture $fixture
+     * @return mixed
+     */
+    public function statistics(Fixture $fixture)
+    {
+        return app(FixtureHandler::class)->statistics($fixture);
+    }
 }
