@@ -3,6 +3,7 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +21,6 @@ Route::get('/', function () {
     return redirect(route('players.index'));
 });
 
-Route::get('/export', function () {
-    return view('export.index');
-});
-
-Route::get('/statistics', function () {
-    return view('statistics.index');
-});
-
 Route::group(['prefix' => 'cities'], function () {
     Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
 });
@@ -38,6 +31,7 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::get('fixture', [FixtureController::class, 'fixture'])->name('fixtures.fixture');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+    Route::get('{fixture}/statistics', [FixtureController::class, 'statistics'])->name('statistics.find');
     Route::get('{fixtureId}/export', [FixtureController::class, 'export'])->name('fixtures.export');
 });
 

@@ -23,8 +23,6 @@ class SetFactory extends Factory
     public function definition()
     {
         return [
-            'winner' => null,
-            'deleted_at' => null
         ];
     }
 }

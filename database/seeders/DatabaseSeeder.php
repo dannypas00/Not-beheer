@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\City;
 use App\Models\Country;
+use Database\Factories\TurnFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -41,6 +42,5 @@ class DatabaseSeeder extends Seeder
         }
         $this->call(PlayersSeeder::class);
         $this->call(FixturesSeeder::class);
-
     }
 }
