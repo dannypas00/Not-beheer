@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <div id="fixtureComponent" class="container">
         <div class="row">
             <div class ="col-12">
@@ -10,7 +10,7 @@
                             <table class="table table-sm">
                                 <thead>
                                 <tr>
-                                    <th>Best of 3 of 5</th>
+                                    <th>Player</th>
                                     <th>Set</th>
                                     <th>Leg</th>
                                     <th>Punten</th>
@@ -18,18 +18,18 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Nam</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>80</td>
+                                    <td>{{$fixture->player1->name}}</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
                                 </tr>
                                 </tbody>
                                 <tbody>
                                 <tr>
-                                    <td>Mathijs</td>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td>240</td>
+                                    <td>{{$fixture->player2->name}}</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -131,6 +131,14 @@
                 </div>
             </div>
         </div>
+        </hr>
     </div>
+
+    <script>
+        let fixture = {!! $fixture !!};
+        let setId = {!! $setId !!};
+        let legId = {!! $legId !!};
+    </script>
+
 
 @endsection

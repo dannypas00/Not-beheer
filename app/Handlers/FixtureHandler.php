@@ -6,7 +6,9 @@ use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
 use App\Models\Leg;
+use App\Models\Game;
 use App\Models\Player;
+use App\Models\Set;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -38,8 +40,21 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create')
-            ->with('players', Player::all());
+        return view('fixtures.create', ['players' => Player::all()]);
+    }
+
+    /**
+     * @param int $id
+     * @return View|Factory
+     */
+    public function show(int $id): View|Factory
+    {
+        $fixture = Fixture::query()->with('sets')->where("id", $id)->first();
+        $set = Game::where('fixture_id', '=', 26)->with('gameable')->get();
+        return view('fixtures.fixture', [
+            'fixture' => $fixture,
+            'setId' => $set[0]['gameable_id']
+            ]);
     }
 
     /**
@@ -48,7 +63,8 @@ class FixtureHandler
      */
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
-        app(FixtureRepository::class)->create($request);
+        //app(FixtureRepository::class)->create($request);
+        app(FixtureRepository::class)->createFixture($request);
         return redirect()->route('fixtures.index');
     }
 

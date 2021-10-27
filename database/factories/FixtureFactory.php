@@ -27,7 +27,7 @@ class FixtureFactory extends Factory
                 'type' => $this->faker->boolean ? 'best_of' : 'first_to',
                 'style' => $this->faker->boolean ? 'sets' : 'legs',
                 'length' => $this->faker->randomElement([1, 3, 5, 7, 9, 11, 13, 15]),
-                'start_score' => $this->faker->numberBetween(180, 1024),
+                'start_score' => $this->faker->randomElement([301,501,701]),
                 'date_time' => $this->faker->date,
                 'location' => City::inRandomOrder()->first()->id
             ];

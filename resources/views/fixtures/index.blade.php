@@ -42,16 +42,26 @@
                             <td>{{$fixture->city->name}}</td>
 
                             <td>
-                                <button type="button" class="btn btn-secondary btn-sm ">
-                                    <i class="bi bi-eye-fill"></i>
-                                </button>
-                                <form method="POST" action="{{route('fixtures.destroy', $fixture)}}">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm ">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
+                                <div class="btn-group">
+                                    <a type="button" href="{{route('fixtures.show', $fixture->id)}}"
+                                       class="me-2 rounded btn btn-sm btn-outline-secondary bi-eye-fill">
+                                        open wedstrijd
+                                    </a>
+
+{{--                                    <a type="button" href="{{route('statistics.show', $fixture)}}"--}}
+{{--                                       class="me-2 rounded btn btn-sm btn-outline-secondary bi-bar-chart-line">--}}
+{{--                                        statistic--}}
+{{--                                    </a>--}}
+
+
+                                    <form method="POST" action="{{route('fixtures.destroy', $fixture)}}">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm ">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
