@@ -5,7 +5,9 @@ namespace App\Handlers;
 use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
+use App\Models\Game;
 use App\Models\Player;
+use App\Models\Set;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -24,6 +26,11 @@ class FixtureHandler
     public function index(FixtureIndexRequest $request): Factory|View
     {
         $fixtures = collect(app(FixtureRepository::class)->all());
+        $fixtures->transform(function (Fixture $fixture) {
+            $city = $fixture->city()->first();
+            $fixture->city->name = sprintf('%s (%s)', $city->name, $city->country()->first()->iso3);
+            return $fixture;
+        });
         return view('fixtures.index', ['fixtures' => $fixtures]);
     }
 
@@ -41,8 +48,12 @@ class FixtureHandler
      */
     public function show(int $id): View|Factory
     {
-        $fixture = Fixture::all()->where("id", $id)->first();
-        return view('fixtures.fixture', ['fixture' => $fixture]);
+        $fixture = Fixture::query()->with('sets')->where("id", $id)->first();
+        $set = Game::where('fixture_id', '=', 26)->with('gameable')->get();
+        return view('fixtures.fixture', [
+            'fixture' => $fixture,
+            'setId' => $set[0]['gameable_id']
+            ]);
     }
 
     /**
@@ -64,5 +75,15 @@ class FixtureHandler
     {
         app(FixtureRepository::class)->delete($fixture);
         return redirect()->route('fixtures.index');
+    }
+
+    /**
+     * @param int $fixtureId
+     * @return array
+     */
+    public function export(int $fixtureId): array
+    {
+        $result = app(FixtureRepository::class)->exportFixture($fixtureId);
+        return $result->toArray();
     }
 }

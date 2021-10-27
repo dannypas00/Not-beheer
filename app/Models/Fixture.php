@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -55,19 +56,19 @@ class Fixture extends Model
     ];
 
     /**
-     * @return MorphMany
+     * @return HasManyThrough
      */
-    public function sets(): MorphMany
+    public function sets(): HasManyThrough
     {
-        return $this->morphMany(Set::class, Game::class);
+        return $this->hasManyThrough(Set::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
-     * @return MorphMany
+     * @return HasManyThrough
      */
-    public function legs(): MorphMany
+    public function legs(): HasManyThrough
     {
-        return $this->morphMany(Leg::class, Game::class);
+        return $this->hasManyThrough(Leg::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
@@ -94,7 +95,7 @@ class Fixture extends Model
         return $this->hasOne(Player::class, 'id', 'winner');
     }
 
-    public function location(): HasOne
+    public function city(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'location');
     }

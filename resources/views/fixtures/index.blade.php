@@ -39,7 +39,7 @@
                             <td>{{$fixture->player2->name ?? "Player not found"}}</td>
                             <td>{{$fixture->start_score}}</td>
                             <td>{{$fixture->date_time}}</td>
-                            <td>{{$fixture->location}}</td>
+                            <td>{{$fixture->city->name}}</td>
 
                             <td>
                                 <div class="btn-group">

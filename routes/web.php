@@ -26,7 +26,7 @@ Route::get('/export', function () {
 });
 
 Route::get('/statistics', function () {
-//    Route::get('{id}', [StatisticController, 'show'])->name('statistics.show');
+    return view('statistics.index');
 });
 
 Route::group(['prefix' => 'cities'], function () {
@@ -39,6 +39,7 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::get('{id}', [FixtureController::class, 'show'])->name('fixtures.show');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{id}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+    Route::get('{id}/export', [FixtureController::class, 'export'])->name('fixtures.export');
 });
 
 Route::group(['prefix' => 'turns'], function () {

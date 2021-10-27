@@ -2,12 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Handlers\FixtureHandler;
 use App\Models\Fixture;
+use App\Models\Leg;
 use App\Models\Player;
+use App\Models\Set;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
-use phpDocumentor\Reflection\Types\This;
 
 /**
  * Class FixtureRepository
@@ -24,6 +26,15 @@ class FixtureRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
+
+    /**
+     * @return Collection
+     */
+    public function index(): Collection
+    {
+        return $this->model->newQuery()->with(['city'])->get();
+    }
+
     /**
      * Returns an eloquent builder with all games (sets or legs) the given player has won
      * @param Player $player
@@ -54,6 +65,40 @@ class FixtureRepository extends AbstractRepository
             });
     }
 
+    public function exportFixture(int $fixtureId): Collection
+    {
+        $collection = Fixture::query()
+            ->whereKey($fixtureId)
+            ->with(['player1', 'player2', 'winner', 'location', 'sets', 'legs'])
+            ->get();
+        return $this->cleanIds(
+            $collection
+        )->first();
+    }
+
+    /**
+     * @param Collection $toClean
+     * @return Collection
+     */
+    private function cleanIds(Collection $toClean): Collection
+    {
+        return $toClean->map(static function ($cleaningItem, $cleaningKey) {
+            if ($cleaningKey === 'id') {
+                return null;
+            }
+            if ($cleaningItem instanceof Model) {
+                $cleaningItem = $cleaningItem->toArray();
+            }
+            if (is_countable($cleaningItem)) {
+                return app(FixtureRepository::class)->cleanIds(new Collection($cleaningItem));
+            }
+            return $cleaningItem;
+        });
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function createFixture($request): void
     {
         $fixture = $this->create($request) ?? new Fixture();
@@ -62,18 +107,19 @@ class FixtureRepository extends AbstractRepository
             $leg = app(LegRepository::class)->create([]);
             app(GameRepository::class)->create([
                 'fixture_id' => $fixture->id,
-                'gameable_type' => 'leg',
+                'gameable_type' => Leg::class,
                 'gameable_id' => $leg->id
-                ]);
+            ]);
         }
         if ($style === 'sets') {
             $set = app(SetRepository::class)->create([]);
-            $leg = app(LegRepository::class)->create(['set_id' => $set->id]);
+            app(LegRepository::class)->create(['set_id' => $set->id]);
             app(GameRepository::class)->create([
                 'fixture_id' => $fixture->id,
-                'gameable_type' => 'set',
+                'gameable_type' => Set::class,
                 'gameable_id' => $set->id
             ]);
         }
     }
+
 }
