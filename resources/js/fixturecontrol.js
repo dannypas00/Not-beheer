@@ -21,47 +21,13 @@ turn++;
 let legBtn = document.createElement("addnewleg");
 legBtn.innerHTML = "Addnewleg";
 legBtn.addEventListener("click", function () {
-    for (let i = 1; i <= leg; i++) {
-        document.getElementById('text' + i).setAttribute('class', 'accordion-button collapsed');
-        document.getElementById('collapse' + i).setAttribute('class', 'accordion-collapse collapse');
-    }
-
-    leg++;
-
-    if(fixtureStyle == 'sets'){
-        createLeg('legsLocation_' + set, leg);
-    }
-    if(fixtureStyle =='legs'){
-        createLeg("setOrLegPosition",leg);
-    }
-
-    player1Turn = 1;
-    player2Turn = 1;
-    turn = playerStartedLeg;
-    duplicateThrowElement(turn);
-    turn++;
-    playerStartedLeg = turn;
+    addNewLeg();
 });
 
 let setBtn = document.createElement("addnewset");
 setBtn.innerHTML = "Addnewset";
 setBtn.addEventListener("click", function () {
-    for (let i = 1; i <= set; i++) {
-        document.getElementById('setText' + i).setAttribute('class', 'accordion-button collapsed');
-        document.getElementById('setCollapse' + i).setAttribute('class', 'accordion-collapse collapse');
-    }
-
-    set++;
-    leg = 1;
-    player1Turn = 1;
-    player2Turn = 1;
-
-    if(fixtureStyle == 'sets'){
-        createSet("setOrLegPosition", set);
-        createLeg('legsLocation_' + set, leg);
-        duplicateThrowElement(turn);
-        turn++;
-    }
+    addNewSet();
 });
 
 document.body.appendChild(setBtn);
@@ -93,6 +59,48 @@ document.addEventListener("keydown", function(event) {
         }
     }
 })
+
+function addNewLeg(){
+    for (let i = 1; i <= leg; i++) {
+        document.getElementById('text' + i).setAttribute('class', 'accordion-button collapsed');
+        document.getElementById('collapse' + i).setAttribute('class', 'accordion-collapse collapse');
+    }
+
+    leg++;
+
+    if(fixtureStyle == 'sets'){
+        createLeg('legsLocation_' + set, leg);
+    }
+    if(fixtureStyle =='legs'){
+        createLeg("setOrLegPosition",leg);
+    }
+
+    player1Turn = 1;
+    player2Turn = 1;
+    turn = playerStartedLeg;
+    duplicateThrowElement(turn);
+    turn++;
+    playerStartedLeg = turn;
+}
+
+function addNewSet(){
+    for (let i = 1; i <= set; i++) {
+        document.getElementById('setText' + i).setAttribute('class', 'accordion-button collapsed');
+        document.getElementById('setCollapse' + i).setAttribute('class', 'accordion-collapse collapse');
+    }
+
+    set++;
+    leg = 1;
+    player1Turn = 1;
+    player2Turn = 1;
+
+    if(fixtureStyle == 'sets'){
+        createSet("setOrLegPosition", set);
+        createLeg('legsLocation_' + set, leg);
+        duplicateThrowElement(turn);
+        turn++;
+    }
+}
 
 function duplicateThrowElement(turn){
     // Create a clone of element with id duplicate:
