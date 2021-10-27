@@ -25,18 +25,18 @@ class TurnRepository extends AbstractRepository
     public function createTurn($request)
     {
         //calculate new current score
-        $currentScore = 10;
-        if ($request->currentScore > 0) {
-            $this->create([
-                'player'  => $request->player,
-                'leg'     => $request->leg,
-                'throw_1' => $request->throw1,
-                'throw_2' => $request->throw2,
-                'throw_3' => $request->throw3
-            ]) ?? new Turn();
-            return $currentScore;
-        }
-        if ($request->currentScore === 0) {
+        $turn = $this->create([
+            'player'  => $request->player,
+            'leg'     => $request->leg,
+          //  'remaining_score' =>
+            'throw_1' => $request->throw1,
+            'throw_2' => $request->throw2,
+            'throw_3' => $request->throw3
+        ]);
+
+       // $currentScore;
+
+        if (true) {
             $fixture = Fixture::all()->where('id', $request->fixtureId)->first();
             $style = $fixture->style ?? 'none';
             if ($style === 'legs') {

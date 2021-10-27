@@ -51,24 +51,4 @@ class TurnHandler
             return new Response($e->getMessage(), ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
-    public function VerifyAndCalculate(TurnStoreRequest $request): bool
-    {
-        $throws = [$request->validated()->throw_1,$request->validated()->throw_2,$request->validated()->throw_3];
-
-        for ($i = 0; $i < 3; $i++) {
-            $split = str_split($throws[$i]);
-            $size = count($split);
-            for ($j = 0; $j < $size; $j++) {
-                $value = $split[$j];
-                if ($value === "T" | $value === "D") {
-                    return true;
-                }
-
-                if ($split[$j]->value === "M" | $split[$j]->value === "m") {
-                }
-            }
-        }
-        return false;
-    }
 }

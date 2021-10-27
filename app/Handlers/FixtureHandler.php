@@ -7,6 +7,7 @@ use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
 use App\Models\Leg;
 use App\Models\Game;
+use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Set;
 use App\Repositories\FixtureRepository;
@@ -49,11 +50,24 @@ class FixtureHandler
      */
     public function show(int $id): View|Factory
     {
-        $fixture = Fixture::query()->with('sets')->where("id", $id)->first();
-        $set = Game::where('fixture_id', '=', 26)->with('gameable')->get();
+        $fixture = Fixture::query()->where("id", $id)->first();
+        $set = Game::query()->where('fixture_id', '=', $id)
+                ->where('gameable_type', '=', Set::class)
+                ->with('gameable')->get();
+        $setId = $set === null ? -1 : $set->first()['gameable_id'];
+        $leg = -1;
+        if ($setId === -1) {
+            $leg = Game::query()->where('fixture_id', '=', $id)
+                ->where('gameable_type', '=', Leg::class)
+                ->with('gameable')->get();
+        } else {
+            $leg = $set[0]->gameable->load('legs')->legs->first();
+        }
+        $legId = $leg === null ? -1 : $leg['id'];
         return view('fixtures.fixture', [
             'fixture' => $fixture,
-            'setId' => $set[0]['gameable_id']
+            'setId' => $setId,
+            'legId' => $legId
             ]);
     }
 

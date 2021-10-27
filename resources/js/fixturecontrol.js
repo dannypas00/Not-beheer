@@ -74,10 +74,10 @@ function addNewLeg() {
 
     leg++;
 
-    if (fixtureStyle === 'sets') {
+    if (fixture.style === 'sets') {
         createLeg('legsLocation_' + set, leg);
     }
-    if (fixtureStyle === 'legs') {
+    if (fixture.style === 'legs') {
         createLeg("setOrLegPosition", leg);
     }
 
@@ -100,7 +100,7 @@ function addNewSet() {
     player1Turn = 1;
     player2Turn = 1;
 
-    if (fixtureStyle === 'sets') {
+    if (fixture.style === 'sets') {
         createSet("setOrLegPosition", set);
         createLeg('legsLocation_' + set, leg);
         duplicateThrowElement(turn);
@@ -225,22 +225,18 @@ function saveTurnToDatabase(throws) {
             throw1: throws[0],
             throw2: throws[1],
             throw3: throws[2],
-            currentScore: '501',
+            leg: legId,
+            setId: setId,
             fixtureId: fixture.id,
             player: currentPlayer
         },
         success: function (data) {
-            if (data.status == 'success') {
-                alert("Thank you for subscribing!");
-            } else if (data.status == 'error') {
-                alert("Error on query!");
-            }
-            //},
-            //newTurn(data);
+
+            newTurn(data);
         },
-        // error: function () {
-        //     alert('Error occured');
-        // },
+        error: function () {
+            alert('Error occured');
+        },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
@@ -251,8 +247,8 @@ function saveTurnToDatabase(throws) {
 function newTurn(data) {
     console.log(data);
 
-    addNewLeg();
-    addNewSet();
+    //addNewLeg();
+    //addNewSet();
     // if (data.set != null){
     //
     // }
