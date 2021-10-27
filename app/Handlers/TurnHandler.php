@@ -4,6 +4,7 @@ namespace App\Handlers;
 
 use App\Http\Requests\Turns\TurnStoreRequest;
 use App\Http\Requests\Turns\TurnIndexRequest;
+use App\Models\Leg;
 use App\Models\Turn;
 use App\Repositories\TurnRepository;
 use Illuminate\Contracts\View\Factory;
@@ -31,8 +32,11 @@ class TurnHandler
     public function store(TurnStoreRequest $request): Response
     {
         try {
-            app(TurnRepository::class)->createTurn($request);
-            return new Response();
+            $data = app(TurnRepository::class)->createTurn($request);
+            if ($data instanceof Leg) {
+                return new Response(['leg' => $data]);
+            }
+            return new Response(['score_remaining' => $data]);
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);
         }

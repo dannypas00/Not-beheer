@@ -16,9 +16,9 @@ class ThrowToScoreService
     public function convertTurn(Turn $turn): Collection
     {
         return new Collection([
-            $this->convertThrow($turn->throw1),
-            $this->convertThrow($turn->throw2),
-            $this->convertThrow($turn->throw3)
+            $this->convertThrow($turn->throw_1),
+            $this->convertThrow($turn->throw_2),
+            $this->convertThrow($turn->throw_3)
         ]);
     }
 

@@ -13,6 +13,7 @@ use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
@@ -42,29 +43,36 @@ class FixtureHandler
     }
 
     /**
-     * @param int $id
+     * @param Fixture $fixture
      * @return View|Factory
      */
-    public function show(int $id): View|Factory
+    public function show(Fixture $fixture): View|Factory
     {
-        $fixture = Fixture::query()->where("id", $id)->first();
-        $set = Game::query()->where('fixture_id', '=', $id)
+        if ($fixture->style === 'sets') {
+            $games = Game::query()->where('fixture_id', '=', $fixture->id)
                 ->where('gameable_type', '=', Set::class)
-                ->with('gameable')->get();
-        $setId = $set === null ? null : $set->first()['gameable_id'];
-        if ($setId === -1) {
-            $leg = Game::query()->where('fixture_id', '=', $id)
-                ->where('gameable_type', '=', Leg::class)
-                ->with('gameable')->get();
+                ->with(['gameable'])->select('gameable_id')->pluck('gameable_id');
+            $sets = Set::with(['legs'])->whereIn('id', $games)->get();
+
+            // So apparently this is the same as $sets === null ? null : $sets->last()->id.
+            // Interesting...
+            $setId = $sets?->last()->id;
+            $legId = $sets?->last()->legs->last()->id;
         } else {
-            $leg = Leg::query()->where('set_id', '=', $setId)->first();
+            $games = Game::query()->where('fixture_id', '=', $fixture->id)
+                ->where('gameable_type', '=', Leg::class)
+                ->with('gameable')->get(['gameable_id']);
+            $legs = Leg::all()->whereIn('id', $games);
+            $legId = $games->last()->id;
         }
-        $legId = $leg === null ? null : $leg['id'];
+
         return view('fixtures.fixture', [
             'fixture' => $fixture,
-            'setId' => $setId,
-            'legId' => $legId
-            ]);
+            'setId' => $setId ?? null,
+            'legId' => $legId,
+            'sets' => $sets ?? null,
+            'legs' => $legs ?? null
+        ]);
     }
 
     /**

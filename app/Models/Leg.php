@@ -11,9 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property $winner
- * @property $set
- * @property $turns
+ * @property int $id
+ * @property int $set_id
+ * @property int $winner
+ * @property int $set
  */
 class Leg extends Model
 {

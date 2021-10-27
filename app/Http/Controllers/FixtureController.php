@@ -44,11 +44,12 @@ class FixtureController extends AbstractController
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @param Fixture $fixture
+     * @return View
      */
-    public function show(int $id): View|Factory|Application
+    public function show(Fixture $fixture): View
     {
-        return app(FixtureHandler::class)->show($id);
+        return app(FixtureHandler::class)->show($fixture);
     }
 
     /**

@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * @property int $id
  * @property Player $player
  * @property Leg $leg
- * @property string $throw1
- * @property string $throw2
- * @property string $throw3
+ * @property string $throw_1
+ * @property string $throw_2
+ * @property string $throw_3
+ * @property int $remaining_score
  */
 class Turn extends Model
 {

@@ -6,6 +6,14 @@
             <div class ="col-12">
                 <div class="card">
                     <div class="card-header">
+                        <h4>
+                            {{ ($fixture->type === "first_to" ? "First to" : "Best of") . " " . $fixture->length . " " . $fixture->style . "." }}
+                        </h4>
+                        <h6>
+                            {{ "Start score of " . $fixture->start_score }}
+                        </h6>
+                    </div>
+                    <div class="card-body">
                         <div class="container">
                             <table class="table table-sm">
                                 <thead>
@@ -126,7 +134,7 @@
                 </button>
             </h2>
             <div id="collapseDuplicate" class="accordion-collapse collapse show">
-                <div id='legPosition'class="accordion-body">
+                <div id="legPosition" class="accordion-body">
 
                 </div>
             </div>
@@ -138,6 +146,8 @@
         let fixture = {!! $fixture !!};
         let setId = {!! $setId ?? 'null' !!};
         let legId = {!! $legId ?? 'null' !!};
+        let legs = {!! $legs ?? '[]' !!};
+        let sets = {!! $sets ?? '[]' !!};
     </script>
 
 
