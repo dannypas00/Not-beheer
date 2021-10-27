@@ -5,6 +5,7 @@ let set = 1;
 let turn = 0;
 let playerStartedLeg = 1;
 
+//TODO
 let fixtureStyle = 'sets';
 
 if(fixtureStyle == 'sets'){
