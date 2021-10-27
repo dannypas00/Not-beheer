@@ -10,6 +10,8 @@
     <meta name="author" content="Team 9">
     <title>Darts</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/icon.svg') }}">
 
@@ -19,9 +21,9 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 

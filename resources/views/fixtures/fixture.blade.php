@@ -38,27 +38,12 @@
                 </div>
             </div>
 
-            <div class ="col-6">
+            <div class ="col-12">
                 <div class="mt-3 mb-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="container">
-                                <h5>Speler 1</h5>
-                                    <div id="player1">
-
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class ="col-6">
-                <div class="mt-3 mb-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="container">
-                                <h5>Speler 2</h5>
-                                <div id="player2">
+                                <div id="setOrLegPosition">
 
                                 </div>
                             </div>
@@ -66,10 +51,11 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <div id="legDuplicate" style="visibility: hidden">
+    <div id="turnDuplicate" style="visibility: hidden">
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button id="text" tabindex="-1" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDuplicate" aria-expanded="true">
@@ -88,6 +74,50 @@
         </div>
     </div>
 
+    <div id="legDuplicate" style="visibility: hidden">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button id="text" tabindex="-1" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDuplicate" aria-expanded="true">
+
+                </button>
+            </h2>
+            <div id="collapseDuplicate" class="accordion-collapse collapse show">
+                <div id='turnsHere'class="accordion-body">
+                    <div class="row">
+                        <div class ="col-6">
+                            <div class="mt-3 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="container">
+                                            <h5>Speler 1</h5>
+                                            <div id="player1_">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class ="col-6">
+                            <div class="mt-3 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="container">
+                                            <h5>Speler 2</h5>
+                                            <div id="player2_">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="setDuplicate" style="visibility: hidden">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -96,10 +126,11 @@
                 </button>
             </h2>
             <div id="collapseDuplicate" class="accordion-collapse collapse show">
-                <div id='putAllLegsHere'class="accordion-body">
+                <div id='legPosition'class="accordion-body">
 
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
