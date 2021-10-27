@@ -45,27 +45,28 @@
 @section('js')
     <script type="application/javascript">
         $(document).ready(function () {
-            // const data = {
-            //     labels: [
-            //
-            //     ],
-            //     datasets: [{
-            //         label: 'My First dataset',
-            //         backgroundColor: 'rgb(255, 99, 132)',
-            //         borderColor: 'rgb(255, 99, 132)',
-            //         data: [0, 10, 5, 2, 20, 30, 45],
-            //     }]
-            // };
-            // let avgConfig = {
-            //     type: 'line',
-            //     data: data,
-            //     options: {}
-            // };
-            // const player1Chart = new Chart(
-            //     $('#player1-average-graph'),
-            //     avgConfig
-            // )
-            console.log(JSON.parse("{!!json_encode($turnAverage);!!}"));
+            let turnAvgData = JSON.parse("{!!json_encode($turnAverage);!!}");
+            console.log(turnAvgData);
+            const data = {
+                labels: [
+
+                ],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [0, 10, 5, 2, 20, 30, 45],
+                }]
+            };
+            let avgConfig = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+            const player1Chart = new Chart(
+                $('#player1-average-graph'),
+                avgConfig
+            )
         });
     </script>
 @endsection
