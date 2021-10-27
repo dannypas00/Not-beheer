@@ -56,20 +56,18 @@ class TurnHandler
     {
         $throws = [$request->validated()->throw_1,$request->validated()->throw_2,$request->validated()->throw_3];
 
-        for($i = 0; $i < 3 ;$i++){
+        for ($i = 0; $i < 3; $i++) {
             $split = str_split($throws[$i]);
             $size = count($split);
-            for($j = 0; $j < $size; $j++){
+            for ($j = 0; $j < $size; $j++) {
                 $value = $split[$j];
-                if ($value === "T"|$value === "D"){
+                if ($value === "T" | $value === "D") {
                     return true;
                 }
 
-                if ($split[$j]->value === "M"| $split[$j]->value === "m"){
-
+                if ($split[$j]->value === "M" | $split[$j]->value === "m") {
                 }
             }
-
         }
         return false;
     }

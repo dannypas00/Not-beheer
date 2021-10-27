@@ -177,5 +177,4 @@ class FixtureRepository extends AbstractRepository
             ]);
         }
     }
-
 }

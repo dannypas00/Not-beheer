@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\LegController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TurnController;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,8 @@ Route::group(['prefix' => 'players'], function () {
     Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
+});
+
+Route::group(['prefix' => 'legs'], function () {
+    Route::get('{leg}/remaining-score', [LegController::class, 'remainingScore'])->name('legs.remaining-score');
 });

@@ -2,16 +2,35 @@
 
 namespace App\Services;
 
+use App\Models\Turn;
+use Illuminate\Support\Collection;
+
 class ThrowToScoreService
 {
     private static string $pattern = '/(D|T|BE|B|M)?(\d+)?/';
 
     /**
-     * @param string $throw
+     * @param Turn $turn
+     * @return Collection
+     */
+    public function convertTurn(Turn $turn): Collection
+    {
+        return new Collection([
+            $this->convertThrow($turn->throw1),
+            $this->convertThrow($turn->throw2),
+            $this->convertThrow($turn->throw3)
+        ]);
+    }
+
+    /**
+     * @param ?string $throw
      * @return int
      */
-    public function convertThrow(string $throw): int
+    public function convertThrow(?string $throw): int
     {
+        if (is_null($throw)) {
+            return 0;
+        }
         preg_match_all(self::$pattern, $throw, $matches);
         $type = $matches[1][0];
         $number = filled($matches[2][0]) ? $matches[2][0] : 0;
