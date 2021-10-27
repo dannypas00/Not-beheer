@@ -14,6 +14,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
@@ -52,7 +53,9 @@ class FixtureHandler
             $games = Game::query()->where('fixture_id', '=', $fixture->id)
                 ->where('gameable_type', '=', Set::class)
                 ->with(['gameable'])->select('gameable_id')->pluck('gameable_id');
-            $sets = Set::with(['legs'])->whereIn('id', $games)->get();
+            $sets = Set::with(['legs' => function (HasMany $query) {
+                $query->with(['turns']);
+            }])->whereIn('id', $games)->get();
 
             // So apparently this is the same as $sets === null ? null : $sets->last()->id.
             // Interesting...
@@ -62,7 +65,7 @@ class FixtureHandler
             $games = Game::query()->where('fixture_id', '=', $fixture->id)
                 ->where('gameable_type', '=', Leg::class)
                 ->with('gameable')->get(['gameable_id']);
-            $legs = Leg::all()->whereIn('id', $games);
+            $legs = Leg::with(['turns'])->whereIn('id', $games)->get();
             $legId = $games->last()->id;
         }
 
