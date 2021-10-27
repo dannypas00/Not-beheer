@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Set;
+use App\Models\Turn;
 use Carbon\Carbon;
 use Database\Factories\LegFactory;
 use Database\Factories\PlayerFactory;
@@ -23,24 +24,44 @@ class FixturesSeeder extends Seeder
      */
     public function run()
     {
-        $fixtures = Fixture::factory()->count(20)->afterCreating(function (Fixture $fixture) {
+        $fixtures = Fixture::factory()->count(20)->afterMaking(function (Fixture $fixture) {
             $players = Player::all()->random(2)->pluck('id');
             $fixture->player_1 = $players[0];
             $fixture->player_2 = $players[1];
-            Game::factory()->count($fixture->length)->afterCreating(function (Game $game) {
+        })->afterCreating(function (Fixture $fixture) {
+            Game::factory()->count($fixture->length)->afterCreating(function (Game $game) use ($fixture) {
                 if ($game->gameable_type === Set::class) {
-                    Set::factory()->count(5)->afterCreating(static function (Set $set) use ($game) {
-                        Leg::factory()->count(5)->create(['set_id' => $set->id]);
-
+                    Set::factory()->afterCreating(static function (Set $set) use ($game, &$gameable_id, $fixture) {
+                        Leg::factory()->afterCreating(function (Leg $leg) use ($fixture) {
+                            Turn::factory()->count(15)->create([
+                                'player' => $fixture->player_1,
+                                'leg' => $leg->id
+                            ]);
+                            Turn::factory()->count(15)->create([
+                                'player' => $fixture->player_2,
+                                'leg' => $leg->id
+                            ]);
+                        })->create(['set_id' => $set->id]);
+                        $gameable_id = $set->id;
                     });
-                    return;
+                } else {
+                    Leg::factory()->afterCreating(function (Leg $leg) use (&$gameable_id, $fixture) {
+                        $gameable_id = $leg->id;
+                        Turn::factory()->count(15)->create([
+                            'player' => $fixture->player_1,
+                            'leg' => $leg->id
+                        ]);
+                        Turn::factory()->count(15)->create([
+                            'player' => $fixture->player_2,
+                            'leg' => $leg->id
+                        ]);
+                    })->create();
                 }
-                Leg::factory()->count(5)->create();
+                $game->gameable_id = $gameable_id;
             })->create([
                 'gameable_type' => $fixture->style === 'legs' ? Leg::class : Set::class,
-                'fixture_id'    => $fixture->id
+                'fixture_id' => $fixture->id
             ]);
-            $fixture->save();
         })->create();
     }
 }

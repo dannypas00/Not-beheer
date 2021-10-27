@@ -25,11 +25,7 @@ class TurnFactory extends Factory
      */
     public function definition()
     {
-        $fixture = Fixture::query()->with(['legs', 'player1', 'player2'])->inRandomOrder()->first();
-        $leg = collect($fixture->legs)->random();
         return [
-            'player' => $this->faker->boolean() ? $fixture->player_1 : $fixture->player_2,
-            'leg'    => $leg->id,
             'throw_1'   => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'M',
             'throw_2'   => $this->faker->boolean(90)

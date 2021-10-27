@@ -42,6 +42,5 @@ class DatabaseSeeder extends Seeder
         }
         $this->call(PlayersSeeder::class);
         $this->call(FixturesSeeder::class);
-        app(TurnFactory::class)->count(200)->create();
     }
 }
