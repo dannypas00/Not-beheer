@@ -82,10 +82,27 @@ function saveTurnToDatabase(throws)
         type: "POST",
         url: '/turns/store',
         data: {
-            data: 'test',
-            id: fixtureId
+            throw1: throws[0],
+            throw2: throws[1],
+            throw3: throws[2],
+            legId: '',
+            currentScore: '',
+            fixtureId: '',
+            player: ''
         },
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-    });
+        success: function (data) {
+            newTurn(data);
+        },
+        error: function () {
+            alert('Error occured');
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 
+    });
+}
+
+function newTurn(data)
+{
+    console.log(data);
 }

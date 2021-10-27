@@ -32,7 +32,7 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create', ['players', Player::all()]);
+        return view('fixtures.create', ['players' => Player::all()]);
     }
 
     /**
@@ -51,8 +51,9 @@ class FixtureHandler
      */
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
-        app(FixtureRepository::class)->create($request);
-        return redirect(route('fixtures.index'));
+        //app(FixtureRepository::class)->create($request);
+        app(FixtureRepository::class)->createFixture($request);
+        return redirect()->route('fixtures.index');
     }
 
     /**

@@ -54,10 +54,10 @@
             "@php artisan key:generate --ansi"
         ],
         "unit": [
-            "@php vendor/bin/phpunit --testsuite Unit --coverage-html storage/app/coverage.html"
+            "@php vendor/bin/phpunit --stop-on-failure --stop-on-error --testsuite Unit --coverage-html storage/app/coverage.html"
         ],
         "feature": [
-            "@php vendor/bin/phpunit --testsuite Feature"
+            "@php vendor/bin/phpunit --stop-on-failure --stop-on-error --testsuite Feature"
         ],
         "fix": [
             "@php vendor/bin/php-cs-fixer fix app",

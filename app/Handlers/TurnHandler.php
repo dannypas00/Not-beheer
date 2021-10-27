@@ -31,7 +31,7 @@ class TurnHandler
     public function store(TurnStoreRequest $request): Response
     {
         try {
-            app(TurnRepository::class)->create($request);
+            app(TurnRepository::class)->createTurn($request);
             return new Response();
         } catch (\Exception $e) {
             return new Response($e->getMessage(), ResponseAlias::HTTP_NOT_ACCEPTABLE);

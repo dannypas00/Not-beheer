@@ -17,7 +17,11 @@ class TurnStoreRequest extends AbstractRequest
             'throw2' => 'required|string|regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|
             (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/',
             'throw3' => 'required|string|regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|
-            (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/'
+            (^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/',
+            'legId' => 'required|string',
+            'currentScore' => 'required|integer',
+            'fixtureId' => 'required|string',
+            'player' => 'required|string',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,10 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $style
  * @property int $length
  * @property int $start_score
- * @property int $average_score
- * @property \DateTime $date
- * @property Player $player_1
- * @property Player $player_2
+ * @property DateTime $date_time
+ * @property Player $player1
+ * @property Player $player2
+ * @property City $location
  */
 class Fixture extends Model
 {
@@ -30,14 +31,28 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['average_score', 'type', 'style', 'length', 'start_score', 'date', 'player_1', 'player_2'];
+    protected $fillable = [
+        'type',
+        'style',
+        'length',
+        'start_score',
+        'date_time',
+        'player_1',
+        'player_2',
+        'winner',
+        'location'
+    ];
 
     /**
      * The attributes that should be guarded.
      *
      * @var string[]
      */
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * @return MorphMany
@@ -77,5 +92,10 @@ class Fixture extends Model
     public function winner(): HasOne
     {
         return $this->hasOne(Player::class, 'id', 'winner');
+    }
+
+    public function location(): HasOne
+    {
+        return $this->hasOne(City::class, 'id', 'location');
     }
 }

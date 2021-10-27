@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TurnController;
@@ -28,10 +29,15 @@ Route::get('/statistics', function () {
 //    Route::get('{id}', [StatisticController, 'show'])->name('statistics.show');
 });
 
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('search/{search}', [CityController::class, 'search'])->name('cities.search');
+});
+
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
     Route::get('{id}', [FixtureController::class, 'show'])->name('fixtures.show');
+    Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{id}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
 });
 

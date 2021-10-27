@@ -2,10 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Handlers\FixtureHandler;
 use App\Models\Fixture;
 use App\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
 use JetBrains\PhpStorm\Pure;
+use phpDocumentor\Reflection\Types\This;
 
 /**
  * Class FixtureRepository
@@ -50,5 +52,28 @@ class FixtureRepository extends AbstractRepository
             ->orWhereHas('player2', function (Builder $query) use ($player) {
                 $query->whereKey($player->id);
             });
+    }
+
+    public function createFixture($request): void
+    {
+        $fixture = $this->create($request) ?? new Fixture();
+        $style = $fixture->style ?? 'none';
+        if ($style === 'legs') {
+            $leg = app(LegRepository::class)->create([]);
+            app(GameRepository::class)->create([
+                'fixture_id' => $fixture->id,
+                'gameable_type' => 'leg',
+                'gameable_id' => $leg->id
+                ]);
+        }
+        if ($style === 'sets') {
+            $set = app(SetRepository::class)->create([]);
+            $leg = app(LegRepository::class)->create(['set_id' => $set->id]);
+            app(GameRepository::class)->create([
+                'fixture_id' => $fixture->id,
+                'gameable_type' => 'set',
+                'gameable_id' => $set->id
+            ]);
+        }
     }
 }
