@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property $average_score
  * @property $winner
  * @property $set
  * @property $turns
@@ -26,10 +26,8 @@ class Leg extends Model
      * @var string[]
      */
     protected $fillable = [
-        'average_score',
         'winner',
         'set_id',
-        'average_score'
     ];
 
     /**
@@ -56,7 +54,7 @@ class Leg extends Model
      */
     public function turns(): HasMany
     {
-        return $this->hasMany(Turn::class);
+        return $this->hasMany(Turn::class, 'leg', 'id');
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Fixture;
+use App\Models\Game;
 use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Turn;
@@ -24,23 +26,14 @@ class TurnFactory extends Factory
     public function definition()
     {
         return [
-            'player' => Player::factory()->create(),
-            'leg' => Leg::factory()->create(),
-            'throw_1' => $this->faker->boolean(90) ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement([
-                    'T',
-                    'D',
-                    ''
-                ]) : 'M',
-            'throw_2' => $this->faker->boolean(90) ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement([
-                    'T',
-                    'D',
-                    ''
-                ]) : 'BE',
-            'throw_3' => $this->faker->boolean(90) ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement([
-                    'T',
-                    'D',
-                    ''
-                ]) : 'B'
+            'player' => Player::query()->first(),
+            'leg' => Leg::query()->first(),
+            'throw_1' => $this->faker->boolean(90)
+                ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'M',
+            'throw_2' => $this->faker->boolean(90)
+                ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'BE',
+            'throw_3' => $this->faker->boolean(90)
+                ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'B'
         ];
     }
 }

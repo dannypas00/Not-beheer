@@ -6,7 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\hasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -56,17 +56,17 @@ class Fixture extends Model
     ];
 
     /**
-     * @return HasManyThrough
+     * @return hasManyThrough
      */
-    public function sets(): HasManyThrough
+    public function sets(): hasManyThrough
     {
         return $this->hasManyThrough(Set::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
-     * @return HasManyThrough
+     * @return hasManyThrough
      */
-    public function legs(): HasManyThrough
+    public function legs(): hasManyThrough
     {
         return $this->hasManyThrough(Leg::class, Game::class, 'fixture_id', 'id');
     }
