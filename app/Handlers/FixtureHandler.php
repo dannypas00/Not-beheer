@@ -7,7 +7,6 @@ use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
 use App\Models\Leg;
 use App\Models\Game;
-use App\Models\Leg;
 use App\Models\Player;
 use App\Models\Set;
 use App\Repositories\FixtureRepository;
@@ -15,9 +14,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class FixtureHandler
 {
@@ -54,16 +51,15 @@ class FixtureHandler
         $set = Game::query()->where('fixture_id', '=', $id)
                 ->where('gameable_type', '=', Set::class)
                 ->with('gameable')->get();
-        $setId = $set === null ? -1 : $set->first()['gameable_id'];
-        $leg = -1;
+        $setId = $set === null ? null : $set->first()['gameable_id'];
         if ($setId === -1) {
             $leg = Game::query()->where('fixture_id', '=', $id)
                 ->where('gameable_type', '=', Leg::class)
                 ->with('gameable')->get();
         } else {
-            $leg = $set[0]->gameable->load('legs')->legs->first();
+            $leg = Leg::query()->where('set_id', '=', $setId)->first();
         }
-        $legId = $leg === null ? -1 : $leg['id'];
+        $legId = $leg === null ? null : $leg['id'];
         return view('fixtures.fixture', [
             'fixture' => $fixture,
             'setId' => $setId,

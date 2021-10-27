@@ -136,8 +136,8 @@
 
     <script>
         let fixture = {!! $fixture !!};
-        let setId = {!! $setId !!};
-        let legId = {!! $legId !!};
+        let setId = {!! $setId ?? 'null' !!};
+        let legId = {!! $legId ?? 'null' !!};
     </script>
 
 

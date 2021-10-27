@@ -217,7 +217,7 @@ function checkIfInputValid(input) {
 
 function saveTurnToDatabase(throws) {
     let currentPlayer = turn % 2 === 0 ? fixture.player_1 : fixture.player_2;
-
+    console.log(legId);
     $.ajax({
         type: "POST",
         url: '/turns/store',
@@ -231,7 +231,6 @@ function saveTurnToDatabase(throws) {
             player: currentPlayer
         },
         success: function (data) {
-
             newTurn(data);
         },
         error: function () {
