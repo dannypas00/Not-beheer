@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAverageScoreToFixtures extends Migration
+class ChangeLocationToCity extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAverageScoreToFixtures extends Migration
     public function up()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            $table->double('average_score')->default(0);
+            $table->foreignId('location')->after('date_time')->change()->references('id')->on('cities');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAverageScoreToFixtures extends Migration
     public function down()
     {
         Schema::table('fixtures', function (Blueprint $table) {
-            $table->dropColumn('average_score');
+            $table->string('location')->change();
         });
     }
 }

@@ -51,6 +51,7 @@ class RepositoriesTest extends TestCase
     {
         Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
+            Log::debug('Testing repository get', ['model' => $model, 'repository' => $repository]);
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
@@ -69,14 +70,17 @@ class RepositoriesTest extends TestCase
 
     public function testAll()
     {
+        $factoryCount = 10;
         foreach ($this->map as $model => $repository) {
-            Artisan::call('migrate:fresh');
+            Log::debug('Testing repository all', ['model' => $model, 'repository' => $repository]);
+            Artisan::call('migrate:fresh --seed');
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
-            $model::factory()->count(10)->create();
-            $actual = $repository->all()->count();
-            $this->assertEquals(10, $actual);
+            $expected = $model::factory()->count($factoryCount)->create();
+            $actual = $repository->all();
+            $result = $actual->pluck('id')->intersect($expected->pluck('id'));
+            $this->assertEquals($factoryCount, $result->count());
         }
         Artisan::call('migrate:fresh --seed');
     }
@@ -85,6 +89,7 @@ class RepositoriesTest extends TestCase
     {
         Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
+            Log::debug('Testing repository create', ['model' => $model, 'repository' => $repository]);
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
@@ -100,6 +105,7 @@ class RepositoriesTest extends TestCase
     {
         Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
+            Log::debug('Testing repository update', ['model' => $model, 'repository' => $repository]);
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
@@ -116,13 +122,15 @@ class RepositoriesTest extends TestCase
     {
         Artisan::call('migrate:fresh --seed');
         foreach ($this->map as $model => $repository) {
+            Log::debug('Testing repository delete', ['model' => $model, 'repository' => $repository]);
             $pair = $this->getPair($model, $repository);
             $model = $pair[0];
             $repository = $pair[1];
             $model = $model::factory()->create();
             $repository->delete($model);
-            $this->assertDatabaseMissing($model->getTable(), ['id'         => $model->id,
-                                                              'deleted_at' => null
+            $this->assertDatabaseMissing($model->getTable(), [
+                'id'         => $model->id,
+                'deleted_at' => null
             ]);
         }
     }

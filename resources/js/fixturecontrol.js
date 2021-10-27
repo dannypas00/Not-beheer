@@ -38,7 +38,7 @@ document.body.appendChild(legBtn);
 
 document.addEventListener("keydown", function(event) {
 
-    if(event.which == 9) {
+    if (event.which == 9) {
         let parent = event.composedPath();
         const activeTextarea = document.activeElement;
 
