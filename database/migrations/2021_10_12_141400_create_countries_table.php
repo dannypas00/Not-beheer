@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropPlayerFixtures extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class DropPlayerFixtures extends Migration
      */
     public function up()
     {
-        Schema::table('player_fixtures', function (Blueprint $table) {
-            $table->dropIfExists();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('iso3');
+            $table->string('iso2');
+            $table->string('emoji');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +30,6 @@ class DropPlayerFixtures extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('countries');
     }
 }

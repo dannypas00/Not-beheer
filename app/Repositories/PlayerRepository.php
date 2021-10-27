@@ -2,8 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Handlers\PlayerHandler;
 use App\Http\Requests\Players\PlayerStoreRequest;
+use App\Models\Fixture;
+use App\Models\Game;
 use App\Models\Player;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\Pure;
 use Exception;
@@ -29,6 +33,7 @@ class PlayerRepository extends AbstractRepository
      */
     public function createWithAvatar(PlayerStoreRequest $request)
     {
+
         // First we store the item by calling the parent
         $player = parent::create($request->validated());
 

@@ -43,7 +43,7 @@ abstract class AbstractRepository
      */
     public function all(): Collection|array
     {
-        return $this->model->all();
+        return $this->model::all();
     }
 
     /**

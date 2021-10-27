@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,10 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $style
  * @property int $length
  * @property int $start_score
- * @property int $average_score
- * @property DateTime $date
+ * @property DateTime $date_time
  * @property Player $player1
  * @property Player $player2
+ * @property City $location
  */
 class Fixture extends Model
 {
@@ -29,29 +32,43 @@ class Fixture extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['average_score', 'type', 'style', 'length', 'start_score', 'date', 'player_1', 'player_2'];
+    protected $fillable = [
+        'type',
+        'style',
+        'length',
+        'start_score',
+        'date_time',
+        'player_1',
+        'player_2',
+        'winner',
+        'location'
+    ];
 
     /**
      * The attributes that should be guarded.
      *
      * @var string[]
      */
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
-     * @return MorphMany
+     * @return HasManyThrough
      */
-    public function sets(): MorphMany
+    public function sets(): HasManyThrough
     {
-        return $this->morphMany(Set::class, Game::class);
+        return $this->hasManyThrough(Set::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
-     * @return MorphMany
+     * @return HasManyThrough
      */
-    public function legs(): MorphMany
+    public function legs(): HasManyThrough
     {
-        return $this->morphMany(Leg::class, Game::class);
+        return $this->hasManyThrough(Leg::class, Game::class, 'fixture_id', 'id');
     }
 
     /**
@@ -68,5 +85,18 @@ class Fixture extends Model
     public function player2(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'player_2', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function winner(): HasOne
+    {
+        return $this->hasOne(Player::class, 'id', 'winner');
+    }
+
+    public function city(): HasOne
+    {
+        return $this->hasOne(City::class, 'id', 'location');
     }
 }
