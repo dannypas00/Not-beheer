@@ -14,10 +14,6 @@ class LegController
      */
     public function remainingScore(Leg $leg): int
     {
-        return $leg->turns->map(function (Turn $turn) {
-            $result = app(ThrowToScoreService::class)->convertThrow($turn->throw1);
-            $result += app(ThrowToScoreService::class)->convertThrow($turn->throw2);
-            return $result + app(ThrowToScoreService::class)->convertThrow($turn->throw3);
-        })->sum();
+        return $leg->turns->last()->remaining_score;
     }
 }
