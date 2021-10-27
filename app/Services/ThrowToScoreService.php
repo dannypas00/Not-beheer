@@ -28,8 +28,8 @@ class ThrowToScoreService
         return match ($type) {
             "D" => $number * 2,
             "T" => $number * 3,
-            "B" => 50,
-            "BE" => 100,
+            "B" => 25,
+            "BE" => 50,
             "M" => 0,
             default => $number,
         };

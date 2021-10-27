@@ -16,9 +16,9 @@ class ThrowToScoreServiceTest extends TestCase
             "D3"      => 6,
             "5"       => 5,
             "M"       => 0,
-            "B"       => 50,
-            "BE"      => 100,
-            "B98"     => 50,
+            "B"       => 25,
+            "BE"      => 50,
+            "B98"     => 25,
             "M100000" => 0
         ]);
         $testdata->each(function ($value, $throw) use ($service) {
