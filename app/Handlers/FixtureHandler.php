@@ -83,7 +83,8 @@ class FixtureHandler
         return view(
             'fixtures.statistics',
             [
-                'turnAverage' => $turnAverage->toArray(),
+                'averageTurnCount' => $turnAverage->toArray(),
+                'averageThrows' => $averageThrows,
                 'fixture' => $fixture,
                 'player1' => $fixture->player1()->first(),
                 'player2' => $fixture->player2()->first()

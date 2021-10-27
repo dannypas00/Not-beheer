@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property $average_score
  * @property $winner
  * @property $set
  * @property $turns
@@ -27,10 +26,8 @@ class Leg extends Model
      * @var string[]
      */
     protected $fillable = [
-        'average_score',
         'winner',
         'set_id',
-        'average_score'
     ];
 
     /**

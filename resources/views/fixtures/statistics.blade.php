@@ -26,14 +26,11 @@
                 </div>
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
                     <div class="col">
-                        <canvas id="player1-average-graph"></canvas>
+                        <canvas id="average-graph"></canvas>
                     </div>
                     <div class="col">
-                        <canvas id="player2-average-graph"></canvas>
+                        <canvas id="throws-graph"></canvas>
                     </div>
-                </div>
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
-                    <canvas id="throws-graph"></canvas>
                 </div>
             </div>
         </div>
@@ -45,28 +42,73 @@
 @section('js')
     <script type="application/javascript">
         $(document).ready(function () {
-            let turnAvgData = JSON.parse("{!!json_encode($turnAverage);!!}");
-            console.log(turnAvgData);
-            const data = {
-                labels: [
+            createTurnCountChart();
+            createAverageThrowsChart();
 
-                ],
-                datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }]
-            };
-            let avgConfig = {
-                type: 'line',
-                data: data,
-                options: {}
-            };
-            const player1Chart = new Chart(
-                $('#player1-average-graph'),
-                avgConfig
-            )
+            function createAverageThrowsChart() {
+                let averageThrowData = JSON.parse('{!! json_encode($averageThrows); !!}');
+                let labels = [];
+                let player1Stats = [];
+                let player2Stats = [];
+                 for (let i = 1; i < averageThrowData.length; i++) {
+                     labels[i] = 'Leg ' + i;
+                     player1Stats[i-1] = averageThrowData[i-1][{{ $fixture->player_1 }}][0];
+                     player2Stats[i-1] = averageThrowData[i-1][{{ $fixture->player_2 }}][0];
+                 }
+                 console.log(player1Stats);
+                 const data = {
+                     labels: labels,
+                     datasets: [
+                         {
+                             label: 'Average score per leg for ' + "{{ $fixture->player1->name }}",
+                             backgroundColor: 'rgb(255, 99, 132)',
+                             borderColor: 'rgb(255, 99, 132)',
+                             data: player1Stats,
+                         },
+                         {
+                             label: 'Average score per leg for ' + "{{ $fixture->player2->name }}",
+                             backgroundColor: 'rgb(132, 99, 255)',
+                             borderColor: 'rgb(132, 99, 255)',
+                             data: player2Stats,
+                         }
+                     ]
+                 };
+                 let config = {
+                     type: 'line',
+                     data: data,
+                     options: {}
+                 };
+                 const chart = new Chart(
+                     $('#average-graph'),
+                     config
+                 )
+            }
+
+            function createTurnCountChart() {
+                let turnAvgData = JSON.parse('{!! json_encode($averageTurnCount); !!}');
+                let labels = [];
+                for (let i = 1; i <= turnAvgData.length; i++) {
+                    labels[i] = 'Leg ' + i;
+                }
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Average turns taken per leg',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: turnAvgData,
+                    }]
+                };
+                let config = {
+                    type: 'bar',
+                    data: data,
+                    options: {}
+                };
+                const chart = new Chart(
+                    $('#throws-graph'),
+                    config
+                )
+            }
         });
     </script>
 @endsection
