@@ -19,6 +19,7 @@ else if(fixtureStyle =='legs'){
 duplicateThrowElement(turn);
 turn++;
 
+//TODO
 let legBtn = document.createElement("addnewleg");
 legBtn.innerHTML = "Addnewleg";
 legBtn.addEventListener("click", function () {
@@ -30,9 +31,10 @@ setBtn.innerHTML = "Addnewset";
 setBtn.addEventListener("click", function () {
     addNewSet();
 });
-
 document.body.appendChild(setBtn);
 document.body.appendChild(legBtn);
+//TODO^^
+
 
 document.addEventListener("keydown", function(event) {
 
