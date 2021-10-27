@@ -26,11 +26,13 @@ class TurnFactory extends Factory
     public function definition()
     {
         return [
-            'throw_1'   => $this->faker->boolean(90)
+            'player' => Player::query()->first(),
+            'leg' => Leg::query()->first(),
+            'throw_1' => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'M',
-            'throw_2'   => $this->faker->boolean(90)
+            'throw_2' => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'BE',
-            'throw_3'   => $this->faker->boolean(90)
+            'throw_3' => $this->faker->boolean(90)
                 ? $this->faker->numberBetween(1, 20) . $this->faker->randomElement(['T', 'D', '']) : 'B'
         ];
     }
