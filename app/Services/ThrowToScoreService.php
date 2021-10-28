@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class ThrowToScoreService
 {
-    private static string $pattern = '/(D|T|BE|B|M)?(\d+)?/';
+    private static string $pattern = '/(D|d|T|t|BE|be|B|b|m|M)?(\d+)?/';
 
     /**
      * @param Turn $turn
@@ -45,11 +45,11 @@ class ThrowToScoreService
     public function letterAndNumberToScore(string $type, int $number): int
     {
         return match ($type) {
-            "D" => $number * 2,
-            "T" => $number * 3,
-            "B" => 25,
-            "BE" => 50,
-            "M" => 0,
+            "D", "d" => $number * 2,
+            "T", "t" => $number * 3,
+            "B", "b" => 25,
+            "BE", "be" => 50,
+            "M", "m" => 0,
             default => $number,
         };
     }

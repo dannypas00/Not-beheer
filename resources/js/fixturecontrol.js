@@ -270,7 +270,7 @@ function createSet(elementLocation, set)
 
 function checkIfInputValid(input)
 {
-    let result = input.search(/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)/);
+    let result = input.search(/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)|(^[0]$)|(^[Mm]$)/);
     return result !== -1;
 }
 
@@ -311,8 +311,17 @@ function saveTurnToDatabase(throws, parent)
 
 function newTurn(data)
 {
+    if (data.set) {
+        setId = data.set.id;
+        legId = data.leg.id;
+        addNewSet();
+        console.log('new leg');
+        return;
+    }
     if (data.leg) {
+        legId = data.leg.id;
         addNewLeg();
+        console.log('new leg');
         return;
     }
     duplicateThrowElement(turn, data.score_remaining);

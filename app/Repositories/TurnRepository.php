@@ -43,12 +43,9 @@ class TurnRepository extends AbstractRepository
         $turn->remaining_score = $this->getTurnRemainingScore($turn, $fixture->start_score, $leg);
         $turn->save();
 
-        dd($turn->remaining_score);
-
         if ($turn->remaining_score > 0) {
             return $turn->remaining_score;
         }
-
         return $this->startNewLeg($fixture);
     }
 
@@ -65,8 +62,8 @@ class TurnRepository extends AbstractRepository
         ]);
 
         if ($fixture->style === 'sets') {
-            $set = app(SetRepository::class)->create();
-            $leg->set_id = $set;
+            $set = app(SetRepository::class)->create([]);
+            $leg->set_id = $set->id;
             $game->gameable_id = $set->id;
             $leg->save();
             $leg->refresh();
