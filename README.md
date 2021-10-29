@@ -4,6 +4,8 @@
 Om het project snel werkend te krijgen op elke machine zijn er twee docker images beschikbaar; `laravel.test` en `mysql`.  
 De `laravel.test` image draait de laravel applicatie en de `mysql` image draait de mysql database.
 
+Deze readme gaat uit van een Linux (of WSL2) systeem waar `docker`, `docker-compose`, en `npm` met hun dependencies op geinstalleerd zijn.
+
 ## Installeren
 Als eerste zal het project gepulled / gecloned moeten worden.
 Vervolgens zal het `.env.example` bestand gekopieerd moeten worden naar een `.env` bestand:  
