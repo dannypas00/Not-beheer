@@ -21,8 +21,7 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
-        depends_on:
-            - mysql
+
     mysql:
         image: 'mysql:8.0'
         ports:
