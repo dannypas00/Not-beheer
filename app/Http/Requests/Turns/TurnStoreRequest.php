@@ -22,10 +22,13 @@ class TurnStoreRequest extends AbstractRequest
 
     public function rules(): array
     {
+        $regexPart1 = 'regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|';
+        $regexPart2 = '(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)|(^[0]$)|(^[Mm]$)/';
+
         return [
-            'throw1' => ['required','regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)|(^[0]$)|(^[Mm]$)/'],
-            'throw2' => ['required','regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)|(^[0]$)|(^[Mm]$)/'],
-            'throw3' => ['required','regex:/(^[Bb][Ee]$)|(^[TtDd][1][0-9]$)|(^[TtDd][2][^1-9aA-zZ]$)|(^[TtDd][1-9]$)|(^[bB]$)|(^[1][0-9]$)|(^[2][^1-9aA-zZ]$)|(^[1-9]$)|(^[0]$)|(^[Mm]$)/'],
+            'throw1' => ['required',$regexPart1 . $regexPart2],
+            'throw2' => ['required',$regexPart1 . $regexPart2],
+            'throw3' => ['required',$regexPart1 . $regexPart2],
             'setId' => 'sometimes|required|int|nullable',
             'leg' => 'nullable|int',
             'fixtureId' => 'required|int',
