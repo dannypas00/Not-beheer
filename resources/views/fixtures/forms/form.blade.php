@@ -50,15 +50,15 @@
                         <div class="mt-3 mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="style"
-                                       id="leg" value="leg" checked>
-                                <label class="form-check-label" for="leg">
+                                       id="legs" value="legs" checked>
+                                <label class="form-check-label" for="legs">
                                     Legs
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="style"
-                                       id="set" value="set">
-                                <label class="form-check-label" for="set">
+                                       id="sets" value="sets">
+                                <label class="form-check-label" for="sets">
                                     Sets
                                 </label>
                             </div>
@@ -123,7 +123,6 @@
         display: none;
     }
 </style>
-
 
 @section('js')
     <script>

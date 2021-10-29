@@ -6,6 +6,7 @@ use App\Models\Fixture;
 use App\Models\Leg;
 use App\Models\Player;
 use App\Services\ThrowToScoreService;
+use App\Models\Set;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -149,5 +150,31 @@ class FixtureRepository extends AbstractRepository
             }
             return $cleaningItem;
         });
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function createFixture($request): void
+    {
+        $fixture = $this->create($request) ?? new Fixture();
+        $style = $fixture->style ?? 'none';
+        if ($style === 'legs') {
+            $leg = app(LegRepository::class)->create([]);
+            app(GameRepository::class)->create([
+                'fixture_id' => $fixture->id,
+                'gameable_type' => Leg::class,
+                'gameable_id' => $leg->id
+            ]);
+        }
+        if ($style === 'sets') {
+            $set = app(SetRepository::class)->create([]);
+            app(LegRepository::class)->create(['set_id' => $set->id]);
+            app(GameRepository::class)->create([
+                'fixture_id' => $fixture->id,
+                'gameable_type' => Set::class,
+                'gameable_id' => $set->id
+            ]);
+        }
     }
 }

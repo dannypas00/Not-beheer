@@ -32,16 +32,18 @@ class FixturesSeeder extends Seeder
             Game::factory()->count($fixture->length)->afterCreating(function (Game $game) use ($fixture) {
                 if ($game->gameable_type === Set::class) {
                     Set::factory()->afterCreating(static function (Set $set) use ($game, &$gameable_id, $fixture) {
-                        Leg::factory()->afterCreating(function (Leg $leg) use ($fixture) {
+                        Leg::factory()->afterCreating(function (Leg $leg) use ($fixture, $set) {
                             Turn::factory()->count(random_int(1, 30))->create([
                                 'player' => $fixture->player_1,
-                                'leg' => $leg->id
+                                'leg' => $leg->id,
+                                'set_id' => $set->id
                             ]);
                             Turn::factory()->count(random_int(1, 30))->create([
                                 'player' => $fixture->player_2,
-                                'leg' => $leg->id
+                                'leg' => $leg->id,
+                                'set_id' => $set->id
                             ]);
-                        })->create(['set_id' => $set->id]);
+                        })->create();
                         $gameable_id = $set->id;
                     });
                 } else {

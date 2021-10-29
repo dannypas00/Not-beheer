@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\LegController;
 use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\TurnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,11 +29,18 @@ Route::group(['prefix' => 'cities'], function () {
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('', [FixtureController::class, 'index'])->name('fixtures.index');
     Route::get('create', [FixtureController::class, 'create'])->name('fixtures.create');
-    Route::get('fixture', [FixtureController::class, 'fixture'])->name('fixtures.fixture');
+    Route::get('{fixture}', [FixtureController::class, 'show'])->name('fixtures.show');
     Route::post('store', [FixtureController::class, 'store'])->name('fixtures.store');
     Route::delete('{fixture}/destroy', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
     Route::get('{fixture}/statistics', [FixtureController::class, 'statistics'])->name('statistics.find');
     Route::get('{fixtureId}/export', [FixtureController::class, 'export'])->name('fixtures.export');
+});
+
+Route::group(['prefix' => 'turns'], function () {
+    Route::get('', [TurnController::class, 'index'])->name('turns.index');
+    Route::get('{id}', [TurnController::class, 'show'])->name('turns.show');
+    Route::post('store', [TurnController::class, 'store'])->name('turns.store');
+    Route::delete('{id}/destroy', [TurnController::class, 'destroy'])->name('turns.destroy');
 });
 
 Route::group(['prefix' => 'players'], function () {
@@ -42,4 +50,8 @@ Route::group(['prefix' => 'players'], function () {
     Route::delete('{player}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
     Route::get('{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('{player}/update', [PlayerController::class, 'update'])->name('players.update');
+});
+
+Route::group(['prefix' => 'legs'], function () {
+    Route::get('{leg}/remaining-score', [LegController::class, 'remainingScore'])->name('legs.remaining-score');
 });

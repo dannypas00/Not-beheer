@@ -6,15 +6,17 @@ use App\Http\Requests\Fixtures\FixtureIndexRequest;
 use App\Http\Requests\Fixtures\FixtureStoreRequest;
 use App\Models\Fixture;
 use App\Models\Leg;
+use App\Models\Game;
 use App\Models\Player;
+use App\Models\Set;
 use App\Repositories\FixtureRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class FixtureHandler
 {
@@ -38,8 +40,42 @@ class FixtureHandler
      */
     public function createView(): View|Factory
     {
-        return view('fixtures.create')
-            ->with('players', Player::all());
+        return view('fixtures.create', ['players' => Player::all()]);
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @return View|Factory
+     */
+    public function show(Fixture $fixture): View|Factory
+    {
+        if ($fixture->style === 'sets') {
+            $games = Game::query()->where('fixture_id', '=', $fixture->id)
+                ->where('gameable_type', '=', Set::class)
+                ->with(['gameable'])->select('gameable_id')->pluck('gameable_id');
+            $sets = Set::with(['legs' => function (HasMany $query) {
+                $query->with(['turns']);
+            }])->whereIn('id', $games)->get();
+
+            // So apparently this is the same as $sets === null ? null : $sets->last()->id.
+            // Interesting...
+            $setId = $sets?->last()->id;
+            $legId = $sets?->last()->legs->last()->id;
+        } else {
+            $games = Game::query()->where('fixture_id', '=', $fixture->id)
+                ->where('gameable_type', '=', Leg::class)
+                ->with('gameable')->get(['gameable_id']);
+            $legs = Leg::with(['turns'])->whereIn('id', $games)->get();
+            $legId = $games->last()->id;
+        }
+
+        return view('fixtures.fixture', [
+            'fixture' => $fixture,
+            'setId' => $setId ?? null,
+            'legId' => $legId,
+            'sets' => $sets ?? null,
+            'legs' => $legs ?? null
+        ]);
     }
 
     /**
@@ -48,7 +84,8 @@ class FixtureHandler
      */
     public function store(FixtureStoreRequest $request): Application|RedirectResponse|Redirector
     {
-        app(FixtureRepository::class)->create($request);
+        //app(FixtureRepository::class)->create($request);
+        app(FixtureRepository::class)->createFixture($request);
         return redirect()->route('fixtures.index');
     }
 

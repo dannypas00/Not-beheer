@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\hasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -20,6 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property DateTime $date_time
  * @property Player $player1
  * @property Player $player2
+ * @property Collection<Set> $sets
+ * @property Collection<Leg> $legs
  * @property City $location
  */
 class Fixture extends Model

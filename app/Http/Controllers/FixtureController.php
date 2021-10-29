@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use phpDocumentor\Reflection\Types\Integer;
 
 class FixtureController extends AbstractController
 {
@@ -43,11 +44,12 @@ class FixtureController extends AbstractController
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @param Fixture $fixture
+     * @return View
      */
-    public function fixture(): View|Factory|Application
+    public function show(Fixture $fixture): View
     {
-        return view('fixtures.fixture');
+        return app(FixtureHandler::class)->show($fixture);
     }
 
     /**
